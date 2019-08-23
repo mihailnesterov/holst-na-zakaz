@@ -1,0 +1,96 @@
+
+aside {
+    /*display: inline-block;*/
+    /*vertical-align: top;*/ /* top, middle,bottom */
+    /*width:25%;*/
+    border: 0;
+}
+
+.catalog-content {
+    /*display: inline-block; 
+    vertical-align: top;
+    width:70%;*/
+    border: 0;
+}
+
+.catalog-menu {
+    border: 0;
+}
+.catalog-menu h3 {
+    color: #fff;
+    background-color: #F43812;
+    padding: 1em;
+    margin:0;
+}
+.catalog-menu ul {
+    background-color: #535353;
+    margin:0;
+    padding:0;
+    list-style-type: none;
+}
+.catalog-menu ul li {
+    padding: 0.4em 1em;
+    border-bottom: 1px #aaa solid;
+}
+.catalog-menu ul li a {
+    color: #fff;
+}
+
+/* used in posterlist.php */
+.holst-card {
+    padding:1em;
+}
+.holst-card h3 {
+    min-height:2.5em;
+    border-top:1px #f3f3f3 solid;
+    padding-top:0.7em;
+}
+.holst-card h3 a {
+    color: #cd40dc;
+}
+.holst-card p {
+    height:1.5em;
+}
+.holst-card img {
+    border: 1px #999 solid;
+    padding:0;
+    object-fit: cover;
+    width: 100%;
+    height: 180px;
+    box-shadow: 5px 5px 4px rgba(0,0,20,0.40);
+}
+.holst-card img:hover {
+    opacity: 0.9;
+    box-shadow: 5px 5px 4px rgba(0,0,0,0.45);
+}
+.holst-card .holst-card-block button {
+    background: #cd40dc;
+    color: #fff;
+}
+
+/*3d effect used in posterlist.php - https://html5book.ru/3d-transform/ */
+.container-3d {
+    perspective: 500px;
+    margin: 0 40px;
+    background: rgba(195,209,212, .0);
+    border-radius: 5px;
+  }
+  .style-flat {
+    transform-style: flat;
+  }
+  .style-3d {
+    transform-style: preserve-3d;
+  }
+  .image-3d {
+    /*height: 160px;*/
+    transform: rotateY(-20deg);
+    border-radius: 5px;
+    background: rgba(169,90,145, .5);
+    -webkit-animation: rotate 5s infinite;
+    animation: rotate 5s infinite;
+  }
+  @keyframes rotate {
+    50% {
+      transform: none;
+      }
+  }
