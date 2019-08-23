@@ -19,7 +19,6 @@ class AppAsset extends AssetBundle
         
     ];
     public $js = [
-        //'https://kit.fontawesome.com/e10db19f3d.js',
         'js/fontawesome.min.js',
         'js/script.min.js'
     ];
