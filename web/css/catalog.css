@@ -1,42 +1,48 @@
 
 aside {
-    /*display: inline-block;*/
-    /*vertical-align: top;*/ /* top, middle,bottom */
-    /*width:25%;*/
     border: 0;
 }
 
 .catalog-content {
-    /*display: inline-block; 
-    vertical-align: top;
-    width:70%;*/
     border: 0;
 }
 
 .catalog-menu {
     border: 0;
+    padding: 0;
+    margin:0;
 }
 .catalog-menu h3 {
     color: #fff;
-    background-color: #F43812;
+    background-color: #cd40dc;
     padding: 1em;
     margin:0;
 }
 .catalog-menu ul {
-    background-color: #535353;
+    /*background-color: #535353;*/
+    background-color: #555;
     margin:0;
     padding:0;
     list-style-type: none;
 }
-.catalog-menu ul li {
+.catalog-menu ul li ul li {
     padding: 0.4em 1em;
     border-bottom: 1px #aaa solid;
 }
-.catalog-menu ul li a {
+.catalog-menu ul li ul li:last-child {
+    border-bottom: 0;
+    margin-bottom: 0.5em;
+}
+.catalog-menu ul li ul li a {
     color: #fff;
 }
+.uk-accordion-title::before {
+    background-color: #fff;
+    border-top: 2px #cd40dc solid;
+    border-right: 2px #cd40dc solid;
+}
 
-/* used in posterlist.php */
+/* used in PosterListWidget\posterlist.php */
 .holst-card {
     padding:1em;
 }

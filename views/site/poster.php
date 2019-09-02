@@ -1,15 +1,148 @@
 <?php
-
 use yii\helpers\Html;
 
-
-/*for( $i=1; $i<=count($catalog); $i++ ) {
-	echo $catalog[$i].name;
-}*/
-
+$this->title = $poster->name;
+$this->registerMetaTag([
+	'name' => 'keywords',
+	'content' => 'keys...'
+]);
+$this->registerMetaTag([
+	'name' => 'description',
+	'content' => 'description...'
+]);
 ?>
 
-<h1><?= $this->title ?></h1>
+<div class="uk-container uk-margin-large-bottom">
+	<ul class="uk-breadcrumb uk-background-muted uk-padding-small uk-text-xsmall">
+		<li><a href="#">Картины</a></li>
+		<li><a href="#">Архитектура</a></li>
+		<li><span><?= $poster->name ?></span></li>
+	</ul>
+	<h1 class="uk-heading-divider uk-margin-medium-bottom">
+		<?= Html::encode($this->title) ?> 
+		<span class="uk-text-small uk-text-middle">Артикул: <?= $poster->articul ?></span>
+	</h1>
+    <div class="uk-text-center" uk-grid>
+		<div class="uk-width-1-3@m">
+			<div class="uk-card uk-card-default uk-card-body1">
+				
+				<div class="module-order-calc-steps-item active"><a href="#" class="module-order-calc-steps-item-title">
+						Выберите размер (см)
+					</a> <div class="module-order-calc-steps-item-subtitle">
+						30×45
+					</div> <div class="module-order-calc-steps-item-body"><a href="#" class="module-order-calc-sizes-item uk-active">
+							30×45
+						</a><a href="#" class="module-order-calc-sizes-item">
+							40×60
+						</a><a href="#" class="module-order-calc-sizes-item">
+							50×75
+						</a><a href="#" class="module-order-calc-sizes-item">
+							60×90
+						</a><a href="#" class="module-order-calc-sizes-item">
+							120×80
+						</a> <div class="module-order-calc-sizes-step"><img src="/img/canvas-sizes-woman/1.jpg" alt="30×45"> <!----> <!----> <!----> <!----></div> <p>Или введите вручную</p> <div uk-grid="" class="uk-grid-small uk-grid"><div class="uk-width-1-2 uk-first-column"><input type="number" class="uk-input uk-width-1-1"></div> <div class="uk-width-1-2"><input type="number" class="uk-input uk-width-1-1"></div></div> <input type="hidden" name="size" value="30×45"></div>
+				</div>
+
+				<div class="module-order-calc-steps-item active"><a href="#" class="module-order-calc-steps-item-title">
+                        Толщина подрамника
+                    </a> <div class="module-order-calc-steps-item-subtitle">
+                        Ретушь фотографии
+                    </div> 
+					<div class="module-order-calc-steps-item-body">
+						
+					<?php foreach($bagetsWidth as $width): ?>
+					<div class="module-order-calc-gifts-item"><label>
+						<input type="radio" value="<?= $width->width ?>">&nbsp;
+							<?= $width->width ?> см
+						</label>
+					</div>
+					<?php endforeach;?>
+					
+					<input type="hidden" name="gift" value="Ретушь фотографии">
+				</div>
+
+				<div class="module-order-calc-steps-item active">
+					<a href="#" class="module-order-calc-steps-item-title">
+                        Выберите материал
+                    </a> 
+					<!--<div class="module-order-calc-steps-item-subtitle">
+                        Холст искусственный
+                    </div> -->
+					<div class="module-order-calc-steps-item-body">
+					
+					<?php foreach($posterMaterials as $material): ?>
+					<div class="module-order-calc-materials-item">
+						<label>
+							<input type="radio" value="[object Object]">&nbsp;
+                                <?= $material->material->name ?>
+                                &nbsp;
+                                <span class="uk-label">
+								<?= $material->price ?> ₽
+                                </span>
+							</label> 
+						<a aria-hidden="true" href="#material-info-holst-naturalniy" uk-toggle="" class="module-order-calc-materials-item-help"><span uk-icon="icon: question" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="question"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle> <circle cx="10.44" cy="14.42" r="1.05"></circle> <path fill="none" stroke="#000" stroke-width="1.2" d="M8.17,7.79 C8.17,4.75 12.72,4.73 12.72,7.72 C12.72,8.67 11.81,9.15 11.23,9.75 C10.75,10.24 10.51,10.73 10.45,11.4 C10.44,11.53 10.43,11.64 10.43,11.75"></path></svg></span></a> <div id="material-info-holst-naturalniy" uk-modal="" class="uk-modal"><div class="uk-modal-dialog uk-modal-body"><button type="button" uk-close="" class="uk-modal-close-default uk-close uk-icon"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button> <h2 class="uk-modal-title">Холст натуральный</h2> <div><p>Натуральный холст придает картине особенного аристократизма и элегантности. Любое изображение, нанесенное на фактурную поверхность такого холста, выглядит солидно и изысканно.</p> <p>Оптимальная зернистость поверхности холста гарантирует отображение малейших штрихов, передачу едва уловимых оттенков. Это премиум материал, который эффектно смотрится в интерьере и создает иллюзию настоящего рукотворного произведения искусства.</p><p><img data-src="/img/desc/holst-naturalniy.jpg" class="lazyload"></p></div></div></div>
+					</div>
+					<?php endforeach; ?>
+						
+				</div>
+
+				
+				
+				<div class="module-order-calc-steps-item inactive">
+					<a href="#" class="module-order-calc-steps-item-title">
+						Дополнительные услуги
+					</a> 
+					<!--<div class="module-order-calc-steps-item-subtitle">
+						Покрытие лаком, Покрытие 3D гелем
+					</div> -->
+					<?php foreach ($postersAddServices as $service): ?>
+					<div class="module-order-calc-steps-item-body">
+						<div class="module-order-calc-addons-item">
+						<label>
+						<input type="checkbox" value="[object Object]">&nbsp;
+							<?= $service->addService->name ?>
+							<span class="uk-label">
+								<?= $service->price ?> ₽
+							</span>
+							</label> 
+							<a aria-hidden="true" href="#addon-info-pokritie-lakom" uk-toggle="" class="module-order-calc-addons-item-help"><span uk-icon="icon: question" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="question"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle> <circle cx="10.44" cy="14.42" r="1.05"></circle> <path fill="none" stroke="#000" stroke-width="1.2" d="M8.17,7.79 C8.17,4.75 12.72,4.73 12.72,7.72 C12.72,8.67 11.81,9.15 11.23,9.75 C10.75,10.24 10.51,10.73 10.45,11.4 C10.44,11.53 10.43,11.64 10.43,11.75"></path></svg></span></a> <div id="addon-info-pokritie-lakom" uk-modal="" class="uk-modal"><div class="uk-modal-dialog uk-modal-body"><button type="button" uk-close="" class="uk-modal-close-default uk-close uk-icon"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button> <h2 class="uk-modal-title">Покрытие лаком</h2> <div><p>Покрытие лаком зашивает картину от всевозможных механических повреждений.</p><p>После покрытия лаком картина приобретает благородный блеск и ее можно протирать влажной тканью.</p><p><img class="lazyload" data-src="/img/desc/lak.jpg" alt=""></p></div></div></div>
+						</div>
+					</div>
+					<?php endforeach; ?>
+					<input type="hidden" name="addons" value="Покрытие лаком, Покрытие 3D гелем">
+				</div>
+
+				<div class="module-order-calc-steps-item inactive">
+					<a href="#" class="module-order-calc-steps-item-title">
+						Багет
+					</a> 
+					<div class="module-order-calc-steps-item-body">
+						<div class="module-order-calc-addons-item">
+						<label>
+						<input type="checkbox" value="">&nbsp;
+							Добавить багетную раму
+						</label> 
+						</div>
+					</div>
+				</div>	
+
+			</div>
+		</div>
+
+		<div class="uk-width-expand@m">
+			<div class="uk-card uk-card-default uk-card-body">
+				<img data-src="images/posters/<?= $firstImage->src ?>" alt="<?= $firstImage->src ?>" width="100%" uk-img>
+				<hr>
+				<?php foreach ($images as $image): ?>
+					<img  data-src="images/posters/<?= $image->src ?>" alt="<?= $image->src ?>" width="100%" uk-img>
+				<?php endforeach; ?>
+			</div>
+		</div>
+    </div>
+    
+</div>
+
+
 
 <h2><?= $poster->name ?></h2>
 <h3><?= $poster->articul ?></h3>
@@ -40,6 +173,7 @@ use yii\helpers\Html;
 </ul>
 
 <ul>
+<h3>123456</h3>
 <?php foreach ($posterMaterials as $material): ?>
 <li><?= $material->material->name ?> <?= $material->price ?> <a href="#" title="<?= $material->material->description ?>">?</a></li>
 <?php endforeach; ?>
@@ -61,148 +195,3 @@ use yii\helpers\Html;
 	<p>Цена: <?= $baget->price ?> руб.</p>
 	<br>
 <?php endforeach; ?>
-
-<?php 
-
-	//echo '123';
-
-	//rint '456';
-
-	// PHP 4,5,7
-
-	// функциональное программирование / ООП (объектно-ориентированное программирование)
-
-	// реализация функции
-	function article( $header, $text, $link='#' ) {
-		// тело функции
-		echo '<h2>'.$header.'</h2>';
-		echo '<p>'.$text.'</p>';
-		echo '<a href="'.$link.'">Далее</a>';
-	}
-
-	// вызов функции
-	//article('Заголовок 1', 'текст 1', '/post1');
-	
-	function counter( $max ) {
-		// while - цикл с предусловием
-		/*while($max > 0) {
-			echo $max.'...';
-			$max--;
-		}*/
-
-		// do..while - цикл с постусловием
-		do {
-			echo $max.'...';
-			$max--;
-		} while($max > 0);
-	}
-
-	//counter(0);
-
-	function add($a, $b) {
-		$result = $a + $b;	// $result - локальная переменная / локальную область видимости
-		echo 'Сумма a+b = '.$result;
-
-		return $result;	// функция возвращает значение $result
-	}
-
-	//$result = add(45,8);	// глобальная перменная - глобальная область видимости
-
-	//echo ' Результат = '.$result;
-
-	// область видимости
-
-	// php, JS - нетипизированные языки
-
-	/**
-	 * строка
-	 * число (целое, дробное)
-	 * массив
-	 * логическая
-	 * ...
-	 * 
-	 * C/C++, Pascal... 
-	 * 
-	 */
-
-	 // PHP 7 - типы
-	 $a = 5;	// integer
-	 $b = 45.56;	// double
-	 $c = 'Привет';	// string
-	 $d = true;	// boolean
-
-	/**
-	 * JS - нетипизированный
-	 * TypeScript - JS с типами
-	 */
-
-	 $d = 89;
-	// PHP-функция, которая возвращает тип
-	//echo gettype($d);
-
-	// 0,1, ....
-
-
-	function args() {
-		$args = func_get_args();
-		if( $args ) {
-			//
-			foreach( $args as $arg ) {
-				echo 'Аргумент = '.$arg;
-			}
-		} else {
-			echo 'Нет аргументов';
-		}
-	}
-
-	//args(5,89,'456465');
-
-	// ООП
-
-	// автомобиль:
-	/**
-	 * 	свойства: легковой, седан, цвет, пробег, год...
-	 *  что-то делает: едет, стоит, паркуется...
-	 */
-
-	 class Cars {
-		// свойства = переменные,массивы
-		//public,private,protected
-		// public - доступ вне класса в любом месте программы
-		// private - доступ только внутри самого класса
-		// protected - Доступ только в классах-наследниках
-
-		protected $mark;
-		public $color;
-		public $year;
-		
-		// методы = функции
-		public function drive() {
-			echo 'Автомобиль '.$this->mark.' едет';
-		}
-
-	 }
-
-	 class Truks extends Cars {
-		public function truk() {
-			echo 'Грузовик '.$this->mark ='KAMAZ';
-		}
-
-	 }
-
-	 // создали экземпляр (объект) класса Cars
-	 /*$toyota = new Cars;
-	 $toyota->mark = 'Toyota';
-	 $toyota->color = 'red';
-	 $toyota->year = '2018';
-	 $toyota->drive();
-
-	 $bmw = new Cars;
-	 $bmw->mark = 'BMW';
-	 $bmw->drive();*/
-
-	 //$kamaz = new Truks;
-	 //$kamaz->mark = 'KAMAZ';
-	 //$kamaz->truk();
-
-?>

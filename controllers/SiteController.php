@@ -77,21 +77,18 @@ class SiteController extends Controller
      * protected - функция доступна внутри класса и классам-потомкам
      * private - функция доступна только внутри класса
      * 
-     * область видимости
      */
-	public function getCatalogMenu() // аргументы
+
+    /*  не используется
+    public function getCatalogMenu()
     {
         $catalog = Catalog::find()->orderby(['id'=>SORT_ASC])->all();
         return $this->view->params['catalog'] = $catalog;
-    }
-    
-    /*$res1 = getCatalogMenu(8,15);
-    $res2 = getCatalogMenu(156,25);*/
+    }*/
 
 	// экшн главной страницы
     public function actionIndex()
     {
-        $this->view->title = 'Главная';
         $posters = Posters::find()->orderby(['id'=>SORT_DESC])->all();
 
         return $this->render('index',[
@@ -102,49 +99,33 @@ class SiteController extends Controller
     // экшн страницы каталога
     public function actionCategory($id)
     {
-        $this->view->title = 'Категория';
-        $catalog = CatalogPosters::find()->where(['catalog_id' => $id])->orderby(['id'=>SORT_DESC])->all();
-        // meta tags
-        /*$this->view->registerMetaTag([
-            'name' => 'keywords',
-            'content' => 'каталог постеров'
-        ]);
-        $this->view->registerMetaTag([
-            'name' => 'description',
-            'content' => 'описание каталога постеров'
-        ]);*/
-
+        $category = Catalog::find()->where(['id' => $id])->one();
+        $postsCount = CatalogPosters::find()->distinct()->where(['catalog_id' => $category->id])->count();
+        
         return $this->render('category',[
-            'catalog' => $catalog
+            'category' => $category,
+            'id' => $id,
+            'postsCount' => $postsCount
         ]);
     }
 
     // экшн страницы постера
     public function actionPoster($id)
     {
-        $this->view->title = 'Постер № '.$id;
-        /*$this->getView()->title = 'ok';
-            $this->getView()->registerMetaTag([
-                'name' => 'keywords',
-                'content' => 'keys...'
-            ]);
-            $this->getView()->registerMetaTag([
-                'name' => 'description',
-                'content' => 'description...'
-            ]);*/
-        $poster = Posters::find()->where(['id' => $id ])->one();
-        $images = Images::find()->where(['poster_id' => $id])->all();// получили картинки постера
+        $poster = Posters::findOne(['id' => $id ]);
+        $images = Images::find()->where(['poster_id' => $id]);// получили картинки постера
         $postersAddServices = PostersAddServices::find()->where(['poster_id' => $id])->all();
         $types = Types::find()->all();  // все типы изделий
         $posterSizes = PostersSizes::find()->where(['poster_id' => $id])->all(); // размеры постера
         $bagetsWidth = Bagets::find()->select('width')->distinct()->all();    // подрамники
         $bagets = Bagets::find()->all();
-        //$bagets = Bagets::findAll();
         $posterMaterials = PostersMaterials::find()->where(['poster_id' => $id])->all(); // материалы постера
 
         return $this->render('poster',[
             'poster' => $poster,
-            'images' => $images,
+            'images' => $images->all(),
+            'firstImage' => $images->one(),
+            'interierImages' => $images->limit(1,),
             'postersAddServices' => $postersAddServices,
             'types' => $types,
             'posterSizes' => $posterSizes,

@@ -8,11 +8,8 @@
     use app\components\catalogmenu\CatalogMenuWidget;
 
 	AppAsset::register($this);
-
-    
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl(Yii::$app->homeUrl.'web');
-  
-    $catalog = Yii::$app->controller->getCatalogMenu();
+    //$catalog = Yii::$app->controller->getCatalogMenu();
   
     $this->beginPage();
 ?>
@@ -36,16 +33,16 @@
     <body>
         <?php $this->beginBody(); ?>
 
-            <div class="main-headerbar">
-    <a class="main-headerbar-toggle" href="#offcanvas" uk-toggle>
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-            <path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal" d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible"></path>
-        </svg>
+        <div class="main-headerbar">
+        <a class="main-headerbar-toggle" href="#offcanvas" uk-toggle>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                <path style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal" d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z" font-weight="400" font-family="sans-serif" white-space="normal" overflow="visible"></path>
+            </svg>
 
-        <span class="main-headerbar-toggle-text">
-            Меню
-        </span>
-    </a>
+            <span class="main-headerbar-toggle-text">
+                Меню
+            </span>
+        </a>
 
     <nav class="main-nav">
         <ul>

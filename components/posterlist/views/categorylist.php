@@ -4,27 +4,27 @@ use yii\helpers\Html;
 use app\components\posterlistimage\PosterListImageWidget;
 ?>
 <div class="uk-container uk-margin-large-bottom">
-<h1 class="uk-heading-bullet uk-margin-top"><?= Html::encode($this->title) ?></h1>
+    <h1 class="uk-heading-bullet uk-margin-top"><?= Html::encode($this->title) ?></h1>
     <div class="uk-child-width-1-3 uk-text-center" uk-grid>
         <?php foreach( $posters as $poster): ?>
         <div>
             <div class="holst-card uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-                <?php echo PosterListImageWidget::widget([ 'poster_id' => $poster->id ]);?>
-                <h3 class="uk-card-title uk-padding-large-top uk-margin-top uk-margin-remove-bottom"><a href="<?= Url::to(['poster','id' => $poster->id]) ?>" class="uk-button uk-button-link"><?= $poster->name ?></a></h3>
+                <?php echo PosterListImageWidget::widget([ 'poster_id' => $poster->poster_id ]);?>
+                <h3 class="uk-card-title uk-padding-large-top uk-margin-top uk-margin-remove-bottom"><a href="<?= Url::to(['poster','id' => $poster->poster_id]) ?>" class="uk-button uk-button-link"><?= $poster->poster->name ?></a></h3>
                 
-                <?php if($poster->autor):?>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Автор <a href="#"><?= $poster->autor ?></a></p>
+                <?php if($poster->poster->autor):?>
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Автор <a href="#"><?= $poster->poster->autor ?></a></p>
                 <?php else: ?>
                     <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"></p>
                 <?php endif; ?>
                 
-                <h4 class="uk-margin-small-top uk-margin-remove-bottom">от <?= $poster->price ?> руб.</h4>
+                <h4 class="uk-margin-small-top uk-margin-remove-bottom">от <?= $poster->poster->price ?> руб.</h4>
                 <div class="holst-card-block uk-padding-small uk-margin-remove">
                     <button class="uk-button uk-margin-small-bottom"><i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину</button>
-                    <a href="<?= Url::to(['poster','id' => $poster->id]) ?>" class="uk-button uk-button-default">Подробнее...</a>
+                    <a href="<?= Url::to(['poster','id' => $poster->poster_id]) ?>" class="uk-button uk-button-default">Подробнее...</a>
                 </div>
                 
-                <p class="uk-text-small uk-margin-remove">Артикул <?= $poster->articul ?></p>
+                <p class="uk-text-small uk-margin-remove">Артикул <?= $poster->poster->articul ?></p>
             </div>
         </div>
         <?php endforeach; ?>
