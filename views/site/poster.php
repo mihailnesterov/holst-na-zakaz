@@ -1,14 +1,16 @@
 <?php
 use yii\helpers\Html;
+use yii\helper\Url;
+use app\components\posterlistimage\PosterListImageWidget;
 
 $this->title = $poster->name;
 $this->registerMetaTag([
 	'name' => 'keywords',
-	'content' => 'keys...'
+	'content' => $poster->name.' '.Yii::$app->name
 ]);
 $this->registerMetaTag([
 	'name' => 'description',
-	'content' => 'description...'
+	'content' => $poster->text.' '.Yii::$app->name
 ]);
 ?>
 
@@ -22,73 +24,153 @@ $this->registerMetaTag([
 		<?= Html::encode($this->title) ?> 
 		<span class="uk-text-small uk-text-middle">Артикул: <?= $poster->articul ?></span>
 	</h1>
-    <div class="uk-text-center" uk-grid>
+    <div class="uk-text-center1" uk-grid>
 		<div class="uk-width-1-3@m">
-			<div class="uk-card uk-card-default uk-card-body1">
-				
-				<div class="module-order-calc-steps-item active"><a href="#" class="module-order-calc-steps-item-title">
+			<div class="uk-card uk-card-default uk-card-body1">	
+				<div class="module-order-calc-steps-item active">
+					<a href="#" class="module-order-calc-steps-item-title">
 						Выберите размер (см)
-					</a> <div class="module-order-calc-steps-item-subtitle">
+					</a> 
+					<!--<div  class="module-order-calc-steps-item-subtitle">
 						30×45
-					</div> <div class="module-order-calc-steps-item-body"><a href="#" class="module-order-calc-sizes-item uk-active">
-							30×45
-						</a><a href="#" class="module-order-calc-sizes-item">
-							40×60
-						</a><a href="#" class="module-order-calc-sizes-item">
-							50×75
-						</a><a href="#" class="module-order-calc-sizes-item">
-							60×90
-						</a><a href="#" class="module-order-calc-sizes-item">
-							120×80
-						</a> <div class="module-order-calc-sizes-step"><img src="/img/canvas-sizes-woman/1.jpg" alt="30×45"> <!----> <!----> <!----> <!----></div> <p>Или введите вручную</p> <div uk-grid="" class="uk-grid-small uk-grid"><div class="uk-width-1-2 uk-first-column"><input type="number" class="uk-input uk-width-1-1"></div> <div class="uk-width-1-2"><input type="number" class="uk-input uk-width-1-1"></div></div> <input type="hidden" name="size" value="30×45"></div>
-				</div>
-
-				<div class="module-order-calc-steps-item active"><a href="#" class="module-order-calc-steps-item-title">
-                        Толщина подрамника
-                    </a> <div class="module-order-calc-steps-item-subtitle">
-                        Ретушь фотографии
-                    </div> 
+					</div> -->
 					<div class="module-order-calc-steps-item-body">
-						
-					<?php foreach($bagetsWidth as $width): ?>
-					<div class="module-order-calc-gifts-item"><label>
-						<input type="radio" value="<?= $width->width ?>">&nbsp;
-							<?= $width->width ?> см
-						</label>
+						<a href="#" class="module-order-calc-sizes-item uk-active">
+							30×45
+						</a>
+						<a href="#" class="module-order-calc-sizes-item">
+							40×60
+						</a>
+						<a href="#" class="module-order-calc-sizes-item">
+							50×75
+						</a>
+						<a href="#" class="module-order-calc-sizes-item">
+							60×90
+						</a>
+						<a href="#" class="module-order-calc-sizes-item">
+							120×80
+						</a> 
+						<div class="module-order-calc-sizes-step">
+							<img id="img-canvas-sizes-woman" src="images/canvas-sizes-woman/1.jpg" alt="30×45">
+						</div> 
+						<p>Или введите вручную</p> 
+						<div uk-grid="" class="uk-grid-small uk-grid">
+							<div class="uk-width-1-2 uk-first-column">
+								<input type="number" class="uk-input uk-width-1-1">
+							</div> 
+							<div class="uk-width-1-2">
+								<input type="number" class="uk-input uk-width-1-1">
+							</div>
+						</div> 
+						<input type="hidden" name="size" value="30×45">
 					</div>
-					<?php endforeach;?>
-					
-					<input type="hidden" name="gift" value="Ретушь фотографии">
+					<script>
+						// js-скрипт выбор размера
+						/*var s=0;
+						
+						const f=5;
+						let g='asdsfs';
+
+						s = 69;*/
+						// JavaScript - нетипизированный
+						// TypeScript - типизированный JS
+
+						/**
+							window
+								document.getElementsByClassName
+								document.getElementById
+								document.querySelectorAll
+						 */
+						
+						const sizesItems = document.getElementsByClassName('module-order-calc-sizes-item');
+						//alert(sizesItems.length);
+						console.log(sizesItems.length);
+
+						for (let i = 0; i < sizesItems.length; i++) {
+							
+							/*function name() {
+
+							}
+							const name = () => {
+
+							}*/
+
+							sizesItems[i].onclick = (e) => {
+								
+								e.preventDefault();
+								
+								for (let j = 0; j < sizesItems.length; j++) {
+									sizesItems[j].classList.remove('uk-active');
+								}
+								
+								e.target.classList.add('uk-active');
+								
+								const canvasSizesWoman = document.getElementById('img-canvas-sizes-woman');
+									canvasSizesWoman.src = `images/canvas-sizes-woman/${i+1}.jpg`;
+									canvasSizesWoman.alt = e.target.innerHTML;
+								
+								const inputHiddenSize = document.querySelector('input[name=size]');
+									if(inputHiddenSize) { inputHiddenSize.value = e.target.innerHTML };
+								
+								const inputTypeNumber = document.querySelectorAll('input[type=number]');
+									console.log(inputTypeNumber.length);
+									inputTypeNumber[0].value = 30;
+									inputTypeNumber[1].value = 45;
+							}
+						}
+					</script>
 				</div>
 
 				<div class="module-order-calc-steps-item active">
 					<a href="#" class="module-order-calc-steps-item-title">
-                        Выберите материал
-                    </a> 
+						Выберите материал
+					</a> 
 					<!--<div class="module-order-calc-steps-item-subtitle">
-                        Холст искусственный
-                    </div> -->
+						Холст искусственный
+					</div> -->
 					<div class="module-order-calc-steps-item-body">
-					
-					<?php foreach($posterMaterials as $material): ?>
-					<div class="module-order-calc-materials-item">
-						<label>
-							<input type="radio" value="[object Object]">&nbsp;
-                                <?= $material->material->name ?>
-                                &nbsp;
-                                <span class="uk-label">
-								<?= $material->price ?> ₽
-                                </span>
-							</label> 
-						<a aria-hidden="true" href="#material-info-holst-naturalniy" uk-toggle="" class="module-order-calc-materials-item-help"><span uk-icon="icon: question" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="question"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle> <circle cx="10.44" cy="14.42" r="1.05"></circle> <path fill="none" stroke="#000" stroke-width="1.2" d="M8.17,7.79 C8.17,4.75 12.72,4.73 12.72,7.72 C12.72,8.67 11.81,9.15 11.23,9.75 C10.75,10.24 10.51,10.73 10.45,11.4 C10.44,11.53 10.43,11.64 10.43,11.75"></path></svg></span></a> <div id="material-info-holst-naturalniy" uk-modal="" class="uk-modal"><div class="uk-modal-dialog uk-modal-body"><button type="button" uk-close="" class="uk-modal-close-default uk-close uk-icon"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button> <h2 class="uk-modal-title">Холст натуральный</h2> <div><p>Натуральный холст придает картине особенного аристократизма и элегантности. Любое изображение, нанесенное на фактурную поверхность такого холста, выглядит солидно и изысканно.</p> <p>Оптимальная зернистость поверхности холста гарантирует отображение малейших штрихов, передачу едва уловимых оттенков. Это премиум материал, который эффектно смотрится в интерьере и создает иллюзию настоящего рукотворного произведения искусства.</p><p><img data-src="/img/desc/holst-naturalniy.jpg" class="lazyload"></p></div></div></div>
-					</div>
-					<?php endforeach; ?>
-						
+						<?php foreach($posterMaterials as $material): ?>
+						<div class="module-order-calc-materials-item">
+							<label>
+								<input type="radio" name="radio-materials" value="<?= $material->id ?>">&nbsp;
+									<?= $material->material->name ?>
+									&nbsp;
+									<span class="uk-label">
+									<?= $material->price ?> ₽
+									</span>
+								</label> 
+							<a aria-hidden="true" href="#material-info-holst-naturalniy" uk-toggle="" class="module-order-calc-materials-item-help"><span uk-icon="icon: question" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="question"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle> <circle cx="10.44" cy="14.42" r="1.05"></circle> <path fill="none" stroke="#000" stroke-width="1.2" d="M8.17,7.79 C8.17,4.75 12.72,4.73 12.72,7.72 C12.72,8.67 11.81,9.15 11.23,9.75 C10.75,10.24 10.51,10.73 10.45,11.4 C10.44,11.53 10.43,11.64 10.43,11.75"></path></svg></span></a> <div id="material-info-holst-naturalniy" uk-modal="" class="uk-modal"><div class="uk-modal-dialog uk-modal-body"><button type="button" uk-close="" class="uk-modal-close-default uk-close uk-icon"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button> <h2 class="uk-modal-title">Холст натуральный</h2> <div><p>Натуральный холст придает картине особенного аристократизма и элегантности. Любое изображение, нанесенное на фактурную поверхность такого холста, выглядит солидно и изысканно.</p> <p>Оптимальная зернистость поверхности холста гарантирует отображение малейших штрихов, передачу едва уловимых оттенков. Это премиум материал, который эффектно смотрится в интерьере и создает иллюзию настоящего рукотворного произведения искусства.</p><p><img data-src="/img/desc/holst-naturalniy.jpg" class="lazyload"></p></div></div></div>
+						</div>
+						<?php endforeach; ?>
+					</div>	
 				</div>
 
-				
-				
-				<div class="module-order-calc-steps-item inactive">
+				<div class="module-order-calc-steps-item active">
+					<a href="#" class="module-order-calc-steps-item-title">
+						Толщина подрамника
+					</a>
+					<div class="module-order-calc-steps-item-subtitle">
+						Ретушь фотографии
+					</div> 
+					<div class="module-order-calc-steps-item-body">
+						
+						<?php foreach($bagetsWidth as $key => $width): ?>
+						<div class="module-order-calc-gifts-item"><label>
+							<?php if($key === 0):?>
+								<input checked='checked' type="radio" name="radio-bagets-width" value="<?= $width->width ?>">&nbsp;
+							<?php else: ?>
+								<input type="radio" name="radio-bagets-width" value="<?= $width->width ?>">&nbsp;
+							<?php endif; ?>
+								<?= $width->width ?> см
+							</label>
+						</div>
+						<?php endforeach;?>
+						
+						<input type="hidden" name="gift" value="Ретушь фотографии">
+					</div>
+				</div>
+
+				<div class="module-order-calc-steps-item active">
 					<a href="#" class="module-order-calc-steps-item-title">
 						Дополнительные услуги
 					</a> 
@@ -124,21 +206,20 @@ $this->registerMetaTag([
 						</label> 
 						</div>
 					</div>
-				</div>	
-
+				</div>
+				
 			</div>
 		</div>
-
 		<div class="uk-width-expand@m">
 			<div class="uk-card uk-card-default uk-card-body">
-				<img data-src="images/posters/<?= $firstImage->src ?>" alt="<?= $firstImage->src ?>" width="100%" uk-img>
+				<?php echo PosterListImageWidget::widget([ 'poster_id' => $poster->id ]);?>
+				
 				<hr>
 				<?php foreach ($images as $image): ?>
 					<img  data-src="images/posters/<?= $image->src ?>" alt="<?= $image->src ?>" width="100%" uk-img>
 				<?php endforeach; ?>
 			</div>
 		</div>
-    </div>
     
 </div>
 

@@ -513,7 +513,7 @@
 <div class="main-wrapper uk-container">
     <div class="--wrapper" uk-grid>
 
-        <aside class="uk-width-1-4@m">
+        <aside class="uk-width-1-5@m">
             <?php echo CatalogMenuWidget::widget();?>
         </aside>
 
