@@ -135,6 +135,20 @@ class SiteController extends Controller
         ]);
     }
 
+    // экшн страницы корзины
+    public function actionCart()
+    {
+
+        return $this->render('cart');
+    }
+
+    // экшн страницы заказа
+    public function actionOrder()
+    {
+        
+        return $this->render('order');
+    }
+
     // экшн страницы контактов
     /*public function actionContacts()
     {

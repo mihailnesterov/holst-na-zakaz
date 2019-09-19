@@ -6,7 +6,6 @@ use app\components\posterlist\PosterListWidget;
 $baseurl = Yii::$app->request->baseUrl;
 
 ?>
-
 <!-- search form -->
 <div class="uk-background-muted uk-padding-small uk-panel uk-margin-bottom">
 	<form action="" method="POST" class="uk-margin-small-bottom">
@@ -20,3 +19,4 @@ $baseurl = Yii::$app->request->baseUrl;
 
 <!-- posters list -->
 <?php echo PosterListWidget::widget(); ?>
+

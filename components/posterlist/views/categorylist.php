@@ -9,7 +9,14 @@ use app\components\posterlistimage\PosterListImageWidget;
         <?php foreach( $posters as $poster): ?>
         <div>
             <div class="holst-card uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-                <?php echo PosterListImageWidget::widget([ 'poster_id' => $poster->poster_id ]);?>
+                <div class="container-3d">
+                    <a href="<?= Url::to(['poster', 'id' => $poster->id]) ?>">
+                        <?php echo PosterListImageWidget::widget([ 
+                            'poster_id' => $poster->id, 
+                            'img_class' => 'image-3d style-flat' ]
+                        );?>
+                    </a>
+                </div>
                 <h3 class="uk-card-title uk-padding-large-top uk-margin-top uk-margin-remove-bottom"><a href="<?= Url::to(['poster','id' => $poster->poster_id]) ?>" class="uk-button uk-button-link"><?= $poster->poster->name ?></a></h3>
                 
                 <?php if($poster->poster->autor):?>

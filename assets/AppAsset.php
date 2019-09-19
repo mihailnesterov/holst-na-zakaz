@@ -20,7 +20,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/fontawesome.min.js',
-        'js/script.min.js'
+        'js/script.min.js',//vue
+        'js/catalog.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
