@@ -1,8 +1,8 @@
 <?php
     use yii\helpers\Html;
-    use app\assets\AppAsset;
+    use app\assets\AdminAsset;
     
-    $directoryAsset = Yii::$app->assetManager->getPublishedUrl('zgrboard/web');
+    $directoryAsset = Yii::$app->assetManager->getPublishedUrl(Yii::$app->homeUrl.'web');
     $this->beginPage();
 ?>
 <!DOCTYPE html>
@@ -31,19 +31,16 @@
         <?= $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => $directoryAsset . 'favicon.ico']) ?>
         
         <?php            
-            AppAsset::register($this);
+            AdminAsset::register($this);
         ?>
         
     </head>
     <body>
         <?php $this->beginBody(); ?>
         
-        <div id="login-wrapper" style="margin-top:8%;">
-
-             <?= $content ?>               
-
-        </div> 	<!-- end wrapper-->
-
+        <div style="margin-top:8%;">
+             <?= $content ?>
+        </div>
         
         <?php $this->endBody(); ?>
         

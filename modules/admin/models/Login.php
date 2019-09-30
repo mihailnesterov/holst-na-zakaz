@@ -4,7 +4,7 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Users;
+use app\modules\admin\models\Users;
 
 /**
  * Login form
@@ -31,7 +31,7 @@ class Login extends Users
      * @param string $attribute the attribute currently being validated
      * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    /*public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
@@ -40,7 +40,10 @@ class Login extends Users
                 $this->addError($attribute, 'Неправильный логин или пароль');
             }
         }
+    }*/
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
-
 
 }
