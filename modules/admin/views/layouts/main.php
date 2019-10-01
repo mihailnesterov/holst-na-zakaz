@@ -1,6 +1,9 @@
 <?php
+    use app\assets\AdminAsset;
     use yii\helpers\Html;
-    use app\assets\AdminAsset;    
+    use yii\helpers\Url;
+    use app\components\catalogmenu\CatalogMenuWidget;
+
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl(Yii::$app->homeUrl.'web');   
    
     $this->beginPage();
@@ -20,15 +23,6 @@
         
         <?php $this->head(); ?>
         
-        <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-        
         <?= $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => $directoryAsset . 'favicon.ico']) ?>
         
         <?php AdminAsset::register($this); ?>
@@ -36,7 +30,45 @@
     </head>
     <body>
         <?php $this->beginBody(); ?>
-            <?= $content ?>
+
+        <!-- header -->
+        <div class="main-headerbar">
+            <h3 class="uk-margin-top">
+                кабинет  
+                (<?= Yii::$app->user->identity->login ?>) 
+                <a href="<?= Url::to('@web/admin/logout') ?>">выйти</a>
+            </h3>
+            <div class="main-headerbar-buttons">
+                <!-- add hamburger here... -->
+            </div>
+        </div>
+        <!-- content -->
+        <div class="main-wrapper uk-container">
+            <div class="--wrapper" uk-grid>
+
+                <aside class="uk-width-1-5@m  uk-margin-large-top">
+                    <?php echo CatalogMenuWidget::widget();?>
+                </aside>
+
+                <div class="--catalog-content uk-width-expand@m">
+                    <?= $content ?>
+                </div>
+
+            </div>  <!-- end wrapper -->
+        </div>  <!-- end main-wrapper -->
+
+        <!-- footer -->
+        <footer class="main-footer">
+            <div class="main-footer-pasta"></div>
+                <div class="main-footer-copyright uk-text-center uk-background-default uk-padding">
+                © Холст на заказ
+                &nbsp;|&nbsp;
+                <a href="<?= Url::to('index')?>">перейти на сайт</a>
+                &nbsp;|&nbsp;
+                <?php echo date('Y'); ?>
+            </div>
+        </footer>
+
         <?php $this->endBody(); ?>
     </body>
 </html>

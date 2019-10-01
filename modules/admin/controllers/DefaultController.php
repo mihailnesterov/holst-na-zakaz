@@ -3,9 +3,25 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\web\Controller;
+// admin/models
 use app\modules\admin\models\Users;
 use app\modules\admin\models\Login;
 use app\modules\admin\models\Signup;
+// models
+use app\models\Catalog;
+use app\models\Posters;
+use app\models\Images;
+use app\models\AddServices;
+use app\models\PostersAddServices;
+use app\models\Bagets;
+use app\models\CatalogPosters;
+use app\models\Clocks;
+use app\models\Materials;
+use app\models\PostersMaterials;
+use app\models\PostersSizes;
+use app\models\PostersTypes;
+use app\models\Sizes;
+use app\models\Types;
 
 /**
  * Default controller for the `admin` module
@@ -21,10 +37,12 @@ class DefaultController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(Yii::$app->urlManager->createUrl('/admin/login'));
         } else {
-            $model = $this->findUserModel(Yii::$app->user->identity->id);
-            $this->view->title = 'Личный кабинет';
+            $user = $this->findUserModel(Yii::$app->user->identity->id);
+            $posters = Posters::find()->orderby(['id'=>SORT_DESC])->all();
+            $this->view->title = 'Картины';
             return $this->render('index',[
-                'model' => $model
+                'user' => $user,
+                'posters' => $posters
             ]);
         }
         
@@ -118,5 +136,30 @@ class DefaultController extends Controller
             return $model;
         }
         throw new NotFoundHttpException('User not found...');
+    }
+
+    /**
+     * find Poster model
+     */
+    protected function findPosterModel($id)
+    {
+        if (($model = Posters::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Poster not found...');
+    }
+
+    /**
+     * Deletes an existing poster model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionPosterDelete($id)
+    {
+        //$this->findPosterModel($id)->delete();
+
+        return $this->redirect(['admin']);
     }
 }
