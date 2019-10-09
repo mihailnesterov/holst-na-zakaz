@@ -20,3 +20,4 @@ use yii\helpers\Url;
     </li>
 </ul>
 <a href="<?= Url::to('order') ?>">Оформить заказ</a>
+

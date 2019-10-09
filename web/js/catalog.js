@@ -1,87 +1,4 @@
 
-	/*const cart = document.getElementById('cart');
-	const cartCount = document.getElementById('cartCount');
-	const cartSum = document.getElementById('cartSum');
-
-	const buttons = document.querySelectorAll('.holst-card button');
-	console.log(buttons);
-    
-
-    for(let i = 0; i<buttons.length;i++) {
-        buttons[i].onclick = function(e) {
-            cartCount.innerHTML = Number(cartCount.innerHTML) + 1;
-            cartSum.innerHTML = buttons[i].closest('.holst-card').innerHTML;
-        }
-    }*/
-
-    /*buttons[0].onclick = (e) => {
-        
-    }*/
-
-
-// js-скрипт выбор размера
-/*var s=0;
-
-const f=5;
-let g='asdsfs';
-
-s = 69;*/
-// JavaScript - нетипизированный
-// TypeScript - типизированный JS
-
-/**
-    window
-        document.getElementsByClassName
-        document.getElementById
-        document.querySelectorAll
-    */
-
-
-/*
-const sizesItems = document.getElementsByClassName('module-order-calc-sizes-item');
-for (let i = 0; i < sizesItems.length; i++) {
-    sizesItems[i].onclick = (e) => {       
-        e.preventDefault();
-        for (let j = 0; j < sizesItems.length; j++) {
-            sizesItems[j].classList.remove('uk-active');
-        }
-        e.target.classList.add('uk-active');
-        const canvasSizesWoman = document.getElementById('img-canvas-sizes-woman');
-            canvasSizesWoman.src = `images/canvas-sizes-woman/${i+1}.jpg`;
-            canvasSizesWoman.alt = e.target.innerHTML;
-        const inputHiddenSize = document.querySelector('input[name=size]');
-            if(inputHiddenSize) { inputHiddenSize.value = e.target.innerHTML };
-        const inputTypeNumber = document.querySelectorAll('input[type=number]');
-            const width = sizesItems[i].textContent.split('×')[0];
-            const height = sizesItems[i].textContent.split('×')[1];
-            console.log(width + 'x' + height);
-            inputTypeNumber[0].value = Number(width);
-            inputTypeNumber[1].value = Number(height);
-    }
-}
-sizesItems[0].classList.add('uk-active');
-
-function getDefaultPrices() {
-    const arrPrices = [0,0,0,0,0,0];
-    const priceBase = document.getElementById('price-base').innerHTML;
-        arrPrices[0] = Number(priceBase);
-    const priceMaterials = document.querySelector('input[name=radio-materials]').value;
-        arrPrices[1] = Number(priceMaterials);
-    const priceBagetWidth = document.querySelector('input[name=radio-bagets-width]').value;
-        arrPrices[2] = Number(priceBagetWidth);
-    return arrPrices;
-}
-
-window.onload = () => {
-    const defaultPrices = getDefaultPrices();
-    document.getElementById('price-all').innerHTML = defaultPrices.toString();
-    let sumPrices = 0;
-    for (let i = 0; i < defaultPrices.length; i++) {
-        sumPrices += Number(defaultPrices[i]);
-    }
-    document.getElementById('price-total').innerHTML = sumPrices;
-}*/
-
 /*new Vue({
     el: 'id',
     data: {
@@ -97,6 +14,19 @@ window.onload = () => {
          автозагрузка - методы, стартующие при загрузке
     }
 });*/
+
+
+$( function() {
+    // сработает после загрузки страницы
+    $('.uk-accordion-content').each( function(){
+        const p = $(this).html();
+        console.log( p );
+    });
+} );
+
+
+
+
 
 const app = new Vue({
     el: '#poster-app',

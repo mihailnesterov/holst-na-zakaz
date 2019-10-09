@@ -3,6 +3,7 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\helpers\ArrayHelper;
 // admin/models
 use app\modules\admin\models\Users;
 use app\modules\admin\models\Login;
@@ -161,5 +162,36 @@ class DefaultController extends Controller
         //$this->findPosterModel($id)->delete();
 
         return $this->redirect(['admin']);
+    }
+
+    /**
+     * Renders the add category view for the module
+     * @return string
+     */
+    public function actionCategoryAdd() {       
+        $this->view->title = 'Добавить категорию...';
+        $model = new Catalog();
+        // получаем список всех категорий
+        $catalog = Catalog::find()->all();
+        /* 
+            формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+            массив будем выводить во view в выпадающем списке для выбора родительской
+            категории
+        */
+        $items = ArrayHelper::map($catalog,'id','name');
+        $params = [
+            'prompt' => 'без родительской'
+        ];
+        
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if($model->save()) {
+                return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            }
+        }
+        return $this->render('category-add', [
+            'model' => $model,
+            'items' => $items,
+            'params' => $params,
+        ]);
     }
 }
