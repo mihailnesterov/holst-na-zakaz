@@ -13,10 +13,10 @@ use app\components\posterlistimage\PosterListImageWidget;
         <p><?= $user->login ?>, Вы не являетесь администратором!</p>
     <?php else: ?>
         <div class="uk-margin-bottom">
-            <a href="<?= Url::to(['/admin/poster-add']) ?>" class="uk-button uk-button-primary">Добавить картину</a>
-            <a href="<?= Url::to(['/admin/category-add']) ?>" class="uk-button uk-button-primary">Добавить категорию</a>
+            <?= Html::a('<i class="fa fa-plus"></i> Добавить картину',Url::to(['/admin/poster-add']),['class' => 'uk-button uk-button-primary']) ?>
+            <?= Html::a('<i class="fa fa-plus"></i> Добавить категорию',Url::to(['/admin/category-add']),['class' => 'uk-button uk-button-primary']) ?>
+            <?= Html::a('<i class="fa fa-plus"></i> Добавить услугу',Url::to(['/admin/service-add']),['class' => 'uk-button uk-button-primary']) ?>
         </div>
-        
         <div class="uk-child-width-1-3 uk-text-center" uk-grid>
             <?php foreach( $posters as $poster): ?>
             <div>

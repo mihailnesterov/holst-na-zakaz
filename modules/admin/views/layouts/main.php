@@ -2,7 +2,9 @@
     use app\assets\AdminAsset;
     use yii\helpers\Html;
     use yii\helpers\Url;
-    use app\components\catalogmenu\CatalogMenuWidget;
+    use app\modules\admin\components\categorymenu\CategoryMenuWidget;
+    use app\modules\admin\components\servicesmenu\ServicesMenuWidget;
+    use app\modules\admin\components\bagetsmenu\BagetsMenuWidget;
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl(Yii::$app->homeUrl.'web');   
    
@@ -47,7 +49,16 @@
             <div class="--wrapper" uk-grid>
 
                 <aside class="uk-width-1-5@m  uk-margin-large-top">
-                    <?php echo CatalogMenuWidget::widget();?>
+                    <div class="aside-menu">
+                        <h4 class="uk-margin-medium-bottom">
+                            <?= Html::a('<i class="fa fa-images"></i> Картины',Url::to(['/admin']),['class' => '']) ?>
+                        </h4>
+                        <ul uk-accordion>
+                            <?php echo CategoryMenuWidget::widget();?>
+                            <?php echo ServicesMenuWidget::widget();?>
+                            <?php echo BagetsMenuWidget::widget();?>
+                        </ul>
+                    </div>
                 </aside>
 
                 <div class="--catalog-content uk-width-expand@m">

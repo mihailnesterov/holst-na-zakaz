@@ -1,4 +1,4 @@
 <?php
 use app\modules\admin\components\category\CategoryWidget;
-echo CategoryWidget::widget();
+echo CategoryWidget::widget(['id' => $id]);
 ?>

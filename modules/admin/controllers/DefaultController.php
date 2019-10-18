@@ -151,47 +151,106 @@ class DefaultController extends Controller
     }
 
     /**
+     * find Category model
+     */
+    protected function findCategoryModel($id)
+    {
+        if (($model = Catalog::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Category not found...');
+    }
+    /**
+     * find Service model
+     */
+    protected function findServiceModel($id)
+    {
+        if (($model = AddServices::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Service not found...');
+    }
+
+
+    /**
+     * Renders the add category view for the module
+     * @return string
+     */
+    public function actionCategoryAdd() {
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        }
+        return $this->render('category-add');
+    }
+
+    /**
+     * Renders the edit category view for the module
+     * @return string
+     */
+    public function actionCategoryEdit($id) {       
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        }
+        return $this->render('category-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing category model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionCategoryDelete($id) {
+        $this->findCategoryModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+    }
+
+    /**
+     * Renders the add service view for the module
+     * @return string
+     */
+    public function actionServiceAdd() {        
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        }
+        return $this->render('service-add');
+    }
+    /**
+     * Renders the edit service view for the module
+     * @return string
+     */
+    public function actionServiceEdit($id) {       
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        }
+        return $this->render('service-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing service model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionServiceDelete($id) {
+        $this->findServiceModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+    }
+
+    /**
      * Deletes an existing poster model.
      * If deletion is successful, the browser will be redirected to the '/admin' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionPosterDelete($id)
-    {
-        //$this->findPosterModel($id)->delete();
+    public function actionPosterDelete($id) {
+        $this->findPosterModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+    }   
 
-        return $this->redirect(['admin']);
-    }
-
-    /**
-     * Renders the add category view for the module
-     * @return string
-     */
-    public function actionCategoryAdd() {       
-        $this->view->title = 'Добавить категорию...';
-        $model = new Catalog();
-        // получаем список всех категорий
-        $catalog = Catalog::find()->all();
-        /* 
-            формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
-            массив будем выводить во view в выпадающем списке для выбора родительской
-            категории
-        */
-        $items = ArrayHelper::map($catalog,'id','name');
-        $params = [
-            'prompt' => 'без родительской'
-        ];
-        
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if($model->save()) {
-                return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
-            }
-        }
-        return $this->render('category-add', [
-            'model' => $model,
-            'items' => $items,
-            'params' => $params,
-        ]);
-    }
 }
