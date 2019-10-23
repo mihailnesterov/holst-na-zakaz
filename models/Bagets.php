@@ -26,6 +26,11 @@ class Bagets extends \yii\db\ActiveRecord
     }
 
     /**
+     * @var UploadedImage
+     */
+    public $imageFile;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
@@ -36,6 +41,7 @@ class Bagets extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['articul'], 'string', 'max' => 10],
             [['material', 'color', 'image'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => true, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
         ];
     }
 
@@ -53,5 +59,20 @@ class Bagets extends \yii\db\ActiveRecord
             'image' => 'Image',
             'price' => 'Price',
         ];
+    }
+
+    /**
+     * @return uploaded image file
+     */
+    
+    public function upload($imageFile, $image){
+        if($this->validate()){            
+            $filename = 'images/baguettes/'.$image;
+            $imageFile->saveAs($filename);
+            //$this->imageFile->saveAs('images/baguettes/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            //return true;
+        } else {
+            return false;
+        }
     }
 }

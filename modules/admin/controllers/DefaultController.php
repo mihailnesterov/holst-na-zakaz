@@ -170,6 +170,16 @@ class DefaultController extends Controller
         }
         throw new NotFoundHttpException('Service not found...');
     }
+    /**
+     * find Baget model
+     */
+    protected function findBagetModel($id)
+    {
+        if (($model = Bagets::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Baguettes not found...');
+    }
 
 
     /**
@@ -238,6 +248,40 @@ class DefaultController extends Controller
      */
     public function actionServiceDelete($id) {
         $this->findServiceModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+    }
+
+    /**
+     * Renders the add baget view for the module
+     * @return string
+     */
+    public function actionBagetAdd() {        
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        }
+        return $this->render('baget-add');
+    }
+    /**
+     * Renders the edit baget view for the module
+     * @return string
+     */
+    public function actionBagetEdit($id) {       
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        }
+        return $this->render('baget-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing baget model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionBagetDelete($id) {
+        $this->findBagetModel($id)->delete();
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
     }
 
