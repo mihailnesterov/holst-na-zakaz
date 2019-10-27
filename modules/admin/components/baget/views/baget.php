@@ -71,20 +71,28 @@ use yii\widgets\ActiveForm;
                 'template' => '{input}{error}',
                 'inputOptions' => [
                     'id' => 'form-baget-image-input',   // id используем в js/jquery
-                    'tabindex' => '5',
+                    //'tabindex' => '5',
+                    'type' => 'hidden',
                     'placeholder' => 'Картинка',
                     'class'=>'uk-input'
                 ]
-            ])/*->fileInput()*/->label(false) ?>
+            ])->label(false) ?>
         </div>
 
         <div class="uk-margin" uk-margin>
             <div uk-form-custom="target: true">
                 <span class="uk-form-icon" uk-icon="icon: download"></span>
-                <input type="file" id="baget-image-file-input" accept=".jpg, .jpeg, .png" value="<?= $model->image != '' ? $model->image : '' ?>">
-                <input class="uk-input uk-form-width-large" type="text" placeholder="<?= $model->image != '' ? $model->image : 'загрузите картинку' ?>" disabled >
+                <?= $form->field($model, 'imageFile', [
+                    'template' => '{input}{error}',
+                    'inputOptions' => [
+                        'id' => 'baget-image-file-input',
+                        'tabindex' => '5',
+                        'class' =>'uk-input',
+                        'accept' => '.jpg, .jpeg, .png'
+                    ]
+                ])->fileInput()->label(false) ?>
+                <input id="baget-image-file-name" class="uk-input uk-form-width-large" type="text" placeholder="<?= $model->image != '' ? $model->image : 'загрузите картинку' ?>" disabled >
             </div>
-            <!--<button type="button" class="uk-button uk-button-primary"><span uk-icon="download"></span></button>-->
         </div>
 
         <div class="uk-margin">
@@ -114,7 +122,7 @@ use yii\widgets\ActiveForm;
                         ],
                 ]
             ) ?>
-            <?= Html::a('Отмена', Url::to(['/admin']), ['class' => 'uk-button uk-button-default']) ?>
+            <?= Html::a('Отмена', Url::to(['/admin/bagets']), ['class' => 'uk-button uk-button-default']) ?>
         </div>
     </fieldset>
     <?php ActiveForm::end(); ?>

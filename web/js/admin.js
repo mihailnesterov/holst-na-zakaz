@@ -36,14 +36,18 @@ console.log( catalogDescription );*/
 
 $( function() {
 
-    $('#baget-image-file-input').on('change',function(){
+    /*$('#baget-image-file-input').on('change',function(){
         
         $('#form-baget-image-input').val( $(this).val() );
         console.log('change =' + $(this).val());
+    });*/
+
+    $('#baget-img').on('click', function() {
+        $('#baget-image-file-input').click();
     });
 
 
-    $('#baget-image-file-input1').on('change',function() {
+    $('#baget-image-file-input').on('change',function() {
         console.clear();
         
         const value = $(this).val().replace(/^.*\\/, "");
@@ -56,6 +60,8 @@ $( function() {
         console.log( imageName );
         console.log( imageExt );
         console.log( random );
+
+        $('#baget-image-file-name').val(value);
 
         previewImage('baget-img','baget-image-file-input','form-baget-image-input');
     });
@@ -133,10 +139,10 @@ function previewImage(imgId, fileId, fileNameId) {
  * после того, как завершила выполнение основная функция
  */
 
-setTimeout(function(){
+/*setTimeout(function(){
     console.log('setTimeout');
 },3000);
 
 setInterval(function(){
     console.log('setInterval');
-},2000);
+},2000);*/

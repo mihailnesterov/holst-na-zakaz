@@ -5,6 +5,7 @@
     use app\modules\admin\components\categorymenu\CategoryMenuWidget;
     use app\modules\admin\components\servicesmenu\ServicesMenuWidget;
     use app\modules\admin\components\bagetsmenu\BagetsMenuWidget;
+    use app\modules\admin\components\topmenu\TopMenuWidget;
 
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl(Yii::$app->homeUrl.'web');   
    
@@ -35,14 +36,20 @@
 
         <!-- header -->
         <div class="main-headerbar">
-            <h3 class="uk-margin-top">
-                кабинет  
-                (<?= Yii::$app->user->identity->login ?>) 
+            <h4 class="uk-margin-top uk-margin-right">
+                Кабинет: 
+            </h4>
+            <?php echo TopMenuWidget::widget(['action' => Yii::$app->controller->action->id]);?>
+            <h4 class="uk-margin-top uk-margin-left">
+                <span class="--uk-form-icon" uk-icon="icon: user"></span>
+                <?= Yii::$app->user->identity->login ?>
+                 / 
                 <a href="<?= Url::to('@web/admin/logout') ?>">выйти</a>
-            </h3>
+            </h4>
             <div class="main-headerbar-buttons">
                 <!-- add hamburger here... -->
             </div>
+            
         </div>
         <!-- content -->
         <div class="main-wrapper uk-container">

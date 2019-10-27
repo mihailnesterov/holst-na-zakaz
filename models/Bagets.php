@@ -70,9 +70,19 @@ class Bagets extends \yii\db\ActiveRecord
             $filename = 'images/baguettes/'.$image;
             $imageFile->saveAs($filename);
             //$this->imageFile->saveAs('images/baguettes/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            //return true;
+            return true;
         } else {
             return false;
         }
     }
+
+    /*public function upload1()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs('images/baguettes/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
+    }*/
 }

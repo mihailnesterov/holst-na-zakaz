@@ -3,6 +3,9 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use yii\helpers\ArrayHelper;
 // admin/models
 use app\modules\admin\models\Users;
@@ -31,6 +34,32 @@ class DefaultController extends Controller
 {
     
     /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout'],
+                'rules' => [
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            /*'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],*/
+        ];
+    }
+
+    /**
      * Renders the index view for the module
      * @return string
      */
@@ -46,7 +75,6 @@ class DefaultController extends Controller
                 'posters' => $posters
             ]);
         }
-        
     }
     
     /**
@@ -183,12 +211,27 @@ class DefaultController extends Controller
 
 
     /**
+     * Renders the category view for the module
+     * @return string
+     */
+    public function actionCategory() {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/login'));
+        } else {
+            $model = Catalog::find()->orderby(['name'=>SORT_ASC])->all();
+            $this->view->title = 'Категории';
+            return $this->render('category',[
+                'model' => $model
+            ]);
+        }  
+    }
+    /**
      * Renders the add category view for the module
      * @return string
      */
     public function actionCategoryAdd() {
         if( Yii::$app->request->post()) {
-            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/category'));
         }
         return $this->render('category-add');
     }
@@ -199,7 +242,7 @@ class DefaultController extends Controller
      */
     public function actionCategoryEdit($id) {       
         if( Yii::$app->request->post()) {
-            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/category'));
         }
         return $this->render('category-edit',[
             'id' => $id
@@ -251,13 +294,29 @@ class DefaultController extends Controller
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
     }
 
+
+    /**
+     * Renders the bagets view for the module
+     * @return string
+     */
+    public function actionBagets() {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/login'));
+        } else {
+            $bagets = Bagets::find()->orderby(['id'=>SORT_ASC])->all();
+            $this->view->title = 'Багеты';
+            return $this->render('bagets',[
+                'bagets' => $bagets
+            ]);
+        }  
+    }
     /**
      * Renders the add baget view for the module
      * @return string
      */
     public function actionBagetAdd() {        
         if( Yii::$app->request->post()) {
-            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/bagets'));
         }
         return $this->render('baget-add');
     }
@@ -267,7 +326,8 @@ class DefaultController extends Controller
      */
     public function actionBagetEdit($id) {       
         if( Yii::$app->request->post()) {
-            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            //$this->refresh();
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/bagets'));
         }
         return $this->render('baget-edit',[
             'id' => $id

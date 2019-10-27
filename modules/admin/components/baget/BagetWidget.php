@@ -31,7 +31,7 @@ class BagetWidget extends Widget {
         if( $model->load(Yii::$app->request->post()) && $model->validate()) { 
             if($model->save()) {   
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                if ($model->imageFile != null) {
+                if ($model->imageFile) {
                     $model->upload($model->imageFile, $model->image);
                 }
                 return;
