@@ -75,14 +75,4 @@ class Bagets extends \yii\db\ActiveRecord
             return false;
         }
     }
-
-    /*public function upload1()
-    {
-        if ($this->validate()) {
-            $this->imageFile->saveAs('images/baguettes/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 }

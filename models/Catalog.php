@@ -67,4 +67,20 @@ class Catalog extends \yii\db\ActiveRecord
     {
         return \app\models\CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
     }
+
+    /** + метод для подсчета кол-ва подкатегорий в категории
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getSubCategoryCount($catalog_id)
+    {
+        return \app\models\Catalog::find()->where(['parent' => $catalog_id])->count();
+    }
+    
+    /** + метод для вывода подкатегорий в категории
+     * @return \yii\db\ActiveQuery
+     */
+    public static function getSubCategories($catalog_id)
+    {
+        return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
+    }
 }

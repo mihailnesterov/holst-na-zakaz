@@ -8,8 +8,7 @@ use app\models\Catalog;
 class CategoryMenuWidget extends Widget {
     public function run() {
         parent::run();
-        $this->view->title = 'Категории';
-        $catalog = Catalog::find()->orderby(['id' => SORT_ASC])->all();
+        $catalog = Catalog::find()->where(['parent' => 0])->orderby(['id' => SORT_ASC])->all();
         return $this->render('categorymenu', [
             'catalog' => $catalog,
         ]);

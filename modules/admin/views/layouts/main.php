@@ -51,28 +51,12 @@
             </div>
             
         </div>
+        
         <!-- content -->
         <div class="main-wrapper uk-container">
-            <div class="--wrapper" uk-grid>
-
-                <aside class="uk-width-1-5@m  uk-margin-large-top">
-                    <div class="aside-menu">
-                        <h4 class="uk-margin-medium-bottom">
-                            <?= Html::a('<i class="fa fa-images"></i> Картины',Url::to(['/admin']),['class' => '']) ?>
-                        </h4>
-                        <ul uk-accordion>
-                            <?php echo CategoryMenuWidget::widget();?>
-                            <?php echo ServicesMenuWidget::widget();?>
-                            <?php echo BagetsMenuWidget::widget();?>
-                        </ul>
-                    </div>
-                </aside>
-
-                <div class="--catalog-content uk-width-expand@m">
-                    <?= $content ?>
-                </div>
-
-            </div>  <!-- end wrapper -->
+            <div class="content-container"> <!-- no css -->
+                <?= $content ?>
+            </div>
         </div>  <!-- end main-wrapper -->
 
         <!-- footer -->

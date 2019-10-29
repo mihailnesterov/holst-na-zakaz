@@ -9,39 +9,30 @@ use yii\widgets\Breadcrumbs;*/
 <div class="uk-container uk-margin-large-bottom uk-margin-top">
     <h1 class="uk-heading-bullet uk-margin-top"><?= Html::encode($this->title) ?></h1>
         <div class="uk-margin-bottom">
-            <?= Html::a('<i class="fa fa-plus"></i> Добавить багет',Url::to(['/admin/baget-add']),['class' => 'uk-button uk-button-primary']) ?>
+            <?= Html::a('<i class="fa fa-plus"></i> Добавить услугу',Url::to(['/admin/service-add']),['class' => 'uk-button uk-button-primary']) ?>
         </div>
         <div class="uk-child-width-1-4 uk-text-center" uk-grid>
-            <?php foreach( $bagets as $baget): ?>
+            <?php foreach( $services as $service): ?>
             <div>
                 <div class="admin-holst-card uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-                    <div class="uk-margin-bottom">
-                        <a href="<?= Url::to(['/admin/baget-edit', 'id' => $baget->id]) ?>">
-                            <?= Html::img('@web/images/baguettes/'.$baget->image,['alt' => "$baget->articul"]) ?>
-                        </a>
-                    </div>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Артикул: <?= $baget->articul ?></p>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Материал: <?= $baget->material ?></p>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Толщина: <?= $baget->width ?> см</p>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Цвет: <?= $baget->color ?></p>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Цена: <?= $baget->price ?> руб.</p>
-                    
+                    <h4 class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $service->name ?></h4>
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $service->description ?></p>                    
                     
                     <div class="--holst-card-block uk-padding-small uk-margin-remove">
                         <div class="uk-button-group">
-                            <a href="<?= Url::to(['/admin/baget-edit', 'id' => $baget->id]) ?>" class="uk-button uk-button-default uk-button-small" title="редактировать">
+                            <a href="<?= Url::to(['/admin/service-edit', 'id' => $service->id]) ?>" class="uk-button uk-button-default uk-button-small" title="редактировать">
                                 <i class="fa fa-pencil-alt"></i>
                             </a>
                             <?= Html::a(
-                                '<i class="fa fa-times" title="Удалить '.$baget->articul.'"></i>', 
+                                '<i class="fa fa-times" title="Удалить '.$service->name.'"></i>', 
                                 [
-                                    '/admin/baget-delete', 'id' => $baget->id
+                                    '/admin/service-delete', 'id' => $service->id
                                 ], 
                                 [
                                     'class' => 'uk-button uk-button-danger uk-button-small',
-                                    'title' => 'Удалить "'.$baget->articul.'"',
+                                    'title' => 'Удалить "'.$service->name.'"',
                                     'data' => [
-                                        'confirm' => 'Удалить "'.$baget->articul.'"?',
+                                        'confirm' => 'Удалить "'.$service->name.'"?',
                                         'method' => 'post',
                                         ],
                                 ]

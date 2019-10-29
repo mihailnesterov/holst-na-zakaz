@@ -10,8 +10,8 @@ class TopMenuWidget extends Widget {
         $items = [
             [
                 'title' => 'Картины',
-                'url' => '/admin',
-                'action' => 'index'
+                'url' => '/admin/posters',
+                'action' => 'posters'
             ],
             [
                 'title' => 'Категории',

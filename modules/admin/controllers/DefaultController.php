@@ -211,19 +211,51 @@ class DefaultController extends Controller
 
 
     /**
+     * Renders the posters view for the module
+     * @return string
+     */
+    public function actionPosters($cat=null) {
+        if($cat) {
+            $posters = CatalogPosters::find()->select('poster_id')->distinct()->where(['catalog_id' => $cat])->all();
+            $category = Catalog::findOne(['id'=>$cat]);
+            $this->view->title = 'Картины из категории "'.$category->name.'" ('.count($posters).')';
+        } else {
+            $posters = CatalogPosters::find()->select('poster_id')->distinct()->all();
+            $this->view->title = 'Все картины ('.count($posters).')';
+        }
+        
+        return $this->render('posters',[
+            'posters' => $posters,
+        ]);
+    }
+    /**
+     * Renders the posters download view for the module
+     * @return string
+     */
+    public function actionPostersDownload() {
+        $this->view->title = 'Загрузить картины из каталога';
+        return $this->render('posters-download');
+    }
+
+    /**
      * Renders the category view for the module
      * @return string
      */
-    public function actionCategory() {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/login'));
+    public function actionCategory($id=null) {
+        $postersInCategoryCount = 0;
+        if($id) {
+            $model = Catalog::find()->where(['parent' => $id])->orderby(['name'=>SORT_ASC])->all();
+            $category = Catalog::findOne(['id' => $id]);
+            $postersInCategoryCount = CatalogPosters::find()->where(['catalog_id' => $id])->count();
+            $this->view->title = 'Категория ' . $category->name . ' (' . count($model) . ', ' . $postersInCategoryCount . ')';
         } else {
             $model = Catalog::find()->orderby(['name'=>SORT_ASC])->all();
-            $this->view->title = 'Категории';
-            return $this->render('category',[
-                'model' => $model
-            ]);
-        }  
+            $postersInCategoryCount = Posters::find()->count();
+            $this->view->title = 'Все категории' . ' (' . count($model) . ', ' . $postersInCategoryCount . ')';
+        }
+        return $this->render('category',[
+            'model' => $model
+        ]); 
     }
     /**
      * Renders the add category view for the module
@@ -260,13 +292,25 @@ class DefaultController extends Controller
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
     }
 
+
+    /**
+     * Renders the services view for the module
+     * @return string
+     */
+    public function actionServices() {
+        $services = AddServices::find()->orderby(['id'=>SORT_ASC])->all();
+        $this->view->title = 'Услуги';
+        return $this->render('services',[
+            'services' => $services
+        ]); 
+    }
     /**
      * Renders the add service view for the module
      * @return string
      */
     public function actionServiceAdd() {        
         if( Yii::$app->request->post()) {
-            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/services'));
         }
         return $this->render('service-add');
     }
@@ -276,7 +320,7 @@ class DefaultController extends Controller
      */
     public function actionServiceEdit($id) {       
         if( Yii::$app->request->post()) {
-            $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/services'));
         }
         return $this->render('service-edit',[
             'id' => $id

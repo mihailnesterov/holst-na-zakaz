@@ -59,7 +59,7 @@ use yii\widgets\ActiveForm;
                         ],
                 ]
             ) ?>
-            <?= Html::a('Отмена', Url::to(['/admin']), ['class' => 'uk-button uk-button-default']) ?>
+            <?= Html::a('Отмена', Url::to(['/admin/services']), ['class' => 'uk-button uk-button-default']) ?>
         </div>
     </fieldset>
     <?php ActiveForm::end(); ?>

@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
                     'class'=>'uk-input',
                     //'pattern'=>'\D+([a-zA-Z0-9._@])$'
                 ]
-            ])->label(false) ?>
+            ])->label('Название') ?>
         </div>
         <div class="uk-margin">
             <?= $form->field($model, 'parent', [
@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
                     'tabindex' => '2',
                     'class'=>'uk-select'
                 ]
-            ])->dropDownList($items,$params)->label(false) ?>
+            ])->dropDownList($items,$params)->label('Родительская категория') ?>
         </div>
         <div class="uk-margin">
             <?= $form->field($model, 'description', [
@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
                     'placeholder' => 'Описание',
                     'class'=>'uk-textarea'
                 ]
-            ])->textarea(['rows' => 3, 'cols' => 20])->label(false) ?>
+            ])->textarea(['rows' => 3, 'cols' => 20])->label('Описание') ?>
         </div>
         <div class="uk-margin">
             <?= $form->field($model, 'keywords', [
@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
                     'placeholder' => 'Ключевые слова',
                     'class'=>'uk-input'
                 ]
-            ])->label(false) ?>
+            ])->label('Ключевые слова') ?>
         </div>
         <div class="uk-margin" uk-margin>
             <?= Html::submitButton('Сохранить', ['class' => 'uk-button uk-button-primary']) ?>
