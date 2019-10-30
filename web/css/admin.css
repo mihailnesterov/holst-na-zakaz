@@ -1,1 +1,12 @@
 /* admin css*/
+
+/* fix top menu - top-menu-nav (uk-navbar-nav)*/
+.top-menu-nav {
+    margin-top:0 !important;
+}
+.top-menu-nav>li>a {
+    min-height: auto !important;
+}
+.top-menu-nav>li.uk-active>a {
+    color:#fff !important;
+}

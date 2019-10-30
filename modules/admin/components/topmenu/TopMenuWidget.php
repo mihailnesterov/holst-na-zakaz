@@ -19,34 +19,47 @@ class TopMenuWidget extends Widget {
                 'action' => 'category'
             ],
             [
-                'title' => 'Типы',
-                'url' => '/admin/types',
-                'action' => 'types'
+                'title' => 'Настройки',
+                [
+                    'title' => 'Типы картин',
+                    'url' => '/admin/types',
+                    'action' => 'types'
+                ],
+                [
+                    'title' => 'Доп. услуги',
+                    'url' => '/admin/services',
+                    'action' => 'services'
+                ],
+                [
+                    'title' => 'Багеты',
+                    'url' => '/admin/bagets',
+                    'action' => 'bagets'
+                ],
+                [
+                    'title' => 'Материалы',
+                    'url' => '/admin/materials',
+                    'action' => 'materials'
+                ],
+                [
+                    'title' => 'Часы',
+                    'url' => '/admin/clocks',
+                    'action' => 'clocks'
+                ],
+                [
+                    'title' => 'Размеры картин',
+                    'url' => '/admin/sizes',
+                    'action' => 'sizes'
+                ]
             ],
             [
-                'title' => 'Доп.услуги',
-                'url' => '/admin/services',
-                'action' => 'services'
+                'title' => 'Заказы',
+                'url' => '/admin/orders',
+                'action' => 'orders'
             ],
             [
-                'title' => 'Багеты',
-                'url' => '/admin/bagets',
-                'action' => 'bagets'
-            ],
-            [
-                'title' => 'Материалы',
-                'url' => '/admin/materials',
-                'action' => 'materials'
-            ],
-            [
-                'title' => 'Часы',
-                'url' => '/admin/clocks',
-                'action' => 'clocks'
-            ],
-            [
-                'title' => 'Размеры',
-                'url' => '/admin/sizes',
-                'action' => 'sizes'
+                'title' => 'Пользователи',
+                'url' => '/admin/users',
+                'action' => 'users'
             ]
         ];
         return $this->render('topmenu',[

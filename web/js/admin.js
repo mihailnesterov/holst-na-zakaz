@@ -93,6 +93,40 @@ function previewImage(imgId, fileId, fileNameId) {
     }
 }
 
+/**
+ * function(e) {...}
+ * e => {...}   не имеют this
+ */
+
+
+/**
+ * 1. Подключиться к форме $('#form-category')
+ * 2. зоздать обработчик (on) на событие submit 
+ * 3. Отменить дефолтный submit (e.preventDefault())
+ * 4. Получить данне из формы (serialize)
+ * 5. Создать и настроить AJAX-обработку
+ */
+
+$('#form-category1').on('submit', function(e) {
+    e.preventDefault();
+    console.clear();
+    // $(this) = e.target
+    //console.log(e.target);
+    //console.log($(this));
+    const form = $(this);
+    //const formData = form.serialize();
+    //$('#catalog-name').val();
+    //console.log(formData);
+    $.ajax({
+        url: form.attr('action'), // send.php
+        type: form.attr('method'), // POST, GET... PUT, DELETE 
+        data: form.serialize(),
+        /*success: function(response) {},
+        error: function(err) {},*/
+    });
+    
+});
+
 //$('#form-baget1').on('submit', function(e) {
     /**
      * e - event, объект события
