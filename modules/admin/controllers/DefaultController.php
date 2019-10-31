@@ -206,9 +206,18 @@ class DefaultController extends Controller
         if (($model = Bagets::findOne($id)) !== null) {
             return $model;
         }
-        throw new NotFoundHttpException('Baguettes not found...');
+        throw new NotFoundHttpException('Baguette not found...');
     }
-
+    /**
+     * find Type model
+     */
+    protected function findTypeModel($id)
+    {
+        if (($model = Types::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Type not found...');
+    }
 
     /**
      * Renders the posters view for the module
@@ -235,6 +244,17 @@ class DefaultController extends Controller
     public function actionPostersDownload() {
         $this->view->title = 'Загрузить картины из каталога';
         return $this->render('posters-download');
+    }
+    /**
+     * Deletes an existing poster model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionPosterDelete($id) {
+        $this->findPosterModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
     }
 
     /**
@@ -386,19 +406,53 @@ class DefaultController extends Controller
      */
     public function actionBagetDelete($id) {
         $this->findBagetModel($id)->delete();
-        return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin/bagets'));
     }
 
+    
+
     /**
-     * Deletes an existing poster model.
+     * Renders the types view for the module
+     * @return string
+     */
+    public function actionTypes() {
+        $types = Types::find()->all();
+        $this->view->title = 'Типы';        
+        return $this->render('types', compact('types'));
+    }
+    /**
+     * Renders the add type view for the module
+     * @return string
+     */
+    public function actionTypeAdd() {
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/types'));
+        }
+        return $this->render('type-add');
+    }
+    /**
+     * Renders the edit type view for the module
+     * @return string
+     */
+    public function actionTypeEdit($id) {       
+        if( Yii::$app->request->post()) {
+            //$this->refresh();
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/types'));
+        }
+        return $this->render('type-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing type model.
      * If deletion is successful, the browser will be redirected to the '/admin' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionPosterDelete($id) {
-        $this->findPosterModel($id)->delete();
-        return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
-    }   
+    public function actionTypeDelete($id) {
+        $this->findTypeModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin/types'));
+    }
 
 }
