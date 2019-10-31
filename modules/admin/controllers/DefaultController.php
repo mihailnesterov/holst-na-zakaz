@@ -409,8 +409,6 @@ class DefaultController extends Controller
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin/bagets'));
     }
 
-    
-
     /**
      * Renders the types view for the module
      * @return string
@@ -453,6 +451,50 @@ class DefaultController extends Controller
     public function actionTypeDelete($id) {
         $this->findTypeModel($id)->delete();
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin/types'));
+    }
+
+    /**
+     * Renders the sizes view for the module
+     * @return string
+     */
+    public function actionSizes() {
+        $sizes = Sizes::find()->all();
+        $this->view->title = 'Размеры';        
+        return $this->render('sizes', compact('sizes'));
+    }
+    /**
+     * Renders the add size view for the module
+     * @return string
+     */
+    public function actionSizeAdd() {
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/sizes'));
+        }
+        return $this->render('size-add');
+    }
+    /**
+     * Renders the edit type view for the module
+     * @return string
+     */
+    public function actionSizeEdit($id) {       
+        if( Yii::$app->request->post()) {
+            //$this->refresh();
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/sizes'));
+        }
+        return $this->render('size-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing size model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionSizeDelete($id) {
+        $this->findSizeModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin/sizes'));
     }
 
 }
