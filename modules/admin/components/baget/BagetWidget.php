@@ -2,7 +2,6 @@
 namespace app\modules\admin\components\baget;
 use Yii;
 use yii\base\Widget;
-use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 use app\models\Bagets;
 

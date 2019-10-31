@@ -2,7 +2,6 @@
 namespace app\modules\admin\components\type;
 use Yii;
 use yii\base\Widget;
-use yii\helpers\ArrayHelper;
 use app\models\Types;
 
 class TypeWidget extends Widget {

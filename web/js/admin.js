@@ -1,73 +1,23 @@
 /* admin js */
 
-/*const app = new Vue({
-    el: '#root',
-    data: {
-        
-    },
-    methods: {
-        
-    },
-    computed: {
-
-    },
-    mounted() {
-
-    }
-});*/
-
-//const formCategory = $('#form-category');
-
-//console.log( $(formCategory).html() );
-
-/*const catalogName = $('#catalog-name').val();
-
-console.log( catalogName );
-
-
-const catalogParent = $('#catalog-parent').val();
-
-console.log( catalogParent );
-
-
-const catalogDescription = $('#catalog-description').val();
-
-console.log( catalogDescription );*/
-
+// baget: image add
 $( function() {
-
-    /*$('#baget-image-file-input').on('change',function(){
-        
-        $('#form-baget-image-input').val( $(this).val() );
-        console.log('change =' + $(this).val());
-    });*/
-
     $('#baget-img').on('click', function() {
         $('#baget-image-file-input').click();
     });
-
-
-    $('#baget-image-file-input').on('change',function() {
-        console.clear();
-        
+    $('#baget-image-file-input').on('change',function() { 
         const value = $(this).val().replace(/^.*\\/, "");
-        const imageName = value.replace(/\..*/, '');
+        //const imageName = value.replace(/\..*/, '');
         //const imageName = value.substr(0,value.indexOf("."));
-        const imageExt = $(this).val().substr( $(this).val().indexOf(".") );
+        /*const imageExt = $(this).val().substr( $(this).val().indexOf(".") );
         const random = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + imageExt;
-
-        console.log( value );
-        console.log( imageName );
-        console.log( imageExt );
-        console.log( random );
-
+        */
         $('#baget-image-file-name').val(value);
-
         previewImage('baget-img','baget-image-file-input','form-baget-image-input');
     });
 } );
 
-// admin: download image function
+// download image function
 function previewImage(imgId, fileId, fileNameId) {  
     // создаем переменные для картинки и файла из input
     var preview = document.getElementById(imgId);

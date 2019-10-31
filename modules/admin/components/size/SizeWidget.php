@@ -2,7 +2,6 @@
 namespace app\modules\admin\components\size;
 use Yii;
 use yii\base\Widget;
-//use yii\helpers\ArrayHelper;
 use app\models\Sizes;
 
 class SizeWidget extends Widget {

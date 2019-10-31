@@ -2,7 +2,6 @@
 namespace app\modules\admin\components\service;
 use Yii;
 use yii\base\Widget;
-use yii\helpers\ArrayHelper;
 use app\models\AddServices;
 
 class ServiceWidget extends Widget {
