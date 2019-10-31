@@ -1,6 +1,6 @@
 /* admin js */
 
-// baget: image add
+// baget image add
 $( function() {
     $('#baget-img').on('click', function() {
         $('#baget-image-file-input').click();
@@ -14,6 +14,18 @@ $( function() {
         */
         $('#baget-image-file-name').val(value);
         previewImage('baget-img','baget-image-file-input','form-baget-image-input');
+    });
+} );
+
+// clocks image add
+$( function() {
+    $('#clock-img').on('click', function() {
+        $('#clock-image-file-input').click();
+    });
+    $('#clock-image-file-input').on('change',function() { 
+        const value = $(this).val().replace(/^.*\\/, "");
+        $('#clock-image-file-name').val(value);
+        previewImage('clock-img','clock-image-file-input','form-clock-image-input');
     });
 } );
 

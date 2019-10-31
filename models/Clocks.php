@@ -22,6 +22,11 @@ class Clocks extends \yii\db\ActiveRecord
     }
 
     /**
+     * @var UploadedImage
+     */
+    public $imageFile;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
@@ -29,6 +34,7 @@ class Clocks extends \yii\db\ActiveRecord
         return [
             [['src', 'name'], 'required'],
             [['src', 'name'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'extensions' => 'gif, png, jpg, jpeg', 'skipOnEmpty' => true, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
         ];
     }
 
@@ -42,5 +48,19 @@ class Clocks extends \yii\db\ActiveRecord
             'src' => 'Src',
             'name' => 'Name',
         ];
+    }
+
+    /**
+     * @return uploaded image file
+     */
+    public function upload($imageFile, $image){
+        if($this->validate()){            
+            $filename = 'images/clocks/'.$image;
+            $imageFile->saveAs($filename);
+            //$this->imageFile->saveAs('images/clocks/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

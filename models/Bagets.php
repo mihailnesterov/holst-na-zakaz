@@ -64,7 +64,6 @@ class Bagets extends \yii\db\ActiveRecord
     /**
      * @return uploaded image file
      */
-    
     public function upload($imageFile, $image){
         if($this->validate()){            
             $filename = 'images/baguettes/'.$image;

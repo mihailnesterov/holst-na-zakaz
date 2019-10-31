@@ -218,6 +218,27 @@ class DefaultController extends Controller
         }
         throw new NotFoundHttpException('Type not found...');
     }
+    /**
+     * find Size model
+     */
+    protected function findSizeModel($id)
+    {
+        if (($model = Sizes::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Size not found...');
+    }
+    /**
+     * find Clock model
+     */
+    protected function findClockModel($id)
+    {
+        if (($model = Clocks::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Clock not found...');
+    }
+    
 
     /**
      * Renders the posters view for the module
@@ -364,15 +385,11 @@ class DefaultController extends Controller
      * @return string
      */
     public function actionBagets() {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/login'));
-        } else {
-            $bagets = Bagets::find()->orderby(['id'=>SORT_ASC])->all();
-            $this->view->title = 'Багеты';
-            return $this->render('bagets',[
-                'bagets' => $bagets
-            ]);
-        }  
+        $bagets = Bagets::find()->orderby(['id'=>SORT_ASC])->all();
+        $this->view->title = 'Багеты';
+        return $this->render('bagets',[
+            'bagets' => $bagets
+        ]); 
     }
     /**
      * Renders the add baget view for the module
@@ -495,6 +512,52 @@ class DefaultController extends Controller
     public function actionSizeDelete($id) {
         $this->findSizeModel($id)->delete();
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin/sizes'));
+    }
+
+    /**
+     * Renders the clocks view for the module
+     * @return string
+     */
+    public function actionClocks() {
+        $clocks = Clocks::find()->orderby(['id'=>SORT_ASC])->all();
+        $this->view->title = 'Часы';
+        return $this->render('clocks',[
+            'clocks' => $clocks
+        ]); 
+    }
+    /**
+     * Renders the add clock view for the module
+     * @return string
+     */
+    public function actionClockAdd() {        
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/clocks'));
+        }
+        return $this->render('clock-add');
+    }
+    /**
+     * Renders the edit clocks view for the module
+     * @return string
+     */
+    public function actionClockEdit($id) {       
+        if( Yii::$app->request->post()) {
+            //$this->refresh();
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/clocks'));
+        }
+        return $this->render('clock-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing clock model.
+     * If deletion is successful, the browser will be redirected to the '/admin/clocks' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionClockDelete($id) {
+        $this->findClocksModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin/clocks'));
     }
 
 }
