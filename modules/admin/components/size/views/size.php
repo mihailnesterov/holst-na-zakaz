@@ -46,6 +46,7 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="uk-margin" uk-margin>
             <?= Html::submitButton('Сохранить', ['class' => 'uk-button uk-button-primary']) ?>
+            <?php if( Yii::$app->controller->action->id !== 'size-add' ):?>
             <?= Html::a(
                 'Удалить', 
                 [
@@ -60,6 +61,7 @@ use yii\widgets\ActiveForm;
                         ],
                 ]
             ) ?>
+            <?php endif; ?>
             <?= Html::a('Отмена', Url::to(['/admin/sizes']), ['class' => 'uk-button uk-button-default']) ?>
         </div>
     </fieldset>

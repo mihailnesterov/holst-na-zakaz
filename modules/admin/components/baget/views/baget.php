@@ -108,6 +108,7 @@ use yii\widgets\ActiveForm;
 
         <div class="uk-margin" uk-margin>
             <?= Html::submitButton('Сохранить', ['class' => 'uk-button uk-button-primary']) ?>
+            <?php if( Yii::$app->controller->action->id !== 'baget-add' ):?>
             <?= Html::a(
                 'Удалить', 
                 [
@@ -122,6 +123,7 @@ use yii\widgets\ActiveForm;
                         ],
                 ]
             ) ?>
+            <?php endif; ?>
             <?= Html::a('Отмена', Url::to(['/admin/bagets']), ['class' => 'uk-button uk-button-default']) ?>
         </div>
     </fieldset>
