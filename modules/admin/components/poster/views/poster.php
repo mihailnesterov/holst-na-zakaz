@@ -44,6 +44,38 @@ use yii\widgets\ActiveForm;
             ])->label('Название') ?>
         </div>
 
+        <div class="uk-margin" uk-margin>
+            <img id="poster-img" src="<?= $model->image != '' ? 'images/posters/'.$model->image : 'images/image.png' ?>" alt="">
+        </div>
+
+        <div class="uk-margin">
+            <?= $form->field($model, 'image', [
+                'template' => '{input}{error}',
+                'inputOptions' => [
+                    'id' => 'form-poster-image-input',
+                    'type' => 'hidden',
+                    'placeholder' => 'Картинка',
+                    'class'=>'uk-input'
+                ]
+            ])->label(false) ?>
+        </div>
+
+        <div class="uk-margin" uk-margin>
+            <div uk-form-custom="target: true">
+                <span class="uk-form-icon" uk-icon="icon: download"></span>
+                <?= $form->field($model, 'imageFile', [
+                    'template' => '{input}{error}',
+                    'inputOptions' => [
+                        'id' => 'poster-image-file-input',
+                        'tabindex' => '5',
+                        'class' =>'uk-input',
+                        'accept' => '.jpg, .jpeg, .png, .gif'
+                    ]
+                ])->fileInput()->label(false) ?>
+                <input id="poster-image-file-name" class="uk-input uk-form-width-large" type="text" placeholder="<?= $model->image != '' ? $model->image : 'загрузите картинку' ?>" disabled >
+            </div>
+        </div>
+
         <div class="uk-margin">
             <?= $form->field($model, 'autor', [
                 'template' => '{input}{error}',

@@ -2,7 +2,7 @@
 namespace app\modules\admin\components\poster;
 use Yii;
 use yii\base\Widget;
-//use yii\web\UploadedFile;
+use yii\web\UploadedFile;
 use app\models\Posters;
 
 class PosterWidget extends Widget {
@@ -15,10 +15,10 @@ class PosterWidget extends Widget {
         $this->view->title = $this->id ? 'Картина: '.$model->articul : 'Добавить картину ...';
         if( $model->load(Yii::$app->request->post()) && $model->validate()) { 
             if($model->save()) {   
-                /*$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
                 if ($model->imageFile) {
                     $model->upload($model->imageFile, $model->image);
-                }*/
+                }
                 return;
             }
         }

@@ -17,6 +17,18 @@ $( function() {
     });
 } );
 
+// poster image add
+$( function() {
+    $('#poster-img').on('click', function() {
+        $('#poster-image-file-input').click();
+    });
+    $('#poster-image-file-input').on('change',function() { 
+        const value = $(this).val().replace(/^.*\\/, "");
+        $('#poster-image-file-name').val(value);
+        previewImage('poster-img','poster-image-file-input','form-poster-image-input');
+    });
+} );
+
 // clocks image add
 $( function() {
     $('#clock-img').on('click', function() {

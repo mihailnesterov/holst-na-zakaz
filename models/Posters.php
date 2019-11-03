@@ -38,16 +38,22 @@ class Posters extends \yii\db\ActiveRecord
     }
 
     /**
+     * @var UploadedImage
+     */
+    public $imageFile;
+
+    /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['articul', 'name', 'image', 'autor', 'price', 'text', 'size_width', 'size_height', 'thikness', 'color', 'type'], 'required'],
+            [['articul', 'name', 'image',], 'required'],
             [['articul', 'price', 'size_width', 'size_height', 'thikness'], 'integer'],
             [['text'], 'string'],
             [['name'], 'string', 'max' => 512],
             [['autor', 'color', 'type', 'image'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'extensions' => 'png, jpg, jpeg, gif', 'skipOnEmpty' => true, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
         ];
     }
 
@@ -118,5 +124,19 @@ class Posters extends \yii\db\ActiveRecord
     public function getPostersTypes()
     {
         return $this->hasMany(PostersTypes::className(), ['poster_id' => 'id']);
+    }
+
+    /**
+     * @return uploaded image file
+     */
+    public function upload($imageFile, $image){
+        if($this->validate()){            
+            $filename = 'images/posters/'.$image;
+            $imageFile->saveAs($filename);
+            //$this->imageFile->saveAs('images/posters/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
