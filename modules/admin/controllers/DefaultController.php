@@ -276,6 +276,29 @@ class DefaultController extends Controller
         return $this->render('posters-download');
     }
     /**
+     * Renders the add poster view for the module
+     * @return string
+     */
+    public function actionPosterAdd() {
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
+        }
+        return $this->render('poster-add');
+    }
+
+    /**
+     * Renders the edit poster view for the module
+     * @return string
+     */
+    public function actionPosterEdit($id) {       
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
+        }
+        return $this->render('poster-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
      * Deletes an existing poster model.
      * If deletion is successful, the browser will be redirected to the '/admin' page.
      * @param integer $id
