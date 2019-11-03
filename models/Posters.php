@@ -48,12 +48,12 @@ class Posters extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['articul', 'name', 'image',], 'required'],
+            [['articul', 'name', 'image'], 'required'],
             [['articul', 'price', 'size_width', 'size_height', 'thikness'], 'integer'],
             [['text'], 'string'],
             [['name'], 'string', 'max' => 512],
             [['autor', 'color', 'type', 'image'], 'string', 'max' => 255],
-            [['imageFile'], 'file', 'extensions' => 'png, jpg, jpeg, gif', 'skipOnEmpty' => true, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
+            [['imageFile'], 'file', 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => false, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
         ];
     }
 
