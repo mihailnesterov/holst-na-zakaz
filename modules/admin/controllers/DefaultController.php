@@ -238,7 +238,16 @@ class DefaultController extends Controller
         }
         throw new NotFoundHttpException('Clock not found...');
     }
-    
+    /**
+     * find Material model
+     */
+    protected function findMaterialModel($id)
+    {
+        if (($model = Materials::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('Material not found...');
+    }
 
     /**
      * Renders the posters view for the module
@@ -558,6 +567,50 @@ class DefaultController extends Controller
     public function actionClockDelete($id) {
         $this->findClocksModel($id)->delete();
         return $this->redirect(Yii::$app->urlManager->createUrl('/admin/clocks'));
+    }
+
+    /**
+     * Renders the materials view for the module
+     * @return string
+     */
+    public function actionMaterials() {
+        $materials = Materials::find()->all();
+        $this->view->title = 'Материалы';        
+        return $this->render('materials', compact('materials'));
+    }
+    /**
+     * Renders the add material view for the module
+     * @return string
+     */
+    public function actionMaterialAdd() {
+        if( Yii::$app->request->post()) {
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/materials'));
+        }
+        return $this->render('material-add');
+    }
+    /**
+     * Renders the edit material view for the module
+     * @return string
+     */
+    public function actionMaterialEdit($id) {       
+        if( Yii::$app->request->post()) {
+            //$this->refresh();
+            $this->redirect(Yii::$app->urlManager->createUrl('/admin/materials'));
+        }
+        return $this->render('material-edit',[
+            'id' => $id
+        ]);
+    }
+    /**
+     * Deletes an existing material model.
+     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionMaterialDelete($id) {
+        $this->findMaterialModel($id)->delete();
+        return $this->redirect(Yii::$app->urlManager->createUrl('/admin/materials'));
     }
 
 }
