@@ -10,6 +10,7 @@ use Yii;
  * @property int $id id постера
  * @property int $articul актикул
  * @property string $name название постера
+ * @property string $image картинка
  * @property string $autor автор постера
  * @property int $price цена, руб.
  * @property string $text описание
@@ -42,11 +43,11 @@ class Posters extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['articul', 'name', 'autor', 'price', 'text', 'size_width', 'size_height', 'thikness', 'color', 'type'], 'required'],
+            [['articul', 'name', 'image', 'autor', 'price', 'text', 'size_width', 'size_height', 'thikness', 'color', 'type'], 'required'],
             [['articul', 'price', 'size_width', 'size_height', 'thikness'], 'integer'],
             [['text'], 'string'],
             [['name'], 'string', 'max' => 512],
-            [['autor', 'color', 'type'], 'string', 'max' => 255],
+            [['autor', 'color', 'type', 'image'], 'string', 'max' => 255],
         ];
     }
 
@@ -59,6 +60,7 @@ class Posters extends \yii\db\ActiveRecord
             'id' => 'ID',
             'articul' => 'Articul',
             'name' => 'Name',
+            'image' => 'Image',
             'autor' => 'Autor',
             'price' => 'Price',
             'text' => 'Text',
