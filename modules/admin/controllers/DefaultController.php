@@ -292,6 +292,7 @@ class DefaultController extends Controller
      */
     public function actionPosterEdit($id) {       
         if( Yii::$app->request->post()) {
+            //$this->refresh();
             $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
         }
         return $this->render('poster-edit',[
@@ -300,7 +301,7 @@ class DefaultController extends Controller
     }
     /**
      * Deletes an existing poster model.
-     * If deletion is successful, the browser will be redirected to the '/admin' page.
+     * If deletion is successful, the browser will be redirected to the '/admin/posters' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

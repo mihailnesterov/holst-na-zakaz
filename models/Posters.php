@@ -53,7 +53,7 @@ class Posters extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['name'], 'string', 'max' => 512],
             [['autor', 'color', 'type', 'image'], 'string', 'max' => 255],
-            [['imageFile'], 'file', 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => false, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
+            [['imageFile'], 'file', 'extensions' => 'gif, png, jpg, jpeg', 'skipOnEmpty' => true, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
         ];
     }
 
@@ -129,7 +129,8 @@ class Posters extends \yii\db\ActiveRecord
     /**
      * @return uploaded image file
      */
-    public function upload($imageFile, $image){
+    public function upload($imageFile, $image)
+    {
         if($this->validate()){            
             $filename = 'images/posters/'.$image;
             $imageFile->saveAs($filename);

@@ -69,7 +69,7 @@ use yii\widgets\ActiveForm;
                         'id' => 'poster-image-file-input',
                         'tabindex' => '5',
                         'class' =>'uk-input',
-                        'accept' => '.jpg, .jpeg, .png'
+                        'accept' => '.gif, .jpg, .jpeg, .png'
                     ]
                 ])->fileInput()->label(false) ?>
                 <input id="poster-image-file-name" class="uk-input uk-form-width-large" type="text" placeholder="<?= $model->image != '' ? $model->image : 'загрузите картинку' ?>" disabled >
