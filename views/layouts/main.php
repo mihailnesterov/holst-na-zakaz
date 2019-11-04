@@ -270,7 +270,7 @@
     </nav>
 
     <a href="/" class="main-headerbar-logo">
-        <img src="/img/icons/logo.svg" alt="Holst-na-zakaz">
+        <img src="images/icons/logo.svg" alt="Holst-na-zakaz">
     </a>
 
     <div class="main-headerbar-buttons">
@@ -490,10 +490,10 @@
                     </a><br>
                     <a href="tel:<?php echo Yii::$app->params['phones']['phone2']; ?>">
                         <a title="Viber" href="viber://add?number=79686038598">
-                            <img src="/img/icons/vib.png" alt="Viber">
+                            <img src="images/icons/vib.png" alt="Viber">
                         </a>
                         <a title="WhatsApp" href="whatsapp://send?phone=+79686038598">
-                            <img src="/img/icons/wh.png" style="margin-left: 0;" alt="WhatsApp">
+                            <img src="images/icons/wh.png" style="margin-left: 0;" alt="WhatsApp">
                         </a>
                         <div class="phone phone22 phone-size">
                             <?php echo Yii::$app->params['phones']['phone2']; ?>
@@ -530,7 +530,7 @@
 
     <div class="wrapper">
         <a href="/" class="main-footer-logo">
-          <img src="/img/icons/logo.svg" alt="Холст на заказ" class="uk-margin-bottom" width="200">
+          <img src="images/icons/logo.svg" alt="Холст на заказ" class="uk-margin-bottom" width="200">
         </a>
         <!--<a class="main-headerbar-toggle" href="#offcanvas" uk-toggle>
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
@@ -783,13 +783,13 @@
                     <div class="main-footer-contacts-item">
                         Дополнительные телефоны:<br>
                         <a title="Viber" href="viber://add?number=79686038598" style="text-decoration: none;">
-                            <img src="/img/icons/vib.png" alt="Viber">
+                            <img src="images/icons/vib.png" alt="Viber">
                         </a>
                         <a title="WhatsApp" href="whatsapp://send?phone=+79686038598" style="text-decoration: none;">
-                            <img src="/img/icons/wh.png" alt="WhatsApp">
+                            <img src="images/icons/wh.png" alt="WhatsApp">
                         </a>
                         <a title="Telegram" href="tg://resolve?domain=Holst-na-zakaz" style="text-decoration: none;">
-                            <img src="/img/icons/icon-telegram.png" alt="Telegram">
+                            <img src="images/icons/icon-telegram.png" alt="Telegram">
                         </a>&nbsp;
                         <a href="<?php echo Yii::$app->params['phones']['phone2']; ?>"
                             class="main-footer-contacts-item-phone small-phone">
@@ -797,26 +797,26 @@
                         </a>
                     </div>
                     <div class="main-footer-contacts-item">
-                        <img src="/img/icons/icon-phone.png" alt="Phone">&nbsp;
+                        <img src="images/icons/icon-phone.png" alt="Phone">&nbsp;
                         <a href="<?php echo Yii::$app->params['phones']['phone1']; ?>"
                             class="main-footer-contacts-item-phone small-phone">
                             <?php echo Yii::$app->params['phones']['phone1']; ?> (Москва)
                         </a>
                         <br>
-                        <img src="/img/icons/icon-phone.png" alt="Phone">&nbsp;
+                        <img src="images/icons/icon-phone.png" alt="Phone">&nbsp;
                         <a href="<?php echo Yii::$app->params['phones']['phone3']; ?>"
                             class="main-footer-contacts-item-phone small-phone">
                             <?php echo Yii::$app->params['phones']['phone3']; ?> (Санкт-Петербург)
                         </a>
                     </div>
                     <div class="main-footer-contacts-item">
-                        <img src="/img/icons/icon-email.png" alt="Email">&nbsp;
+                        <img src="images/icons/icon-email.png" alt="Email">&nbsp;
                         <a href="mailto:<?php echo Yii::$app->params['email']; ?>"
                             class="main-footer-contacts-item-email small-phone">
                             <?php echo Yii::$app->params['email']; ?>
                         </a><br>
                         <a href="skype:Holst-na-zakaz.ru?chat" style="text-decoration: none;">
-                            <img src="/img/icons/icon-skype.png" alt="Skype">
+                            <img src="images/icons/icon-skype.png" alt="Skype">
                         </a>&nbsp;
                         <a href="skype:Holst-na-zakaz.ru?chat"><?php echo Yii::$app->params['skype']; ?></a>
                     </div>
@@ -864,46 +864,46 @@
                         <div class="main-footer-payment">
                             <div class="main-footer-payment-item">
                                 <a href="//holst-na-zakaz.ru/kassa/">
-                                    <img src="/img/payment/visa.png" width="50" alt="Visa">
+                                    <img src="images/payment/visa.png" width="50" alt="Visa">
                                 </a>
                             </div>
                             <div class="main-footer-payment-item">
                                 <a href="//holst-na-zakaz.ru/kassa/">
-                                    <img src="/img/payment/mastercard.png" width="70" alt="Mastercard">
+                                    <img src="images/payment/mastercard.png" width="70" alt="Mastercard">
                                 </a>
                             </div>
                             <div class="main-footer-payment-item">
                                 <a href="//holst-na-zakaz.ru/kassa//">
-                                    <img src="/img/payment/mir.png" width="70" alt="МИР">
+                                    <img src="images/payment/mir.png" width="70" alt="МИР">
                                 </a>
                             </div>
                             <div class="payment-methods-item">
                                 <a href="//holst-na-zakaz.ru/kassa/">
-                                    <img src="/img/payment/yamoney.png" width="130" alt="Яндекс.Деньги">
+                                    <img src="images/payment/yamoney.png" width="130" alt="Яндекс.Деньги">
                                 </a>
                             </div>
                         </div>
                         <div class="subscription">
                             <p>Подписывайтесь на наc<br>
                                 <a href="https://vk.com/holstnazakazmsk" target="_blank">
-                                    <img src="/img/icons/icon-vk.png" class="icons-social" style="margin: 0 5px 0 15px;"
+                                    <img src="images/icons/icon-vk.png" class="icons-social" style="margin: 0 5px 0 15px;"
                                         alt="VK" title="VK">
                                 </a>
                                 <a href="https://www.instagram.com/mr.holst_na_zakaz/" target="_blank">
-                                    <img src="/img/icons/icon-instagram.png" class="icons-social" style="margin-right: 5px;"
+                                    <img src="images/icons/icon-instagram.png" class="icons-social" style="margin-right: 5px;"
                                         alt="Instagram" title="Instagram">
                                 </a>
                                 <a href="https://www.facebook.com/kartina.na.zakaz/" target="_blank">
-                                    <img src="/img/icons/icon-facebook.png" class="icons-social" style="margin-right: 5px;" alt="Facebook" title="Facebook">
+                                    <img src="images/icons/icon-facebook.png" class="icons-social" style="margin-right: 5px;" alt="Facebook" title="Facebook">
                                 </a>
                                 <a href="https://www.youtube.com/channel/UCmMxngnmaLF89pmolo1VqYQ?view_as=subscriber/"target="_blank">
-                                    <img src="/img/icons/icon-youtube.png" class="icons-social" style="margin-right: 5px;" alt="Youtube" title="Youtube">
+                                    <img src="images/icons/icon-youtube.png" class="icons-social" style="margin-right: 5px;" alt="Youtube" title="Youtube">
                                 </a>
                                 <a href="https://twitter.com/o6d7ADK84neabqL?lang=en" target="_blank">
-                                    <img src="/img/icons/icon-twitter.png" class="icons-social" style="margin-right: 5px;" alt="Twitter" title="Twitter">
+                                    <img src="images/icons/icon-twitter.png" class="icons-social" style="margin-right: 5px;" alt="Twitter" title="Twitter">
                                 </a>
                                 <a href="https://ok.ru/group/55833923944548" target="_blank">
-                                    <img src="/img/icons/icon-odnoklassniki.png" class="icons-social" alt="Odnoklassniki" title="Odnoklassniki">
+                                    <img src="images/icons/icon-odnoklassniki.png" class="icons-social" alt="Odnoklassniki" title="Odnoklassniki">
                                 </a>
                             </p>
                         </div>
