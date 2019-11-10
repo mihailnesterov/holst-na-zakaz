@@ -1,6 +1,8 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use app\components\cart\CartWidget;
 use app\components\posterlist\PosterListWidget;
 
 $baseurl = Yii::$app->request->baseUrl;
@@ -18,15 +20,24 @@ $this->registerMetaTag([
 
 ?>
 
-<!-- search form -->
+<!-- search form + shopping cart -->
 <div class="uk-background-muted uk-padding-small uk-panel uk-margin-bottom">
-	<form action="" method="POST" class="uk-margin-small-bottom">
-		<div class="uk-inline uk-width-1-1 uk-margin-small-top">
-			<button class="uk-form-icon uk-form-icon-flip" uk-icon="icon: search"></button>
-			<input class="uk-input uk-form-default" type="text" placeholder="Поиск по каталогу">
+	<div uk-grid>
+		<div class="uk-width-3-4@m">
+			<!-- search form -->
+			<form action="" method="POST" class="uk-margin-small-bottom">
+				<div class="uk-inline uk-width-1-1 uk-margin-small-top">
+					<button class="uk-form-icon uk-form-icon-flip" uk-icon="icon: search"></button>
+					<input class="uk-input uk-form-default" type="text" placeholder="Поиск по каталогу">
+				</div>
+			</form>
 		</div>
-	</form>
+		<div class="uk-width-expand@m">
+			<?php echo CartWidget::widget(); ?>
+		</div>
+	</div>
 </div>
+<!-- /. search form + shopping cart -->
 
 <!-- posters list -->
 <?php echo PosterListWidget::widget(['id' => $id]); ?>
