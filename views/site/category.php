@@ -1,7 +1,4 @@
 <?php
-
-use yii\helpers\Html;
-use yii\helpers\Url;
 use app\components\search\SearchWidget;
 use app\components\cart\CartWidget;
 use app\components\posterlist\PosterListWidget;

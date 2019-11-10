@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\components\search\SearchWidget;
+use app\components\cart\CartWidget;
 use app\components\posterlistimage\PosterListImageWidget;
 
 $this->title = $poster->name;
@@ -15,6 +17,18 @@ $this->registerMetaTag([
 ?>
 
 <div id="poster-app" class="uk-container uk-margin-large-bottom">
+	<!-- search form + shopping cart -->
+	<div class="uk-background-muted uk-padding-small uk-panel uk-margin-bottom">
+		<div uk-grid>
+			<div class="uk-width-3-4@m">
+				<?php echo SearchWidget::widget(); ?>
+			</div>
+			<div class="uk-width-expand@m">
+				<?php echo CartWidget::widget(); ?>
+			</div>
+		</div>
+	</div>
+	<!-- /. search form + shopping cart -->
 <div id="cart" style="border: 1px red solid; padding: 10px;">
 	<a href="<?= Url::to('cart') ?>">
 	{{ cartHeader }} 
@@ -23,8 +37,7 @@ $this->registerMetaTag([
 	</a>
 </div>
 	<ul class="uk-breadcrumb uk-background-muted uk-padding-small uk-text-xsmall">
-		<li><a href="#">Картины</a></li>
-		<li><a href="#">Архитектура</a></li>
+		<li><a href="<?= Url::home() ?>">Картины</a></li>
 		<li><span><?= $poster->name ?></span></li>
 	</ul>
 	<h1 class="uk-heading-divider uk-margin-medium-bottom">
