@@ -68,8 +68,12 @@ class CatalogPosters extends \yii\db\ActiveRecord
     /** + метод для подсчета кол-ва постеров в категории
      * @return \yii\db\ActiveQuery
      */
-    public static function getCategoryCount($catalog_id)
+    public static function getCategoryCount($catalog_id=null)
     {
-        return CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
+        if (!$catalog_id) {
+            return CatalogPosters::find()->select('poster_id')->distinct()->count();
+        } else {
+            return CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
+        }
     }
 }

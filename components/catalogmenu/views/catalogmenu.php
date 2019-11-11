@@ -8,6 +8,9 @@ use yii\helpers\Url;
             <a class="uk-accordion-title" href="#"><h3>Картины <i class="fas fa-arrow-circle-right"></i></h3></a>
             <div class="uk-accordion-content">
                 <ul>
+                    <li>
+                        <a href="<?= Url::home() ?>">Все картины (<?= app\models\CatalogPosters::getCategoryCount() ?>)</a>
+                    </li>
                     <?php foreach( $catalog as $item): ?>
                         <li>
                             <a href="<?= Url::to(['category','id'=>$item->catalog_id]) ?>"><?= $item->catalog->name ?> (<?= app\models\CatalogPosters::getCategoryCount($item->catalog_id) ?>)</a>
@@ -20,9 +23,12 @@ use yii\helpers\Url;
             <a class="uk-accordion-title" href="#"><h3>Модульные картины <i class="fas fa-arrow-circle-right"></i></h3></a>
             <div class="uk-accordion-content">
                 <ul>
+                    <li>
+                        <a href="<?= Url::home() ?>">Все картины (<?= app\models\CatalogPosters::getCategoryCount() ?>)</a>
+                    </li>
                     <?php foreach( $catalog as $item): ?>
                         <li>
-                        <a href="<?= Url::to(['category','id'=>$item->catalog_id]) ?>"><?= $item->catalog->name ?></a>
+                        <a href="<?= Url::to(['category','id'=>$item->catalog_id]) ?>"><?= $item->catalog->name ?> (<?= app\models\CatalogPosters::getCategoryCount($item->catalog_id) ?>)</a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
