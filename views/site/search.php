@@ -17,5 +17,5 @@ use app\components\posterlist\PosterListWidget;
 <!-- /. search form + shopping cart -->
 
 <!-- posters list -->
-<?php echo PosterListWidget::widget(); ?>
+<?php echo PosterListWidget::widget(['search' => \Yii::$app->request->get('q')]); ?>
 

@@ -70,30 +70,11 @@ class SiteController extends Controller
             ],
         ];
     }
-	
-    // функция для формирования меню каталога
-    /**
-     * public - функция доступна извне класса...
-     * protected - функция доступна внутри класса и классам-потомкам
-     * private - функция доступна только внутри класса
-     * 
-     */
 
-    /*  не используется
-    public function getCatalogMenu()
-    {
-        $catalog = Catalog::find()->orderby(['id'=>SORT_ASC])->all();
-        return $this->view->params['catalog'] = $catalog;
-    }*/
-
-	// экшн главной страницы
+	// экшн главной страницы (см. виджет PosterListWidget)
     public function actionIndex()
     {
-        $posters = Posters::find()->orderby(['id'=>SORT_DESC])->all();
-
-        return $this->render('index',[
-            'posters' => $posters
-        ]);
+        return $this->render('index');
     }
 
     // экшн страницы каталога
@@ -107,6 +88,12 @@ class SiteController extends Controller
             'id' => $id,
             'postsCount' => $postsCount
         ]);
+    }
+
+    // экшн страницы вывода результатов поиска (см. виджет PosterListWidget)
+    public function actionSearch()
+    {
+        return $this->render('search');
     }
 
     // экшн страницы постера
@@ -149,17 +136,8 @@ class SiteController extends Controller
         return $this->render('order');
     }
 
-    // экшн страницы контактов
-    /*public function actionContacts()
-    {
-        $this->view->title = 'Контакты';
-        
-        return $this->render('contacts');
-    }*/
-    
-	
     /*
-     * Error page (404...) - страница вывода ошибок в url
+     * Error page (404...)
      */
     public function actionError()
     {
@@ -170,21 +148,5 @@ class SiteController extends Controller
             }
         }
         return $this->render('error',['exception' => $exception]);
-    }    
-
-    /*protected function findBusesModel($id)
-    {
-        if (($model = Buses::findOne($id)) !== null) {
-            return $model;
-        }
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    public function actionDeleteBuses($id)
-    {
-        $this->findBusesModel($id)->delete();
-
-        return $this->redirect(['/']);
-    }*/
-
 }

@@ -9,17 +9,38 @@ class PosterListWidget extends Widget
     /**
      * проблема - нужно выводить Posters если главная, а если catalog/id,
      * то выводить из CatalogPosters все с catalog_id == id (distinct)
+     * если задана поисковая строка $search - выводим найденные элементы
      */
     public $id = null;
+    public $search = null;
     public function run() {
         parent::run();
         $view = 'posterlist';
         if($this->id){  // если виджет вызван во view с аргументом id
+            
             $view = 'categorylist';
             $posters = CatalogPosters::find()->distinct()->where(['catalog_id' => $this->id])->orderby(['catalog_id' => SORT_ASC]);
+
+        } elseif (!$this->id && $this->search) {    // если виджет вызван во view с поисковым запросом (страница поиска)
+            
+            mb_internal_encoding('UTF-8');
+            $search = str_replace(
+                ' ', 
+                '', 
+                mb_substr(mb_strtoupper($this->search, 'utf-8'), 0, 1, 'utf-8') . mb_substr($this->search, 1, mb_strlen($this->search)-1, 'utf-8')
+            );
+            $posters = Posters::find()
+                ->where(['like', 'replace(articul, " ", "")', $search])
+                ->orWhere(['like', 'replace(name, " ", "")', $search])
+                ->orWhere(['like', 'replace(autor, " ", "")', $search])
+                ->orWhere(['like', 'replace(text, " ", "")', $search]);
+            $this->view->title = 'Найдено ('.count($posters->all()).') по запросу "'.$this->search.'"';
+
         } else {    // если виджет вызван во view без аргумента (главная страница)
+            
             $posters = Posters::find()->orderby(['id' => SORT_ASC]);
             $this->view->title = 'Картины ('.count($posters->all()).')';
+
         }
         
         if($posters){
@@ -27,7 +48,7 @@ class PosterListWidget extends Widget
             $countPosters = clone $posters; // счетчик
             $pages = new \yii\data\Pagination([ // создаем объект пагинации
                 'totalCount' => $countPosters->count(),
-                'pageSize' => 3, // кол-во эл-в на странице
+                'pageSize' => 3, // кол-во элементов на странице
                 'forcePageParam' => false, 
                 'pageSizeParam' => false
                 ]);
@@ -36,7 +57,7 @@ class PosterListWidget extends Widget
                 ->limit($pages->limit)
                 ->all();
             return $this->render($view,[
-                'posters' => $_posters, //!
+                'posters' => $_posters, // вывод кол-ва элементов = pageSize
                 'pages' => $pages,
             ]);
         } else {
