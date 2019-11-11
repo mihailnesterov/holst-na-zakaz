@@ -73,6 +73,10 @@ aside {
     background: #cd40dc;
     color: #fff;
 }
+.holst-card .holst-card-block .add-to-cart-button {
+    background: #cd40dc;
+    color: #fff;
+}
 
 /*3d effect used in posterlist.php - https://html5book.ru/3d-transform/ */
 .container-3d {

@@ -27,7 +27,21 @@ use app\components\posterlistimage\PosterListImageWidget;
                 
                 <h4 class="uk-margin-small-top uk-margin-remove-bottom">от <span><?= $poster->price ?></span> руб.</h4>
                 <div class="holst-card-block uk-padding-small uk-margin-remove">
-                    <button class="uk-button uk-margin-small-bottom"><i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину</button>
+                    <!--<button class="uk-button uk-margin-small-bottom"><i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину</button>-->
+                    <?= Html::a(
+                        '<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
+                        [
+                            'add-to-cart', 'id' => $poster->id
+                        ], 
+                        [
+                            'class' => 'uk-button uk-margin-small-bottom add-to-cart-button',
+                            'title' => 'Добавить в корзину "'.$poster->name.'"',
+                            'data' => [
+                                //'confirm' => 'Удалить "'.$poster->name.'"?',
+                                'method' => 'post',
+                                ],
+                        ]
+                    ) ?>
                     <a href="<?= Url::to(['poster','id' => $poster->id]) ?>" class="uk-button uk-button-default">Подробнее...</a>
                 </div>
                 

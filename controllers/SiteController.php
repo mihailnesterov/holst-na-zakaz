@@ -129,6 +129,13 @@ class SiteController extends Controller
         return $this->render('cart');
     }
 
+    // экшн добавления заказа
+    public function actionAddToCart()
+    {
+        
+        return $this->render('add-to-cart');
+    }
+
     // экшн страницы заказа
     public function actionOrder()
     {
