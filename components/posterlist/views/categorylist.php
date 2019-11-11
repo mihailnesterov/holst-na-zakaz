@@ -10,9 +10,9 @@ use app\components\posterlistimage\PosterListImageWidget;
         <div>
             <div class="holst-card uk-card uk-card-default uk-card-body uk-margin-small-bottom">
                 <div class="container-3d">
-                    <a href="<?= Url::to(['poster', 'id' => $poster->id]) ?>">
+                    <a href="<?= Url::to(['poster', 'id' => $poster->poster_id]) ?>">
                         <?php echo PosterListImageWidget::widget([ 
-                            'poster_id' => $poster->id, 
+                            'poster_id' => $poster->poster_id, 
                             'img_class' => 'image-3d style-flat' ]
                         );?>
                     </a>
