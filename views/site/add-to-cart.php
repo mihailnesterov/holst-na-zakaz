@@ -18,7 +18,7 @@ use yii\helpers\Url;
                     <th class="uk-table-shrink uk-text-center">Автор</th>
                     <th class="uk-table-shrink uk-text-nowrap uk-text-center">Цена, руб.</th>
                     <th class="uk-table-expand uk-text-center">Описание</th>
-                    <th class="uk-table-shrink uk-width-small uk-text-center"><i class="fas fa-times"></i></th>
+                    <th class="uk-table-shrink uk-width-small uk-text-center"></th>
                 </tr>
             </thead>
             <tbody>
