@@ -26,6 +26,8 @@ use app\models\PostersSizes;
 use app\models\PostersTypes;
 use app\models\Sizes;
 use app\models\Types;
+use app\models\Orders;
+use app\models\OrderItems;
 
 class SiteController extends Controller
 {
@@ -132,8 +134,18 @@ class SiteController extends Controller
     // экшн добавления заказа
     public function actionAddToCart()
     {
-        
-        return $this->render('add-to-cart');
+        $id = Yii::$app->request->get('id');
+        $poster = Posters::findOne($id);
+        if (empty($poster)) return false;
+        $session = Yii::$app->session;
+        $session->open(); 
+        $order = new Orders();
+        $order->addToCart($poster);
+        $session->close();
+        //$session->destroy();
+        $this->layout = false;
+        // render modal
+        return $this->render('add-to-cart', compact('session','id'));
     }
 
     // экшн страницы заказа

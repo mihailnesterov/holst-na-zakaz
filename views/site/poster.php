@@ -5,6 +5,34 @@ use app\components\search\SearchWidget;
 use app\components\cart\CartWidget;
 use app\components\posterlistimage\PosterListImageWidget;
 
+/*
+order_items:
+----
+id
+order_id
+poster_id
+width
+height
+type_id
+material_id
+service_1
+service_2
+service_3
+service_4
+service_5
+baget_id
+created
+
+fix prices: 
+--------
+крепеж=50
+общая наценка=150
+подрамник=550
+багет работа=350
+промо-код=-300
+
+ */
+
 $this->title = $poster->name;
 $this->registerMetaTag([
 	'name' => 'keywords',
