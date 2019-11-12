@@ -124,7 +124,9 @@ $('.add-to-cart-button').on('click', function(e) {
         type: 'GET',
         success: (res) => {
             if( !res ) console.log('(ajax) success but poster id=' + id + ' not found');
-            console.log(res);
+            $('#modal-add-to-cart .modal-body').html(res);
+            $('#modal-add-to-cart').modal();
+            //console.log(res);
         },
         error: (err) => {
             console.log('Error! add to cart false: ' + JSON.stringify(err));

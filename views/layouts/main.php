@@ -1,9 +1,9 @@
 <?php
 	
 	use yii\helpers\Html;
-	use yii\bootstrap\Nav;
+	/*use yii\bootstrap\Nav;
 	use yii\bootstrap\NavBar;
-	use yii\widgets\Breadcrumbs;
+	use yii\widgets\Breadcrumbs;*/
     use app\assets\AppAsset;
     use app\components\catalogmenu\CatalogMenuWidget;
 
@@ -938,7 +938,27 @@
 
     <?php //include('schema-organization.php'); ?>
 </footer>
-
+        <?php yii\bootstrap4\Modal::begin([
+            'id' => 'modal-add-to-cart',
+            //'header' => '<h2><i class="fa fa-shopping-cart uk-margin-right uk-text-danger"></i>Корзина</h2>',
+            'closeButton' => [ 
+                'label' => 'x',
+            ],
+            /*'options' => [
+                'class' => 'modal-class',
+            ],*/
+            'size' => 'modal-xl',
+            'footer' => '
+                <button type="button" data-dismiss="modal" class="uk-button uk-button-default">
+                    Продолжить покупки
+                </button>
+                <button type="button" class="uk-button uk-button-danger">
+                    Оформить заказ
+                </button>
+            ',
+        ]);?>
+            <?php //... empty ?>             
+        <?php yii\bootstrap4\Modal::end(); ?>
         <?php $this->endBody(); ?>
     </body>
 </html>

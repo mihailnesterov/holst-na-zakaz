@@ -134,6 +134,20 @@ class SiteController extends Controller
     // экшн добавления заказа
     public function actionAddToCart()
     {
+        /**
+         * cookie:
+         * Yii::$app->request->cookies->has('cname')
+         * Yii::$app->getRequest()->getCookies()->getValue('cname');
+         * $jsonItems = json_decode($cookie, true);
+        */
+         /* 
+            $cookie = new \yii\web\Cookie([
+                'name' => 'cname',
+                'value' => $id,
+                'expire' => time() + 60 * 60 * 24 * 365,
+            ]);
+            Yii::$app->getResponse()->getCookies()->add($cookie);
+         */
         $id = Yii::$app->request->get('id');
         $poster = Posters::findOne($id);
         if (empty($poster)) return false;

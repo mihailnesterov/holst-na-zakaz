@@ -8,30 +8,32 @@ use yii\helpers\Url;
 
 <?php if( !empty($session['cart']) ): ?>
     <div class="uk-overflow-auto">
-        <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+        <table class="uk-table uk-table-hover uk-table-middle uk-table-divider uk-table-striped">
             <thead>
                 <tr>
-                    <th class="uk-table-shrink"></th>
-                    <th class="uk-table-shrink">Preserve</th>
-                    <th class="uk-table-expand">Expand + Link</th>
-                    <th class="uk-width-small">Truncate</th>
-                    <th class="uk-table-shrink uk-text-nowrap">Shrink + Nowrap</th>
-                    <th class="uk-table-shrink uk-text-nowrap uk-text-center"><i class="fa fa-close"></i></th>
+                    <!--<th class="uk-table-shrink"></th>-->
+                    <th class="uk-table-shrink uk-text-center">Картина</th>
+                    <th class="uk-table-small uk-text-center">Артикул</th>
+                    <th class="uk-table-shrink -uk-width-expand uk-text-center">Название</th>
+                    <th class="uk-table-shrink uk-text-center">Автор</th>
+                    <th class="uk-table-shrink uk-text-nowrap uk-text-center">Цена, руб.</th>
+                    <th class="uk-table-expand uk-text-center">Описание</th>
+                    <th class="uk-table-shrink uk-width-small uk-text-center"><i class="fas fa-times"></i></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach( $session['cart'] as $id => $item): ?>
                 <tr>
-                    <td><input class="uk-checkbox" type="checkbox"></td>
-                    <td><img class="uk-preserve-width uk-border-circle" src="images/posters/<?= $item['image'] ?>" width="40" alt="<?= $item['name'] ?>"></td>
+                    <!-- <td><input class="uk-checkbox" type="checkbox"></td> -->
+                    <td><img class="uk-preserve-width -uk-border-circle" src="images/posters/<?= $item['image'] ?>" width="60" alt="<?= $item['name'] ?>"></td>
                     <td class="uk-text-nowrap"><?= $item['articul'] ?></td>
                     <td class="uk-table-link">
-                        <a class="uk-link-reset" href="<?= Url::to([ 'poster', 'id' => $id ]) ?>"><?= $item['name'] ?></a>
+                        <a class="uk-link-reset uk-text-bolder" title="Изменить параметры картины" href="<?= Url::to([ 'poster', 'id' => $id ]) ?>"><i class="fas fa-edit uk-margin-small-right"></i><?= $item['name'] ?></a>
                     </td>
-                    <td class="uk-text-nowrap"><?= $item['autor'] ?></td>
-                    <td class="uk-text-nowrap"><?= $item['price'] ?></td>
-                    <td class="uk-text-truncate"><?= $item['text'] ?></td>
-                    <td class="uk-text-nowrap"><button class="uk-button uk-button-default" type="button"><i class="fa fa-close"></i></button></td>
+                    <td class="uk-text-nowrap uk-text-center uk-text-muted"><?= $item['autor'] ?></td>
+                    <td class="uk-text-nowrap uk-text-center uk-text-bold"><?= $item['price'] ?></td>
+                    <td class="uk-text-truncate uk-text-muted"><?= $item['text'] ?></td>
+                    <td class="uk-text-nowrap uk-text-center"><button class="uk-button uk-button-small uk-button-danger" type="button" title="Удалить">x</button></td>
                 </tr>
                 <?php endforeach;?>
             </tbody>
