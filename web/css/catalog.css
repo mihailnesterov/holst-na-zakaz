@@ -114,7 +114,15 @@ aside {
   /* shopping cart */
   #cart a {
     background:#cd40dc;
-    color:#fff;
+    /*background-color: #f0506e;*/
+    color: #fff;
+    border: 1px solid transparent;
     text-transform:lowercase;
     box-shadow:2px 2px 4px rgba(0,0,0,0.1)
+  }
+  #cart a #cartCount {
+    background-color:#f0506e;
+    color: #fff;
+    font-weight: 600;
+    box-shadow:3px 6px 3px rgba(0,0,0,0.1)
   }
