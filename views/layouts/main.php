@@ -944,7 +944,7 @@
             <div class="uk-modal-header">
                 <h2 class="uk-modal-title">
                     <i class="fa fa-shopping-cart uk-margin-right uk-text-danger"></i>
-                    Ваш заказ:
+                    Корзина:
                 </h2>
             </div>
             <div class="uk-modal-body"></div>
