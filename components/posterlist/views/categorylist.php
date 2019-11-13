@@ -36,10 +36,7 @@ use app\components\posterlistimage\PosterListImageWidget;
                         [
                             'class' => 'uk-button uk-margin-small-bottom add-to-cart-button',
                             'title' => 'Добавить в корзину "'.$poster->poster->name.'"',
-                            'data' => [
-                                //'confirm' => 'Удалить "'.$poster->name.'"?',
-                                'method' => 'post',
-                                ],
+                            'data-id' => $poster->poster_id,
                         ]
                     ) ?>
                     <a href="<?= Url::to(['poster','id' => $poster->poster_id]) ?>" class="uk-button uk-button-default">Подробнее...</a>
