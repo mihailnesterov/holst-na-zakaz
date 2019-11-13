@@ -952,10 +952,10 @@
                 <button type="button" class="uk-button uk-button-default uk-modal-close uk-text-right">
                     Продолжить покупки
                 </button>
-                <button type="button" class="uk-button uk-button-primary">
+                <button id="add-to-cart-order-button" type="button" class="uk-button uk-button-primary">
                     Оформить заказ
                 </button>
-                <button onclick="clearCart()" class="uk-button uk-button-danger uk-text-left" type="button" title="Очистить корзину">x</button>
+                <button id="add-to-cart-clear-button" onclick="clearCart()" class="uk-button uk-button-danger uk-text-left" type="button" title="Очистить корзину">x</button>
             </div>
         </div>
     </div>

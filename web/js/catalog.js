@@ -124,6 +124,8 @@ $('.add-to-cart-button').on('click', function(e) {
         success: (res) => {
             if( !res ) console.log('(ajax) success but poster id=' + id + ' not found');
             $('#modal-add-to-cart .uk-modal-body').html(res);
+            $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',false);
+            $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',false);
             UIkit.modal('#modal-add-to-cart').show();
         },
         error: (err) => {
@@ -139,6 +141,8 @@ function clearCart() {
         success: (res) => {
             if( !res ) console.log('(ajax) success but clear false');
             $('#modal-add-to-cart .uk-modal-body').html(res);
+            $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
+            $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',true);
             UIkit.modal('#modal-add-to-cart').show();
         },
         error: (err) => {
