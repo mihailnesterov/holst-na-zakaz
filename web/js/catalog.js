@@ -126,6 +126,13 @@ $('.add-to-cart-button').on('click', function(e) {
             $('#modal-add-to-cart .uk-modal-body').html(res);
             $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',false);
             $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',false);
+            $('#cart #cartCount').html(0);
+            $('#modal-add-to-cart table tbody tr input[type="number"]').each(function() {
+                const qty = $(this).val();
+                const currentCartCount = $('#cart #cartCount').text();
+                $('#cart #cartCount').html( parseInt(currentCartCount) + parseInt(qty) );
+            });
+            $('#cart a').attr('uk-tooltip','title: Выбрано картин: ' + $('#cart #cartCount').text() + ' шт.; pos: bottom; delay: 400');
             UIkit.modal('#modal-add-to-cart').show();
         },
         error: (err) => {
@@ -143,6 +150,8 @@ function clearCart() {
             $('#modal-add-to-cart .uk-modal-body').html(res);
             $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
             $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',true);
+            $('#cart #cartCount').html(0);
+            $('#cart a').attr('uk-tooltip','title: Ваша корзина пуста...; pos: bottom; delay: 400');
             UIkit.modal('#modal-add-to-cart').show();
         },
         error: (err) => {
@@ -150,3 +159,10 @@ function clearCart() {
         },
     });
 }
+// open cart
+$('#cart a').on('click', function(e) {
+    e.preventDefault();
+    if($('#cart #cartCount').text() !== '0') {
+        UIkit.modal('#modal-add-to-cart').show();
+    }
+});
