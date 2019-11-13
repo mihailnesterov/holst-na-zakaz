@@ -9,7 +9,6 @@
 
 	AppAsset::register($this);
     $directoryAsset = Yii::$app->assetManager->getPublishedUrl(Yii::$app->homeUrl.'web');
-    //$catalog = Yii::$app->controller->getCatalogMenu();
   
     $this->beginPage();
 ?>
@@ -938,27 +937,30 @@
 
     <?php //include('schema-organization.php'); ?>
 </footer>
-        <?php yii\bootstrap4\Modal::begin([
-            'id' => 'modal-add-to-cart',
-            //'header' => '<h2><i class="fa fa-shopping-cart uk-margin-right uk-text-danger"></i>Корзина</h2>',
-            'closeButton' => [ 
-                'label' => 'x',
-            ],
-            /*'options' => [
-                'class' => 'modal-class',
-            ],*/
-            'size' => 'modal-xl',
-            'footer' => '
-                <button type="button" data-dismiss="modal" class="uk-button uk-button-default">
+    <!-- add to cart modal -->
+    <div id="modal-add-to-cart" class="uk-modal-container" uk-modal>
+        <div class="uk-modal-dialog" uk-overflow-auto>
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">
+                    <i class="fa fa-shopping-cart uk-margin-right uk-text-danger"></i>
+                    Ваш заказ:
+                </h2>
+            </div>
+            <div class="uk-modal-body"></div>
+            <div class="uk-modal-footer uk-padding-top uk-text-right uk-padding-bottom-large">
+                <button type="button" class="uk-button uk-button-default uk-modal-close uk-text-right">
                     Продолжить покупки
                 </button>
-                <button type="button" class="uk-button uk-button-danger">
+                <button type="button" class="uk-button uk-button-primary">
                     Оформить заказ
                 </button>
-            ',
-        ]);?>
-            <?php //... empty ?>             
-        <?php yii\bootstrap4\Modal::end(); ?>
+                <button onclick="clearCart()" class="uk-button uk-button-danger uk-text-left" type="button" title="Очистить корзину">x</button>
+            </div>
+        </div>
+    </div>
+    <!-- /. add to cart modal -->
+
         <?php $this->endBody(); ?>
     </body>
 </html>

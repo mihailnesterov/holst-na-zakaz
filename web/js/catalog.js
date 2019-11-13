@@ -117,19 +117,32 @@ if (posterApp) {
 $('.add-to-cart-button').on('click', function(e) {
     e.preventDefault();
     const id = e.target.dataset.id;
-    //console.log(e.target.dataset.id);
     $.ajax({
         url: 'site/add-to-cart',
         data: {id: id},
         type: 'GET',
         success: (res) => {
             if( !res ) console.log('(ajax) success but poster id=' + id + ' not found');
-            $('#modal-add-to-cart .modal-body').html(res);
-            $('#modal-add-to-cart').modal();
-            //console.log(res);
+            $('#modal-add-to-cart .uk-modal-body').html(res);
+            UIkit.modal('#modal-add-to-cart').show();
         },
         error: (err) => {
             console.log('Error! add to cart false: ' + JSON.stringify(err));
         },
     });
 });
+// AJAX clear cart function (site/clearCart action)
+function clearCart() {
+    $.ajax({
+        url: 'site/clear-cart',
+        type: 'GET',
+        success: (res) => {
+            if( !res ) console.log('(ajax) success but clear false');
+            $('#modal-add-to-cart .uk-modal-body').html(res);
+            UIkit.modal('#modal-add-to-cart').show();
+        },
+        error: (err) => {
+            console.log('Error! clear cart false: ' + JSON.stringify(err));
+        },
+    });
+}

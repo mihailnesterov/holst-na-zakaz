@@ -131,7 +131,7 @@ class SiteController extends Controller
         return $this->render('cart');
     }
 
-    // экшн добавления заказа
+    // экшн добавления заказа в корзину
     public function actionAddToCart()
     {
         /**
@@ -160,6 +160,16 @@ class SiteController extends Controller
         $this->layout = false;
         // render modal
         return $this->render('add-to-cart', compact('session','id'));
+    }
+    // экшн очистки корзины
+    public function actionClearCart()
+    {
+        $session = Yii::$app->session;
+        $session->open();
+        $session->remove('cart');
+        $this->layout = false;
+        // render modal
+        return $this->render('add-to-cart', compact('session'));
     }
 
     // экшн страницы заказа

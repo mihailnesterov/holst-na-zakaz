@@ -75,10 +75,10 @@ class Orders extends \yii\db\ActiveRecord
     /**
      * add to cart public method
      */
-    public function addToCart($poster)
+    public function addToCart($poster, $qty=1)
     {
         if(isset($_SESSION['cart'][$poster->id])) {
-            //$_SESSION['cart'][$poster->id]['qty'] += $qty;
+            $_SESSION['cart'][$poster->id]['qty'] += $qty;
             //print_r($_SESSION['cart'][$poster->id]);
         } else {
             $_SESSION['cart'][$poster->id] = [
@@ -88,9 +88,9 @@ class Orders extends \yii\db\ActiveRecord
                 'name' => $poster->name,
                 'autor' => $poster->autor,
                 'price' => $poster->price,
+                'qty' => isset($_SESSION['cart'][$poster->id]['qty']) ? $_SESSION['cart'][$poster->id]['qty'] : $qty,
                 'text' => $poster->text,
             ];
-
         }
     }
 }
