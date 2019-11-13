@@ -28,23 +28,30 @@ use yii\helpers\Url;
                     <td><img class="uk-preserve-width -uk-border-circle" src="images/posters/<?= $item['image'] ?>" width="70" alt="<?= $item['name'] ?>"></td>
                     <td class="uk-text-nowrap"><?= $item['articul'] ?></td>
                     <td class="uk-table-link">
-                        <a class="uk-link-reset uk-text-bolder uk-margin-remove-bottom" 
-                            title="Изменить параметры картины" 
-                            href="<?= Url::to([ 'poster', 'id' => $id ]) ?>">
-                            <?= $item['name'] ?> 
-                            <?php if($item['autor'] !== ''):?>
-                                <span class="uk-text-small uk-text-muted">
-                                ( Автор: <?= $item['autor'] ?> )
-                                </span>
-                            <?php endif;?>
-                        </a>
-                        <ul class="cart-poster-params uk-list uk-list-bullet uk-text-small uk-margin-remove-top uk-margin-remove-bottom">
+                        <?php if( $item['name'] !== '' ):?>
+                            <a class="uk-link-reset uk-text-bolder uk-margin-remove-bottom" 
+                                title="Изменить размер, материал, выбрать багет, покрытие и т.д..." 
+                                href="<?= Url::to([ 'poster', 'id' => $id ]) ?>">
+                                <?= $item['name'] ?> 
+                                <?php if( $item['autor'] !== '' ):?>
+                                    <span class="uk-text-small uk-text-muted">
+                                    ( Автор: <?= $item['autor'] ?> )
+                                    </span>
+                                <?php endif;?>
+                            </a>
+                        <?php endif;?>
+                        <ul class="cart-poster-params uk-list uk-list-bullet uk-text-small <?= $item['name'] !== '' ? 'uk-margin-remove-top' : 'uk-margin-top' ?> uk-margin-remove-bottom">
                             <li>Размер: <span class="uk-text-bold">30х45</span> см</li>
                             <li>Материал: <span class="uk-text-bold">Холст натуральный</span></li>
                             <li>Толщина подрамника: <span class="uk-text-bold">2 см</span></li>
                         </ul>
-                        <a href="<?= Url::to([ 'poster', 'id' => $id ]) ?>" class="uk-text-primary uk-margin-remove-top uk-margin-small-bottom uk-text-small">
-                            <i class="fas fa-edit -uk-margin-small-right uk-text-danger"></i> Изменить параметры картины
+                        <a 
+                            href="<?= Url::to([ 'poster', 'id' => $id ]) ?>" 
+                            class="uk-text-primary uk-margin-remove-top uk-margin-small-bottom uk-text-small"
+                            title="Изменить размер, материал, выбрать багет, покрытие и т.д..."
+                        >
+                            <i class="fas fa-edit -uk-margin-small-right uk-text-danger"></i>
+                            Изменить параметры картины
                         </a>
                     </td>
                     <td class="uk-text-nowrap uk-text-center"><?= $item['price'] ?></td>
