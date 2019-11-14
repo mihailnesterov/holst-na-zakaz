@@ -159,7 +159,7 @@ function clearCart() {
         },
     });
 }
-// AJAX show cart on click
+// AJAX show cart on click (site/showCart action)
 $('#cart a').on('click', function(e) {
     e.preventDefault();
     $.ajax({
@@ -182,7 +182,7 @@ $('#cart a').on('click', function(e) {
     });
 });
 
-// AJAX delete poster by id from cart
+// AJAX delete poster by id from cart (site/deleteItemFromCart action)
 $('#modal-add-to-cart .uk-modal-body').on('click', '.cart-delete-item', function(e) {
     const id = e.target.dataset.id;
     $.ajax({
@@ -193,7 +193,7 @@ $('#modal-add-to-cart .uk-modal-body').on('click', '.cart-delete-item', function
             if( !res ) console.log('(ajax) success but item not found');
             $('#modal-add-to-cart .uk-modal-body').html(res);
             const qty = $(this).closest('tr').find('input[type="number"]').val();
-            $('#cart #cartCount').html( parseInt($('#cart #cartCount').html() - qty) );
+            $('#cart #cartCount').html( parseInt($('#cart #cartCount').html()) - parseInt(qty) );
             if($('#cart #cartCount').text() == '0') {
                 $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
                 $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',true);
