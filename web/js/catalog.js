@@ -13,6 +13,14 @@ if (posterApp) {
                 services: 0,
                 baguette: 0
             },
+            fixPrices: {
+                holder: 50,
+                margin: 150,
+                podramnik: 550,
+                bagetWork: 350,
+                promoCode: 300,
+                isPromoCode: false
+            },
             isBaguettesSelected: false, // false or true Boolean
             cartHeader: 'Корзина',
             cartCount: 0,
@@ -47,9 +55,9 @@ if (posterApp) {
             },
             setDefaultPrice(size) {
                 this.posterPrices.base = document.getElementById('base-price').value;
-                this.posterPrices.size = document.getElementsByClassName('module-order-calc-sizes-item')[size].dataset.price;
                 this.posterPrices.material = document.querySelector('input[name=radio-materials]').value;
-                this.posterPrices.podramnik = document.querySelector('input[name=radio-bagets-width]').value;
+                this.posterPrices.size = document.getElementsByClassName('module-order-calc-sizes-item')[size].dataset.price;
+                //this.posterPrices.podramnik = document.querySelector('input[name=radio-bagets-width]').value;
                 this.posterPrices.services = 0;
                 this.posterPrices.baguette = 0;
             },
@@ -74,6 +82,10 @@ if (posterApp) {
                 const height = e.target.textContent.split('×')[1];
                     inputTypeNumber[0].value = +width;
                     inputTypeNumber[1].value = +height;
+            },
+            selectMaterial(e) {
+                e.target.checked = true;
+                this.posterPrices.material = e.target.value;
             },
             toggleBaguettes() {
                 this.isBaguettesSelected = !this.isBaguettesSelected;
@@ -105,8 +117,8 @@ if (posterApp) {
         },
         mounted() {
             this.setBasePrice('base-price');
-            this.setDefaultPosterSize(2);
             this.setDefaultPrice(2);
+            this.setDefaultPosterSize(2);
         }
     });
 }

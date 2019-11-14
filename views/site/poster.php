@@ -5,34 +5,6 @@ use app\components\search\SearchWidget;
 use app\components\cart\CartWidget;
 use app\components\posterlistimage\PosterListImageWidget;
 
-/*
-order_items:
-----
-id
-order_id
-poster_id
-width
-height
-type_id
-material_id
-service_1
-service_2
-service_3
-service_4
-service_5
-baget_id
-created
-
-fix prices: 
---------
-крепеж=50
-общая наценка=150
-подрамник=550
-багет работа=350
-промо-код=-300
-
- */
-
 $this->title = $poster->name;
 $this->registerMetaTag([
 	'name' => 'keywords',
@@ -86,26 +58,17 @@ $this->registerMetaTag([
 					</div> -->
 					<div class="module-order-calc-steps-item-body">
 						<?php foreach ($posterSizes as $key => $size): ?>
-							<a @click.prevent="selectPosterSize" href="#" class="module-order-calc-sizes-item" data-key="<?= $key ?>" data-price="<?= $size->price ?>">
-								<?= $size->size->width ?>×<?= $size->size->height ?>
+							<a 
+								@click.prevent="selectPosterSize" 
+								href="#" 
+								class="module-order-calc-sizes-item" 
+								data-key="<?= $key ?>" 
+								:data-price="Math.ceil((((<?= $size->width ?> / 100 * <?= $size->height ?> / 100) * posterPrices.material)))"
+							>
+								<?= $size->width ?>×<?= $size->height ?>
 							</a>
 						<?php endforeach; ?>
-						<!--
-						<a href="#" class="module-order-calc-sizes-item uk-active">
-							30×45
-						</a>
-						<a href="#" class="module-order-calc-sizes-item">
-							40×60
-						</a>
-						<a href="#" class="module-order-calc-sizes-item">
-							50×75
-						</a>
-						<a href="#" class="module-order-calc-sizes-item">
-							60×90
-						</a>
-						<a href="#" class="module-order-calc-sizes-item">
-							120×80
-						</a> -->
+						
 						<div class="module-order-calc-sizes-step">
 							<img id="img-canvas-sizes-woman" src="images/canvas-sizes-woman/1.jpg" alt="30×45">
 						</div> 
@@ -134,9 +97,9 @@ $this->registerMetaTag([
 						<div class="module-order-calc-materials-item">
 							<label>
 								<?php if($key === 0):?>
-									<input checked='checked' type="radio" name="radio-materials" value="<?= $material->price ?>">&nbsp;
+									<input @click="selectMaterial" checked='checked' type="radio" name="radio-materials" value="<?= $material->price ?>">&nbsp;
 								<?php else: ?>
-									<input type="radio" name="radio-materials" value="<?= $material->price ?>">&nbsp;
+									<input @click="selectMaterial" type="radio" name="radio-materials"  value="<?= $material->price ?>">&nbsp;
 								<?php endif; ?>
 								<?= $material->name ?>&nbsp;
 								<span class="uk-label">
@@ -163,9 +126,9 @@ $this->registerMetaTag([
 						<?php foreach($bagetsWidth as $key => $width): ?>
 						<div class="module-order-calc-gifts-item"><label>
 							<?php if($key === 0):?>
-								<input checked='checked' type="radio" name="radio-bagets-width" value="0">&nbsp;
+								<input checked='checked' type="radio" name="radio-bagets-width" value="550">&nbsp;
 							<?php else: ?>
-								<input type="radio" name="radio-bagets-width" value="350">&nbsp;
+								<input type="radio" name="radio-bagets-width" value="550">&nbsp;
 							<?php endif; ?>
 								<?= $width->width ?> см
 							</label>
@@ -237,10 +200,13 @@ $this->registerMetaTag([
 					<p>
 						{{posterPrices.base}} + 
 						{{posterPrices.size}} + 
-						{{posterPrices.material}} +
-						{{posterPrices.podramnik}} +
 						{{posterPrices.services}} +
-						{{posterPrices.baguette}}
+						{{posterPrices.baguette}} +
+						{{fixPrices.holder}} +
+						{{fixPrices.margin}} +
+						{{fixPrices.podramnik}} +
+						{{fixPrices.bagetWork}} +
+						{{fixPrices.promoCode}}
 					</p>
 					<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
 					<button @click="buy">Купить</button>
