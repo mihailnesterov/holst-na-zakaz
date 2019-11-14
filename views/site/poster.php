@@ -138,7 +138,7 @@ $this->registerMetaTag([
 								<?php else: ?>
 									<input type="radio" name="radio-materials" value="<?= $material->price ?>">&nbsp;
 								<?php endif; ?>
-								<?= $material->material->name ?>&nbsp;
+								<?= $material->name ?>&nbsp;
 								<span class="uk-label">
 									<span class="price-material">
 										<?= $material->price ?>
@@ -355,54 +355,9 @@ $this->registerMetaTag([
 	</div>
 </div>
 
-
-<h2><?= $poster->name ?></h2>
-<h3><?= $poster->articul ?></h3>
-<h3><?= $poster->autor ?></h3>
-<h3><?= $poster->price ?></h3>
-<p><?= $poster->text ?></p>
-
 <?php foreach ($types as $type): ?>
 	<a href="#"><img src="images/posters/" alt="<?= $type->name ?>"></a>
 <?php endforeach; ?>
 
 <br>
 
-<?php foreach ($images as $image): ?>
-	<img src="images/posters/<?= $image->src ?>" alt="<?= $image->src ?>">
-<?php endforeach; ?>
-
-<ul>
-<?php foreach ($posterSizes as $size): ?>
-	<li><?= $size->size->width ?> <?= $size->size->height ?> <?= $size->price ?></li>
-<?php endforeach; ?>
-</ul>
-
-<ul>
-<?php foreach ($bagetsWidth as $baget): ?>
-	<li><?= $baget->width ?> см.</li>
-<?php endforeach; ?>
-</ul>
-
-<ul>
-<?php foreach ($posterMaterials as $material): ?>
-<li><?= $material->material->name ?> <?= $material->price ?> <a href="#" title="<?= $material->material->description ?>">?</a></li>
-<?php endforeach; ?>
-</ul>
-
-<ul>
-<?php foreach ($postersAddServices as $service): ?>
-	<li><?= $service->addService->name ?> <?= $service->price ?> <a href="#" title="<?= $service->addService->description ?>">?</a></li>
-<?php endforeach; ?>
-</ul>
-
-<!-- выводим все багеты -->
-<?php foreach ($bagets as $baget): ?>
-	<img src="images/baguettes/<?= $baget->image ?>" alt="<?= $baget->material ?> <?= $baget->color ?>">
-	<p>Артикул: <?= $baget->articul ?></p>
-	<p>Материал: <?= $baget->material ?></p>
-	<p>Ширина: <?= $baget->width ?> см.</p>
-	<p>Цвет: <?= $baget->color ?></p>
-	<p>Цена: <?= $baget->price ?> руб.</p>
-	<br>
-<?php endforeach; ?>

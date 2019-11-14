@@ -108,7 +108,8 @@ class SiteController extends Controller
         $posterSizes = PostersSizes::find()->where(['poster_id' => $id])->all(); // размеры постера
         $bagetsWidth = Bagets::find()->select('width')->distinct()->all();    // подрамники
         $bagets = Bagets::find()->all();
-        $posterMaterials = PostersMaterials::find()->where(['poster_id' => $id])->all(); // материалы постера
+        $posterMaterials = Materials::find()->all(); // материалы
+        //$posterMaterials = PostersMaterials::find()->where(['poster_id' => $id])->all(); // материалы постера
 
         return $this->render('poster',[
             'poster' => $poster,
