@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id id материала
  * @property string $name название материала
+ * @property double $price цена, руб.
  * @property string $description описание материала
  *
  * @property PostersMaterials[] $postersMaterials
@@ -29,7 +30,8 @@ class Materials extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'required'],
+            [['name', 'price'], 'required'],
+            [['price'], 'number'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -43,6 +45,7 @@ class Materials extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'price' => 'Price',
             'description' => 'Description',
         ];
     }
