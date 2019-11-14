@@ -93,4 +93,15 @@ class Orders extends \yii\db\ActiveRecord
             ];
         }
     }
+
+    /**
+     * delete item from cart public method
+     */
+    public function deleteItemFromCart($id)
+    {
+        if( !isset($_SESSION['cart'][$id]) ) return false;
+        $qty = $_SESSION['cart'][$id]['qty'];
+        $_SESSION['cart'][$id]['qty'] -= $qty; // qty minus
+        unset($_SESSION['cart'][$id]); // delete item from session
+    }
 }

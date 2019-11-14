@@ -57,7 +57,9 @@ use yii\helpers\Url;
                     <td class="uk-text-nowrap uk-text-center"><?= $item['price'] ?></td>
                     <td class="uk-text-nowrap uk-text-center"><input class="uk-input uk-text-center" type="number" min="1" value="<?= $item['qty'] ?>"></td>
                     <td class="uk-text-nowrap uk-text-center uk-text-bold"><?= $item['qty'] * $item['price'] ?></td>
-                    <td class="uk-text-nowrap uk-text-center"><button class="uk-button uk-button-small uk-button-danger" type="button" title="Удалить">x</button></td>
+                    <td class="uk-text-nowrap uk-text-center">
+                        <button  data-id="<?= $id ?>" class="cart-delete-item uk-button uk-button-small uk-button-danger" type="button" title="Удалить">x</button>
+                    </td>
                 </tr>
                 <?php endforeach;?>
             </tbody>

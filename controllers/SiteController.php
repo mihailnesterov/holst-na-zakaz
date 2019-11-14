@@ -156,7 +156,6 @@ class SiteController extends Controller
         $order = new Orders();
         $order->addToCart($poster);
         $session->close();
-        //$session->destroy();
         $this->layout = false;
         // render modal
         return $this->render('add-to-cart', compact('session','id'));
@@ -166,10 +165,24 @@ class SiteController extends Controller
     {
         $session = Yii::$app->session;
         $session->open();
-        $session->remove('cart');
+        $session->remove('cart'); // clear session
         $this->layout = false;
         // render modal
         return $this->render('add-to-cart', compact('session'));
+    }
+    
+    // экшн удаления картины из корзины
+    public function actionDeleteItemFromCart()
+    {
+        $id = Yii::$app->request->get('id');
+        $session = Yii::$app->session;
+        $session->open();
+        $order = new Orders();
+        $order->deleteItemFromCart($id);
+        $session->close();
+        $this->layout = false;
+        // render modal
+        return $this->render('add-to-cart', compact('session','id'));
     }
 
     // экшн страницы заказа
