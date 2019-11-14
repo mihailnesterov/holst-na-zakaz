@@ -6,7 +6,13 @@ class CartWidget extends Widget
 {
     public function run() {
         parent::run();
-        return $this->render('cart');
+        $qty = 0;
+        if(isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $key => $item) {
+                $qty += $_SESSION['cart'][$key]['qty'];
+            }
+        }
+        return $this->render('cart', compact('qty'));
     }
 }
 ?>

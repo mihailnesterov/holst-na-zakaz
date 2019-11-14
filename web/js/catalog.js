@@ -159,12 +159,27 @@ function clearCart() {
         },
     });
 }
-// open cart on click
+// AJAX show cart on click
 $('#cart a').on('click', function(e) {
     e.preventDefault();
-    if($('#cart #cartCount').text() !== '0') {
-        UIkit.modal('#modal-add-to-cart').show();
-    }
+    $.ajax({
+        url: 'site/show-cart',
+        type: 'GET',
+        success: (res) => {
+            if( !res ) console.log('(ajax) success but show false');
+            $('#modal-add-to-cart .uk-modal-body').html(res);
+            if($('#cart #cartCount').text() !== '0') {
+                UIkit.modal('#modal-add-to-cart').show();
+                $('#cart a').attr('uk-tooltip','title: Выбрано картин: ' + $('#cart #cartCount').text() + ' шт.; pos: bottom; delay: 400');
+            } else {
+                $('#cart a').attr('uk-tooltip','title: Ваша корзина пуста...; pos: bottom; delay: 400');
+            }
+            
+        },
+        error: (err) => {
+            console.log('Error! show cart false: ' + JSON.stringify(err));
+        },
+    });
 });
 
 // AJAX delete poster by id from cart
@@ -180,6 +195,8 @@ $('#modal-add-to-cart .uk-modal-body').on('click', '.cart-delete-item', function
             const qty = $(this).closest('tr').find('input[type="number"]').val();
             $('#cart #cartCount').html( parseInt($('#cart #cartCount').html() - qty) );
             if($('#cart #cartCount').text() == '0') {
+                $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
+                $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',true);
                 $('#cart a').attr('uk-tooltip','title: Ваша корзина пуста...; pos: bottom; delay: 400');
             } else {
                 $('#cart a').attr('uk-tooltip','title: Выбрано картин: ' + $('#cart #cartCount').text() + ' шт.; pos: bottom; delay: 400');

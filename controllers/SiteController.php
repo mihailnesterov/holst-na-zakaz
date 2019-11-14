@@ -124,13 +124,15 @@ class SiteController extends Controller
         ]);
     }
 
-    // экшн страницы корзины
-    public function actionCart()
+    // экшн корзины
+    public function actionShowCart()
     {
-
-        return $this->render('cart');
+        $session = Yii::$app->session;
+        $session->open();
+        $this->layout = false;
+        // render modal
+        return $this->render('add-to-cart', compact('session'));
     }
-
     // экшн добавления заказа в корзину
     public function actionAddToCart()
     {
@@ -170,7 +172,6 @@ class SiteController extends Controller
         // render modal
         return $this->render('add-to-cart', compact('session'));
     }
-    
     // экшн удаления картины из корзины
     public function actionDeleteItemFromCart()
     {

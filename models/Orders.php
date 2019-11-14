@@ -79,7 +79,6 @@ class Orders extends \yii\db\ActiveRecord
     {
         if(isset($_SESSION['cart'][$poster->id])) {
             $_SESSION['cart'][$poster->id]['qty'] += $qty;
-            //print_r($_SESSION['cart'][$poster->id]);
         } else {
             $_SESSION['cart'][$poster->id] = [
                 'id' => $poster->id,
