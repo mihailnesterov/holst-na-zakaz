@@ -10,6 +10,7 @@ use Yii;
  * @property int $id id часов
  * @property string $src картинка
  * @property string $name название
+ * @property double $price цена, руб.
  */
 class Clocks extends \yii\db\ActiveRecord
 {
@@ -32,8 +33,9 @@ class Clocks extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['src', 'name'], 'required'],
+            [['src', 'name', 'price'], 'required'],
             [['src', 'name'], 'string', 'max' => 255],
+            [['price'], 'number'],
             [['imageFile'], 'file', 'extensions' => 'gif, png, jpg, jpeg', 'skipOnEmpty' => true, 'maxSize' => 2048 * 1024, 'tooBig' => 'Размер файла не должен превышать 2 MB'],
         ];
     }
@@ -47,6 +49,7 @@ class Clocks extends \yii\db\ActiveRecord
             'id' => 'ID',
             'src' => 'Src',
             'name' => 'Name',
+            'price' => 'Price',
         ];
     }
 
