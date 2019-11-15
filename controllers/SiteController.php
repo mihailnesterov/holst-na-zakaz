@@ -101,29 +101,58 @@ class SiteController extends Controller
     // экшн страницы постера
     public function actionPoster($id)
     {
-        $poster = Posters::findOne(['id' => $id ]);
-        $images = Images::find()->where(['poster_id' => $id]);// получили картинки постера
-        $postersAddServices = AddServices::find()->all(); // доп услуги
+        // все запросы к БД кэшируем на 1 час
+        $poster = Yii::$app->cache->getOrSet('poster', function () use($id) {
+            return Posters::findOne(['id' => $id ]);
+        }, 3600);
+        //$poster = Posters::findOne(['id' => $id ]);
+        $images = Yii::$app->cache->getOrSet('images', function () use($id) {
+            return Images::find()->where(['poster_id' => $id])->limit(1,);
+        }, 3600);
+        //$images = Images::find()->where(['poster_id' => $id]);// получили картинки постера
+        $postersAddServices = Yii::$app->cache->getOrSet('postersAddServices', function () {
+            return AddServices::find()->all();
+        }, 3600);
+        //$postersAddServices = AddServices::find()->all(); // доп услуги
         //$postersAddServices = PostersAddServices::find()->where(['poster_id' => $id])->all();
-        $types = Types::find()->all();  // все типы изделий
-        $posterSizes = Sizes::find()->all(); // размеры постера
+        $types = Yii::$app->cache->getOrSet('types', function () {
+            return Types::find()->all();
+        }, 3600);
+        //$types = Types::find()->all();  // все типы изделий
+        $posterSizes = Yii::$app->cache->getOrSet('posterSizes', function () {
+            return Sizes::find()->all();
+        }, 3600);
+        //$posterSizes = Sizes::find()->all(); // размеры постера
         //$posterSizes = PostersSizes::find()->where(['poster_id' => $id])->all(); // размеры постера
-        $bagetsWidth = Bagets::find()->select('width')->distinct()->all();    // подрамники
-        $bagets = Bagets::find()->all();
-        $posterMaterials = Materials::find()->all(); // материалы
+        $bagetsWidth = Yii::$app->cache->getOrSet('bagetsWidth', function () {
+            return Bagets::find()->select('width')->distinct()->all();
+        }, 3600);
+        //$bagetsWidth = Bagets::find()->select('width')->distinct()->all();    // подрамники
+        $bagets = Yii::$app->cache->getOrSet('bagets', function () {
+            return Bagets::find()->all();
+        }, 3600);
+        //$bagets = Bagets::find()->all();
+        $posterMaterials = Yii::$app->cache->getOrSet('posterMaterials', function () {
+            return Materials::find()->all();
+        }, 3600);
+        //$posterMaterials = Materials::find()->all(); // материалы
         //$posterMaterials = PostersMaterials::find()->where(['poster_id' => $id])->all(); // материалы постера
+        $clocks = Yii::$app->cache->getOrSet('clocks', function () {
+            return Clocks::find()->all();
+        }, 3600);
 
         return $this->render('poster',[
             'poster' => $poster,
             'images' => $images->all(),
-            'firstImage' => $images->one(),
-            'interierImages' => $images->limit(1,),
+            //'firstImage' => $images->one(),
+            'interierImages' => $images,
             'postersAddServices' => $postersAddServices,
             'types' => $types,
             'posterSizes' => $posterSizes,
             'bagetsWidth' => $bagetsWidth,
             'bagets' => $bagets,
             'posterMaterials' => $posterMaterials,
+            'clocks' => $clocks,
         ]);
     }
 
