@@ -14,7 +14,10 @@ class PosterListImageWidget extends Widget
         parent::run();
         if($this->poster_id){
             //$image = Images::find()->where(['poster_id' => $this->poster_id])->one();
-            $poster = Posters::findOne(['id' => $this->poster_id]);
+            $poster = \Yii::$app->cache->getOrSet('poster', function () {
+                return Posters::findOne(['id' => $this->poster_id]);
+            }, 3600);
+            //$poster = Posters::findOne(['id' => $this->poster_id]);
             return $this->render('image',[
                 //'image' => $image ? 'images/posters/'.$image->src : $bundle->baseUrl.'/img/image.png',
                 'image' => $poster ? 'images/posters/'.$poster->image : $bundle->baseUrl.'/img/image.png',
