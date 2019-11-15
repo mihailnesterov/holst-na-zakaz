@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id id типа постеров
  * @property string $name название типа
+ * @property double $price цена, руб.
  * @property string $description описание типа постеров
  *
  * @property PostersTypes[] $postersTypes
@@ -29,8 +30,9 @@ class Types extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'required'],
+            [['name', 'price'], 'required'],
             [['description'], 'string'],
+            [['price'], 'number'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -43,6 +45,7 @@ class Types extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'price' => 'Price',
             'description' => 'Description',
         ];
     }
