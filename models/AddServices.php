@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id id доп. услуги
  * @property string $name название доп. услуги
+ * @property double $price цена, руб.
  * @property string $description описание доп. услуги
  *
  * @property PostersAddServices[] $postersAddServices
@@ -29,7 +30,8 @@ class AddServices extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description'], 'required'],
+            [['name', 'price'], 'required'],
+            [['price'], 'number'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 512],
         ];
@@ -43,6 +45,7 @@ class AddServices extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
+            'price' => 'Price',
             'description' => 'Description',
         ];
     }

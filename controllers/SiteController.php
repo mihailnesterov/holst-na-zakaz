@@ -103,7 +103,8 @@ class SiteController extends Controller
     {
         $poster = Posters::findOne(['id' => $id ]);
         $images = Images::find()->where(['poster_id' => $id]);// получили картинки постера
-        $postersAddServices = PostersAddServices::find()->where(['poster_id' => $id])->all();
+        $postersAddServices = AddServices::find()->all(); // доп услуги
+        //$postersAddServices = PostersAddServices::find()->where(['poster_id' => $id])->all();
         $types = Types::find()->all();  // все типы изделий
         $posterSizes = Sizes::find()->all(); // размеры постера
         //$posterSizes = PostersSizes::find()->where(['poster_id' => $id])->all(); // размеры постера

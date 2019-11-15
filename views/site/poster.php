@@ -151,7 +151,7 @@ $this->registerMetaTag([
 						<div class="module-order-calc-addons-item">
 							<label>
 								<input @click="selectAddService" type="checkbox" class="checkbox-add-service" value="<?= $service->price ?>">&nbsp;
-								<?= $service->addService->name ?>
+								<?= $service->name ?>
 								<span class="uk-label">
 									<?= $service->price ?> ₽
 								</span>
