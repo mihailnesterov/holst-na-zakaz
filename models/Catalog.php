@@ -76,7 +76,7 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public static function getSubCategoryCount($catalog_id)
     {
-        Yii::$app->cache->getOrSet('sub_category_count', function () use($catalog_id) {
+        $count = Yii::$app->cache->getOrSet('sub_category_count', function () use($catalog_id) {
             return \app\models\Catalog::find()->where(['parent' => $catalog_id])->count();
         }, 3600);
         //return \app\models\Catalog::find()->where(['parent' => $catalog_id])->count();
@@ -87,8 +87,9 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public static function getSubCategories($catalog_id)
     {
-        Yii::$app->cache->getOrSet('catalog_sub_categories', function () use($catalog_id) {
+        Yii::$app->cache->getOrSet('sub_categories', function () use($catalog_id) {
             return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
         }, 3600);
+        //return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
     }
 }
