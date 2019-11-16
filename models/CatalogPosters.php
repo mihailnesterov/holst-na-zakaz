@@ -71,9 +71,13 @@ class CatalogPosters extends \yii\db\ActiveRecord
     public static function getCategoryCount($catalog_id=null)
     {
         if (!$catalog_id) {
-            return CatalogPosters::find()->select('poster_id')->distinct()->count();
+            Yii::$app->cache->getOrSet('catalog_posters_1', function () {
+                return CatalogPosters::find()->select('poster_id')->distinct()->count();
+            }, 3600);
         } else {
-            return CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
+            Yii::$app->cache->getOrSet('catalog_posters_2', function () use($catalog_id) {
+                return CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
+            }, 3600);
         }
     }
 }
