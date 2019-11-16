@@ -11,7 +11,8 @@ class PosterListImageWidget extends Widget
         $bundle = PosterListImageAsset::register( $this->getView() );
         parent::run();
         if($this->poster_id){
-            $poster = \Yii::$app->cache->getOrSet('poster', function () {
+            $poster_key = 'poster_'.$this->poster_id;
+            $poster = \Yii::$app->cache->getOrSet($poster_key, function () {
                 return Posters::findOne(['id' => $this->poster_id]);
             }, 3600);
             return $this->render('image',[

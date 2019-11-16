@@ -10,7 +10,7 @@ class CatalogMenuWidget extends Widget
 {
     public function run() {
         parent::run();
-        $catalog = Yii::$app->cache->getOrSet('catalog', function () {
+        $catalog = Yii::$app->cache->getOrSet('catalog_menu', function () {
             return CatalogPosters::find()->distinct()->select('catalog_id')->orderby(['catalog_id'=>SORT_ASC])->all();
         }, 3600);
         return $this->render('catalogmenu',[
