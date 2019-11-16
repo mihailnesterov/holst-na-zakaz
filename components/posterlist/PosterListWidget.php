@@ -16,10 +16,14 @@ class PosterListWidget extends Widget
     public function run() {
         parent::run();
         $view = 'posterlist';
+        $id = $this->id;
         if($this->id){  // если виджет вызван во view с аргументом id
             
             $view = 'categorylist';
-            $posters = CatalogPosters::find()->distinct()->where(['catalog_id' => $this->id])->orderby(['catalog_id' => SORT_ASC]);
+            $posters = \Yii::$app->cache->getOrSet('posters_poster_list_1', function () use($id) {
+                return CatalogPosters::find()->distinct()->where(['catalog_id' => $this->id])->orderby(['catalog_id' => SORT_ASC]);
+            }, 3600);
+            //$posters = CatalogPosters::find()->distinct()->where(['catalog_id' => $this->id])->orderby(['catalog_id' => SORT_ASC]);
 
         } elseif (!$this->id && $this->search) {    // если виджет вызван во view с поисковым запросом (страница поиска)
             
@@ -37,8 +41,10 @@ class PosterListWidget extends Widget
             $this->view->title = 'Найдено ('.count($posters->all()).') по запросу "'.$this->search.'"';
 
         } else {    // если виджет вызван во view без аргумента (главная страница)
-            
-            $posters = Posters::find()->orderby(['id' => SORT_ASC]);
+            $posters = \Yii::$app->cache->getOrSet('posters_poster_list_1', function () {
+                return Posters::find()->orderby(['id' => SORT_ASC]);
+            }, 3600);
+            //$posters = Posters::find()->orderby(['id' => SORT_ASC]);
             $this->view->title = 'Картины ('.count($posters->all()).')';
 
         }

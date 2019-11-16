@@ -65,7 +65,10 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public static function getPostersInCategoryCount($catalog_id)
     {
-        return \app\models\CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
+        Yii::$app->cache->getOrSet('posters_in_category_count', function () use($catalog_id) {
+            return \app\models\CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
+        }, 3600);
+        //return \app\models\CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
     }
 
     /** + метод для подсчета кол-ва подкатегорий в категории
@@ -73,7 +76,10 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public static function getSubCategoryCount($catalog_id)
     {
-        return \app\models\Catalog::find()->where(['parent' => $catalog_id])->count();
+        Yii::$app->cache->getOrSet('sub_category_count', function () use($catalog_id) {
+            return \app\models\Catalog::find()->where(['parent' => $catalog_id])->count();
+        }, 3600);
+        //return \app\models\Catalog::find()->where(['parent' => $catalog_id])->count();
     }
     
     /** + метод для вывода подкатегорий в категории
@@ -84,6 +90,5 @@ class Catalog extends \yii\db\ActiveRecord
         Yii::$app->cache->getOrSet('catalog_sub_categories', function () use($catalog_id) {
             return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
         }, 3600);
-        //return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
     }
 }
