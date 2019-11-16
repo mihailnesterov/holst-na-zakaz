@@ -81,6 +81,9 @@ class Catalog extends \yii\db\ActiveRecord
      */
     public static function getSubCategories($catalog_id)
     {
-        return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
+        Yii::$app->cache->getOrSet('catalog_sub_categories', function () use($catalog_id) {
+            return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
+        }, 3600);
+        //return \app\models\Catalog::find()->where(['parent' => $catalog_id])->all();
     }
 }
