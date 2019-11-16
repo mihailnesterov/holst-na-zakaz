@@ -76,13 +76,11 @@ class CatalogPosters extends \yii\db\ActiveRecord
             $result = Yii::$app->cache->getOrSet($key, function () {
                 return CatalogPosters::find()->select('poster_id')->distinct()->count();
             }, 3600);
-            return CatalogPosters::find()->select('poster_id')->distinct()->count();
         } else {
             $key = 'catalog_posters_count_'.$catalog_id;
             $result = Yii::$app->cache->getOrSet($key, function () use($catalog_id) {
                 return CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
             }, 3600);
-            //return CatalogPosters::find()->where(['catalog_id' => $catalog_id])->count();
         }
         return $result;
     }
