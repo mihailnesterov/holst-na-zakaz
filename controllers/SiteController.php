@@ -82,16 +82,15 @@ class SiteController extends Controller
     // экшн страницы каталога
     public function actionCategory($id)
     {
-        $category = Yii::$app->cache->getOrSet('action_category_one', function () use($id) {
+        $cat_key = 'action_category_'.$id;
+        $category = Yii::$app->cache->getOrSet($cat_key, function () use($id) {
             return Catalog::find()->where(['id' => $id])->one();
         }, 3600);
-        //$category = Catalog::find()->where(['id' => $id])->one();
         $cat_id = $category->id;
-        $postsCount = Yii::$app->cache->getOrSet('action_category_count', function () use($cat_id) {
+        $cat_count_key = 'action_category_count_'.$cat_id;
+        $postsCount = Yii::$app->cache->getOrSet($cat_count_key, function () use($cat_id) {
             return CatalogPosters::find()->distinct()->where(['catalog_id' => $cat_id])->count();
-        }, 3600);
-        //$postsCount = CatalogPosters::find()->distinct()->where(['catalog_id' => $category->id])->count();
-        
+        }, 3600);  
         return $this->render('category',[
             'category' => $category,
             'id' => $id,
