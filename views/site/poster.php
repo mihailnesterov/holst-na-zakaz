@@ -216,7 +216,9 @@ $this->registerMetaTag([
 		</div>
 		<div class="uk-width-expand@m">
 			<div class="uk-card uk-card-default uk-card-body">
-				<h5 class="uk-text-small uk-margin-remove-top">Автор: <a href="#" style="color: rgb(205, 64, 220);"><?= $poster->autor ?></a></h5>
+				<?php if($poster->autor !== ''): ?>
+				<h5 class="uk-text-small uk-margin-remove-top">Автор: <a href="<?= Url::to(['/search','q' => $poster->autor]) ?>" style="color: rgb(205, 64, 220);"><?= $poster->autor ?></a></h5>
+				<?php endif;?>
 				<?php echo PosterListImageWidget::widget([ 
 					'poster_id' => $poster->id, 
 					'img_class' => 'poster-image' ]);
