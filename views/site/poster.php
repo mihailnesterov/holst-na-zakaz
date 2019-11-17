@@ -29,27 +29,47 @@ $this->registerMetaTag([
 		</div>
 	</div>
 	<!-- /. search form + shopping cart -->
-<div id="cart" style="border: 1px red solid; padding: 10px;">
-	<a href="<?= Url::to('cart') ?>">
-	{{ cartHeader }} 
-	<span id="cartCount">{{ cartCount }}</span>
-	<span id="cartSum">{{ cartSum }}</span>
-	</a>
-</div>
+
 	<ul class="uk-breadcrumb uk-background-muted uk-padding-small uk-text-xsmall">
 		<li><a href="<?= Url::home() ?>">Картины</a></li>
 		<li><span><?= $poster->name ?></span></li>
 	</ul>
-	<h1 class="uk-heading-divider uk-margin-medium-bottom">
-		<?= Html::encode($this->title) ?> 
-		<span class="uk-text-small uk-text-middle" style="color: #cd40dc;">Артикул: <?= $poster->articul ?></span>
-		<input type="hidden" id="base-price" name="base-price" value="<?= $poster->price ?>">
-	</h1>
-    <div class="uk-text-center1" uk-grid>
+    <div uk-grid>
 		<div class="uk-width-1-3@m">
-			<div class="uk-card uk-card-default uk-card-body1">	
-
+			<div class="uk-card uk-card-default --uk-card-body">	
+			
 				<div class="module-order-calc-steps-item active">
+					<!--<h5 class="module-order-calc-steps-item-title uk-padding-small uk-margin-remove">
+						Выберите тип изделия
+					</h5>-->
+					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
+						Выберите тип изделия
+					</a> 
+					<div class="module-order-calc-steps-item-body">
+						<div class="uk-child-width-1-2 uk-padding-remove uk-margin-remove-vertical" uk-grid>
+							<?php foreach ($types as $type): ?>
+								<div class="uk-text-center" style="">
+									<a href="#" data-type-price="<?= $type->price ?>" >
+										<img 
+											data-src="images/types/<?= $type->src ?>" 
+											alt="<?= $type->name ?>" 
+											class="uk-padding-small uk-padding-remove-vertical"
+											uk-img
+										>
+										<p class="uk-text-small uk-margin-remove">
+											<?= $type->name ?>
+										</p>
+									</a>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="module-order-calc-steps-item">
+					<!--<h5 class="module-order-calc-steps-item-title uk-padding-small uk-margin-remove">
+						Выберите размер (см)
+					</h5>-->
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
 						Выберите размер (см)
 					</a> 
@@ -85,7 +105,7 @@ $this->registerMetaTag([
 					</div>
 				</div>
 
-				<div class="module-order-calc-steps-item active">
+				<div class="module-order-calc-steps-item">
 					<a href="#" class="module-order-calc-steps-item-title">
 						Выберите материал
 					</a> 
@@ -216,30 +236,66 @@ $this->registerMetaTag([
 		</div>
 		<div class="uk-width-expand@m">
 			<div class="uk-card uk-card-default uk-card-body">
+				<h2 class="uk-heading-divider uk-margin-medium-bottom">
+				<?php if($this->title !== ''): ?>
+					<?= Html::encode($this->title) ?>
+					<span class="uk-text-small uk-text-middle" style="color: #cd40dc;">Артикул: <?= $poster->articul ?></span>
+				<?php else:?>
+					Артикул: 
+					<span style="color: #cd40dc;">
+						<?= $poster->articul ?>
+					</span>					
+				<?php endif;?>
+				</h2>
+				<!-- base-price-hidden-input -->
+				<input type="hidden" id="base-price" name="base-price" value="<?= $poster->price ?>">
+				
 				<?php if($poster->autor !== ''): ?>
 				<h5 class="uk-text-small uk-margin-remove-top">Автор: <a href="<?= Url::to(['/search','q' => $poster->autor]) ?>" style="color: rgb(205, 64, 220);"><?= $poster->autor ?></a></h5>
 				<?php endif;?>
-				<?php echo PosterListImageWidget::widget([ 
-					'poster_id' => $poster->id, 
-					'img_class' => 'poster-image' ]);
-				?>
 				
+				<div uk-grid>
+					<div class="uk-width-expand@m">
+						<?php echo PosterListImageWidget::widget([ 
+							'poster_id' => $poster->id, 
+							'img_class' => 'poster-image uk-box-shadow-large' ]);
+						?>
+					</div>
+					<div class="uk-width-1-3@m">
+						<ul class="uk-list uk-list-large uk-text-center">
+							<?php foreach ($types as $type): ?>
+								<li>
+									<a href="#" data-type-price="<?= $type->price ?>" >
+										<img 
+											data-src="images/types/<?= $type->src ?>" 
+											alt="<?= $type->name ?>" 
+											width="50"
+											class="uk-box-shadow-small"
+											uk-img
+										>
+										<p class="uk-text-small uk-margin-remove">
+											<?= $type->name ?>
+										</p>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</div>
 				<!-- poster images slider -->
-				<div style="border: 1px #eee solid; padding: 10px;" uk-slider="" class="module-order-calc-packages --uk-visible@m uk-slider uk-slider-container">
-					<!--<div class="uk-h4 module-order-calc-packages-title">
-                        Подарочная упаковка
-					</div> -->
+				<?php if($images): ?>
+				<div uk-slider="" style="border:1px #ddd solid;" class="uk-slider uk-slider-container uk-padding-small uk-margin-top">
+					<div class="uk-h4">
+                        Картина в интерьере
+					</div>
 					<div class="uk-position-relative uk-visible-toggle">
 						<ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid" style="transform: translateX(0px);">
 							<?php foreach ($images as $image): ?>
-							<li class="module-order-calc-packages-item uk-active" style="order: -1;">
+							<li class="module-order-calc-packages-item" style="order: -1;">
 								<div uk-lightbox="">
 									<a href="images/posters/<?= $image->src ?>">
-										<picture>
-											<!--<source type="image/webp" srcset="/img/gift-packages/gift-package-1.webp"> 
-											<source type="image/jpeg" srcset="/img/gift-packages/gift-package-1.jpg"> 
-											<img src="/img/gift-packages/gift-package-1.jpg" alt="1">-->
-											<img  data-src="images/posters/<?= $image->src ?>" alt="<?= $image->src ?>" width="100%" style="object-fit:cover;height:80px;" uk-img>
+										<picture class="uk-inline-clip uk-transition-toggle" tabindex="0">
+											<img  data-src="images/posters/<?= $image->src ?>" alt="<?= $image->src ?>" class="uk-transition-scale-up uk-transition-opaque uk-border-rounded" uk-img>
 										</picture>
 									</a>
 								</div> 
@@ -269,6 +325,7 @@ $this->registerMetaTag([
 					</ul> 
 					<input type="hidden" name="baguette" value="">
 				</div>	<!-- ./ end poster images slider -->
+				<?php endif;?>
 				
 				<!-- bagettes slider -->
 				<div v-if="isBaguettesSelected" uk-slider="" class="module-order-calc-baguettes --uk-visible@m uk-slider uk-slider-container">
@@ -322,10 +379,3 @@ $this->registerMetaTag([
 		</div>
 	</div>
 </div>
-
-<?php foreach ($types as $type): ?>
-	<a href="#"><img src="images/posters/" alt="<?= $type->name ?>"></a>
-<?php endforeach; ?>
-
-<br>
-

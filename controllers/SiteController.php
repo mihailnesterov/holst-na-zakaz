@@ -118,7 +118,7 @@ class SiteController extends Controller
         $postersAddServices = Yii::$app->cache->getOrSet('postersAddServices', function () {
             return AddServices::find()->all();
         }, 3600);
-        $types = Yii::$app->cache->getOrSet('types', function () {
+        $types = Yii::$app->cache->getOrSet('posterTypes', function () {
             return Types::find()->all();
         }, 3600);
         $posterSizes = Yii::$app->cache->getOrSet('posterSizes', function () {
