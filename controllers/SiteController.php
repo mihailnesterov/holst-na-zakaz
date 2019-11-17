@@ -112,7 +112,8 @@ class SiteController extends Controller
             return Posters::findOne(['id' => $id ]);
         }, 3600);
         $images = Yii::$app->cache->getOrSet('images_'.$id, function () use($id) {
-            return Images::find()->where(['poster_id' => $id])->limit(1,);
+            //return Images::find()->where(['poster_id' => $id])->limit(1,);
+            return Images::find()->where(['poster_id' => $id]);
         }, 3600);
         $postersAddServices = Yii::$app->cache->getOrSet('postersAddServices', function () {
             return AddServices::find()->all();
@@ -129,7 +130,7 @@ class SiteController extends Controller
          $bagets = Yii::$app->cache->getOrSet('bagets', function () {
             return Bagets::find()->all();
         }, 3600);
-         $posterMaterials = Yii::$app->cache->getOrSet('posterMaterials', function () {
+        $posterMaterials = Yii::$app->cache->getOrSet('posterMaterials', function () {
             return Materials::find()->all();
         }, 3600);
         $clocks = Yii::$app->cache->getOrSet('clocks', function () {
@@ -139,7 +140,6 @@ class SiteController extends Controller
         return $this->render('poster',[
             'poster' => $poster,
             'images' => $images->all(),
-            'interierImages' => $images,
             'postersAddServices' => $postersAddServices,
             'types' => $types,
             'posterSizes' => $posterSizes,
