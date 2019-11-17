@@ -20,7 +20,7 @@ use app\components\posterlistimage\PosterListImageWidget;
                 <h3 class="uk-card-title uk-padding-large-top uk-margin-top uk-margin-remove-bottom"><a href="<?= Url::to(['poster','id' => $poster->poster_id]) ?>" class="uk-button uk-button-link"><?= $poster->poster->name ?></a></h3>
                 
                 <?php if($poster->poster->autor):?>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Автор <a href="#"><?= $poster->poster->autor ?></a></p>
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom">Автор <a href="<?= Url::to(['/search','q' => $poster->poster->autor]) ?>"><?= $poster->poster->autor ?></a></p>
                 <?php else: ?>
                     <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"></p>
                 <?php endif; ?>
