@@ -236,7 +236,7 @@ class SiteController extends Controller
         $order = new Orders();
         $session->close();
         $this->view->title = "Оформление заказа:";
-        return $this->render('order', compact('session'));
+        return $this->render('order', compact('session', 'order'));
     }
 
     /*
