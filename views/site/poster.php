@@ -35,9 +35,9 @@ $this->registerMetaTag([
 		<li><span><?= $poster->name ?></span></li>
 	</ul>
     <div uk-grid>
+		<!-- left column -->
 		<div class="uk-width-1-3@m">
-			<div class="uk-card uk-card-default --uk-card-body">	
-			
+			<div class="uk-card uk-card-default --uk-card-body">
 				<div class="module-order-calc-steps-item active">
 					<!--<h5 class="module-order-calc-steps-item-title uk-padding-small uk-margin-remove">
 						Выберите тип изделия
@@ -66,7 +66,7 @@ $this->registerMetaTag([
 					</div>
 				</div>
 
-				<div class="module-order-calc-steps-item">
+				<div class="module-order-calc-steps-item active">
 					<!--<h5 class="module-order-calc-steps-item-title uk-padding-small uk-margin-remove">
 						Выберите размер (см)
 					</h5>-->
@@ -105,7 +105,7 @@ $this->registerMetaTag([
 					</div>
 				</div>
 
-				<div class="module-order-calc-steps-item">
+				<div class="module-order-calc-steps-item active">
 					<a href="#" class="module-order-calc-steps-item-title">
 						Выберите материал
 					</a> 
@@ -215,25 +215,23 @@ $this->registerMetaTag([
 					</div>
 				</div>
 
-				<div style="border: 1px red solid; padding: 5px; margin-top: 10px;">
-					<p>Базовая цена = <span id="price-base"><?= $poster->price ?></span></p>
-					<p>
-						{{posterPrices.base}} + 
-						{{posterPrices.size}} + 
-						{{posterPrices.services}} +
-						{{posterPrices.baguette}} +
-						{{fixPrices.holder}} +
-						{{fixPrices.margin}} +
-						{{fixPrices.podramnik}} +
-						{{fixPrices.bagetWork}} +
-						{{fixPrices.promoCode}}
-					</p>
-					<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
-					<button @click="buy">Купить</button>
+				<div class="module-order-calc-steps-item -inactive active">
+					<a href="#" class="module-order-calc-steps-item-title">
+						Часы
+					</a> 
+					<div class="module-order-calc-steps-item-body">
+						<div class="module-order-calc-addons-item">
+						<label>
+						<input @click="toggleClocks" type="checkbox" value="">&nbsp;
+							Добавить часы
+						</label> 
+						</div>
+					</div>
 				</div>
-				
 			</div>
-		</div>
+		</div> <!-- ./ end left column -->
+		
+		<!-- right column -->
 		<div class="uk-width-expand@m">
 			<div class="uk-card uk-card-default uk-card-body">
 				<h2 class="uk-heading-divider uk-margin-medium-bottom">
@@ -375,7 +373,82 @@ $this->registerMetaTag([
 					</ul> 
 					<input type="hidden" name="baguette">
 				</div> <!-- ./ end bagettes slider -->
-			</div>
-		</div>
+
+				<!-- clocks slider -->
+				<div v-if="isClocksSelected" uk-slider="" class="module-order-calc-clocks --uk-visible@m uk-slider uk-slider-container">
+					<div class="uk-h4 module-order-calc-clocks-title">
+                        Выберите часы
+					</div> 
+					<div class="uk-position-relative uk-visible-toggle">
+						<ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid" style="transform: translateX(0px);">
+							<?php foreach ($clocks as $clock): ?>
+							<li class="module-order-calc-clocks-item uk-active">
+								<a @click.prevent="selectClocks" href="#">
+									<div class="module-order-calc-clocks-item-image">
+										<img src="images/clocks/<?= $clock->src ?>" alt="<?= $clock->name ?>">
+									</div>
+								</a> 
+								<label>
+									<input @click="selectClock" type="radio" name="radio-clock-image" value="<?= $clock->price ?>"> Выбрать
+								</label> 
+							</li>
+							<?php endforeach; ?>
+						</ul> 
+						<a href="#" uk-slidenav-previous="" uk-slider-item="previous" class="uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-previous uk-icon uk-slidenav">
+							<svg width="14" height="24" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous">
+								<polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline>
+							</svg>
+						</a> 
+						<a href="#" uk-slidenav-next="" uk-slider-item="next" class="uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-next uk-icon uk-slidenav">
+							<svg width="14" height="24" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-next">
+								<polyline fill="none" stroke="#000" stroke-width="1.4" points="1.225,23 12.775,12 1.225,1 "></polyline>
+							</svg>
+						</a>
+					</div>
+					<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin">
+						<!--<li uk-slider-item="0" class="uk-active">
+							<a href="#"></a>
+						</li>
+						<li uk-slider-item="1">
+							<a href="#"></a>
+						</li>-->
+					</ul> 
+					<input type="hidden" name="clock">
+				</div> <!-- ./ end clocks slider -->
+
+				<div class="uk-margin uk-padding" style="border: 1px #ddd solid;">
+						<p>Базовая цена = <span id="price-base"><?= $poster->price ?></span></p>
+						<p>
+							{{posterPrices.base}} + 
+							{{posterPrices.size}} + 
+							{{posterPrices.services}} +
+							{{posterPrices.baguette}} +
+							{{posterPrices.clock}} +
+							{{fixPrices.holder}} +
+							{{fixPrices.margin}} +
+							{{fixPrices.podramnik}} +
+							{{fixPrices.bagetWork}} +
+							{{fixPrices.promoCode}}
+						</p>
+						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
+						<div class="uk-padding-small uk-margin-remove">
+							<?= Html::a(
+								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
+								[
+									'add-to-cart', 'id' => $poster->id
+								], 
+								[
+									'class' => 'uk-button uk-margin-small-bottom add-to-cart-button',
+									'style' => 'background: #e97eef;color: #fff;',
+									'title' => 'Добавить в корзину "'.$poster->name.'"',
+									'data-id' => $poster->id,
+								]
+							) ?>
+						</div>
+						<!--<button @click="buy">Купить</button>-->
+				</div>
+
+			</div> <!-- ./ end uk-card -->
+		</div> <!-- ./ end right column -->
 	</div>
 </div>

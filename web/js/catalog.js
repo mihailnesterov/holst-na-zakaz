@@ -11,7 +11,8 @@ if (posterApp) {
                 material: 0,
                 podramnik: 0,
                 services: 0,
-                baguette: 0
+                baguette: 0,
+                clock: 0
             },
             fixPrices: {
                 holder: 50,
@@ -22,6 +23,7 @@ if (posterApp) {
                 isPromoCode: false
             },
             isBaguettesSelected: false, // false or true Boolean
+            isClocksSelected: false, // false or true Boolean
             cartHeader: 'Корзина',
             cartCount: 0,
             cartSum: 0,
@@ -60,6 +62,7 @@ if (posterApp) {
                 //this.posterPrices.podramnik = document.querySelector('input[name=radio-bagets-width]').value;
                 this.posterPrices.services = 0;
                 this.posterPrices.baguette = 0;
+                this.posterPrices.clock = 0;
             },
             selectActiveTab(e) {
             // ... выбор активной вкладки
@@ -104,7 +107,16 @@ if (posterApp) {
                         this.posterPrices.services -= +e.target.value;
                     }
                 }
-            }
+            },
+            toggleClocks() {
+                this.isClocksSelected = !this.isClocksSelected;
+                if(!this.isClocksSelected) this.posterPrices.clock = 0;
+            },
+            selectClocks(e) {
+                const radio = e.target.closest('li').querySelector('input[type=radio]');
+                    radio.checked = true;
+                    this.posterPrices.clock = radio.value;
+            },
         },
         computed: {
             getTotalPrice() {

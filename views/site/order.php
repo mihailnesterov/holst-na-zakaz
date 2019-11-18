@@ -4,10 +4,24 @@
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\components\search\SearchWidget;
+use app\components\cart\CartWidget;
 ?>
 
+<!-- search form + shopping cart -->
+<div class="uk-background-muted uk-padding-small uk-panel uk-margin-bottom">
+    <div uk-grid>
+        <div class="uk-width-3-4@m">
+            <?php echo SearchWidget::widget(); ?>
+        </div>
+        <div class="uk-width-expand@m">
+            <?php echo CartWidget::widget(); ?>
+        </div>
+    </div>
+</div>
+<!-- /. search form + shopping cart -->
 
-<div class="uk-width-1-1">
+<div class="uk-width-1-1 uk-margin-medium-top">
     <div class="uk-margin">
     
         <h1 class="uk-heading-divider uk-heading-bullet uk-margin-medium-bottom">
