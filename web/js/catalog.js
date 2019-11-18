@@ -152,6 +152,65 @@ $('.add-to-cart-button').on('click', function(e) {
         },
     });
 });
+
+/**
+ * (AJAX) function plus/minus qty into cart
+ * @param {*} id 
+ * @param {*} that 
+ */
+function changeQtyItemCart(id, that) {
+    // if value == 1 - return
+    if (that.defaultValue === 1) return false;
+    // plus 1
+    if ( that.defaultValue < that.value ) {
+        $.ajax({
+            url: 'site/add-to-cart',
+            data: {id: id},
+            type: 'GET',
+            success: (res) => {
+                if( !res ) console.log('(ajax) success but poster id=' + id + ' not found');
+                $('#modal-add-to-cart .uk-modal-body').html(res);
+                $('#cart #cartCount').html(0);
+                $('#modal-add-to-cart table tbody tr input[type="number"]').each(function() {
+                    const qty = $(this).val();
+                    const currentCartCount = $('#cart #cartCount').text();
+                    $('#cart #cartCount').html( parseInt(currentCartCount) + parseInt(qty) );
+                });
+                $('#cart a').attr('uk-tooltip','title: Выбрано картин: ' + $('#cart #cartCount').text() + ' шт.; pos: bottom; delay: 400');
+            },
+            error: (err) => {
+                console.log('Error! plus 1 false: ' + JSON.stringify(err));
+            },
+        });
+    // minus 1
+    } else if ( that.defaultValue > that.value ) {
+        $.ajax({
+            url: 'site/minus-item-from-cart',
+            data: {id: id},
+            type: 'GET',
+            success: (res) => {
+                if( !res ) console.log('(ajax) success but item not found');
+                $('#modal-add-to-cart .uk-modal-body').html(res);
+                $('#cart #cartCount').html(0);
+                $('#modal-add-to-cart table tbody tr input[type="number"]').each(function() {
+                    const qty = $(this).val();
+                    const currentCartCount = $('#cart #cartCount').text();
+                    $('#cart #cartCount').html( parseInt(currentCartCount) + parseInt(qty) );
+                });
+                $('#cart a').attr('uk-tooltip','title: Выбрано картин: ' + $('#cart #cartCount').text() + ' шт.; pos: bottom; delay: 400');
+            },
+            error: (err) => {
+                console.log('Error! minus 1 false: ' + JSON.stringify(err));
+            },
+        });
+    } else {
+        // default - return
+        return false;
+    }
+    // defaultValue = current value
+    that.defaultValue = that.value;
+}
+
 // AJAX clear cart function (site/clearCart action)
 function clearCart() {
     $.ajax({

@@ -211,6 +211,19 @@ class SiteController extends Controller
         // render modal
         return $this->render('add-to-cart', compact('session','id'));
     }
+    // экшн уменьшения (-1) кол-ва картин в корзине
+    public function actionMinusItemFromCart()
+    {
+        $id = Yii::$app->request->get('id');
+        $session = Yii::$app->session;
+        $session->open();
+        $order = new Orders();
+        $order->minusItemFromCart($id);
+        $session->close();
+        $this->layout = false;
+        // render modal
+        return $this->render('add-to-cart', compact('session','id'));
+    }
 
     // экшн страницы заказа
     public function actionOrder()

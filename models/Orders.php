@@ -103,4 +103,13 @@ class Orders extends \yii\db\ActiveRecord
         $_SESSION['cart'][$id]['qty'] -= $qty; // qty minus
         unset($_SESSION['cart'][$id]); // delete item from session
     }
+
+    /**
+     * minus 1 item from cart public method
+     */
+    public function minusItemFromCart($id)
+    {
+        if( !isset($_SESSION['cart'][$id]) ) return false;
+        $_SESSION['cart'][$id]['qty'] -= 1; // minus 1
+    }
 }
