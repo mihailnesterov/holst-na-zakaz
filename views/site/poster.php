@@ -389,7 +389,7 @@ $this->registerMetaTag([
 									</div>
 								</a> 
 								<label>
-									<input @click="selectClock" type="radio" name="radio-clock-image" value="<?= $clock->price ?>"> Выбрать
+									<input @click="selectClocks" type="radio" name="radio-clock-image" value="<?= $clock->price ?>"> Выбрать
 								</label> 
 							</li>
 							<?php endforeach; ?>
@@ -433,7 +433,7 @@ $this->registerMetaTag([
 						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
 						<div class="uk-padding-small uk-margin-remove">
 							<?= Html::a(
-								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
+								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>Добавить в корзину', 
 								[
 									'add-to-cart', 'id' => $poster->id
 								], 
