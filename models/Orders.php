@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "orders".
@@ -16,6 +17,7 @@ use Yii;
  * @property string $time время доставки
  * @property string $promo промо-код
  * @property string $comment комментарий к заказу
+ * @property boolean $status статус заказа
  * @property string $created дата создания заказа
  *
  * @property OrderItems[] $orderItems
@@ -39,6 +41,7 @@ class Orders extends \yii\db\ActiveRecord
             [['name', 'email', 'phone'], 'required'],
             [['comment'], 'string'],
             [['created'], 'safe'],
+            [['status'], 'boolean'],
             [['name', 'address'], 'string', 'max' => 255],
             [['email', 'phone', 'promo'], 'string', 'max' => 50],
             [['date', 'time'], 'string', 'max' => 30],
@@ -60,6 +63,7 @@ class Orders extends \yii\db\ActiveRecord
             'time' => 'Time',
             'promo' => 'Promo',
             'comment' => 'Comment',
+            'status' => 'Status',
             'created' => 'Created',
         ];
     }
