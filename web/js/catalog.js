@@ -136,7 +136,8 @@ $('.add-to-cart-button').on('click', function(e) {
         success: (res) => {
             if( !res ) console.log('(ajax) success but poster id=' + id + ' not found');
             $('#modal-add-to-cart .uk-modal-body').html(res);
-            $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',false);
+            //$('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',false);
+            $('#modal-add-to-cart #add-to-cart-order-button').show();
             $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',false);
             $('#cart #cartCount').html(0);
             $('#modal-add-to-cart table tbody tr input[type="number"]').each(function() {
@@ -219,7 +220,8 @@ function clearCart() {
         success: (res) => {
             if( !res ) console.log('(ajax) success but clear false');
             $('#modal-add-to-cart .uk-modal-body').html(res);
-            $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
+            //$('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
+            $('#modal-add-to-cart #add-to-cart-order-button').hide();
             $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',true);
             $('#cart #cartCount').html(0);
             $('#cart a').attr('uk-tooltip','title: Ваша корзина пуста...; pos: bottom; delay: 400');
@@ -266,10 +268,12 @@ $('#modal-add-to-cart .uk-modal-body').on('click', '.cart-delete-item', function
             const qty = $(this).closest('tr').find('input[type="number"]').val();
             $('#cart #cartCount').html( parseInt($('#cart #cartCount').html()) - parseInt(qty) );
             if($('#cart #cartCount').text() == '0') {
-                $('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
+                //$('#modal-add-to-cart #add-to-cart-order-button').attr('disabled',true);
+                $('#modal-add-to-cart #add-to-cart-order-button').hide();
                 $('#modal-add-to-cart #add-to-cart-clear-button').attr('disabled',true);
                 $('#cart a').attr('uk-tooltip','title: Ваша корзина пуста...; pos: bottom; delay: 400');
             } else {
+                $('#modal-add-to-cart #add-to-cart-order-button').show();
                 $('#cart a').attr('uk-tooltip','title: Выбрано картин: ' + $('#cart #cartCount').text() + ' шт.; pos: bottom; delay: 400');
             }
             UIkit.modal('#modal-add-to-cart').show();

@@ -228,8 +228,12 @@ class SiteController extends Controller
     // экшн страницы заказа
     public function actionOrder()
     {
-        
-        return $this->render('order');
+        $session = Yii::$app->session;
+        $session->open();
+        $order = new Orders();
+        $session->close();
+        $this->view->title = "Оформление заказа:";
+        return $this->render('order', compact('session'));
     }
 
     /*
