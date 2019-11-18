@@ -431,15 +431,14 @@ $this->registerMetaTag([
 							{{fixPrices.promoCode}}
 						</p>
 						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
-						<div class="uk-padding-small uk-margin-remove">
+						<div class="uk-padding-small uk-margin-remove uk-text-center">
 							<?= Html::a(
 								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>Добавить в корзину', 
 								[
 									'add-to-cart', 'id' => $poster->id
 								], 
 								[
-									'class' => 'uk-button uk-margin-small-bottom add-to-cart-button',
-									'style' => 'background: #e97eef;color: #fff;',
+									'class' => 'button uk-button add-to-cart-button',
 									'title' => 'Добавить в корзину "'.$poster->name.'"',
 									'data-id' => $poster->id,
 								]
