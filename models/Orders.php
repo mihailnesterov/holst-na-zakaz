@@ -55,15 +55,15 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Имя',
             'email' => 'Email',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'date' => 'Date',
-            'time' => 'Time',
-            'promo' => 'Promo',
-            'comment' => 'Comment',
-            'status' => 'Status',
+            'phone' => 'Телефон',
+            'address' => 'Адрес доставки',
+            'date' => 'Дата доставки',
+            'time' => 'Время доставки',
+            'promo' => 'Промо-код',
+            'comment' => 'Комментарий',
+            'status' => 'Статус',
             'created' => 'Created',
         ];
     }
