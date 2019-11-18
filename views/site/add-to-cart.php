@@ -58,7 +58,24 @@ use yii\helpers\Url;
                     <td class="uk-text-nowrap uk-text-center"><input onchange="changeQtyItemCart(<?= $id ?> ,this)" class="uk-input uk-text-center" type="number" min="1" value="<?= $item['qty'] ?>"></td>
                     <td class="uk-text-nowrap uk-text-center uk-text-bold"><?= $item['qty'] * $item['price'] ?></td>
                     <td class="uk-text-nowrap uk-text-center">
-                        <button  data-id="<?= $id ?>" class="cart-delete-item uk-button uk-button-small uk-button-danger" type="button" title="Удалить">x</button>
+                        <?php if( \Yii::$app->controller->action->id == 'order'): ?> 
+                        <?= Html::a(
+                                'x', 
+                                [
+                                    'delete-item-from-cart', 'id' => $id
+                                ], 
+                                [
+                                    'class' => 'cart-delete-item uk-button uk-button-small uk-button-danger',
+                                    'title' => 'Удалить',
+                                    'data' => [
+                                        'method' => 'post',
+                                        ],
+                                ]
+                            )
+                        ?>
+                        <?php else: ?>
+                            <button  data-id="<?= $id ?>" class="cart-delete-item uk-button uk-button-small uk-button-danger" type="button" title="Удалить">x</button>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach;?>

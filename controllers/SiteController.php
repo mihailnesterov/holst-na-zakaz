@@ -210,6 +210,9 @@ class SiteController extends Controller
         $order = new Orders();
         $order->deleteItemFromCart($id);
         $session->close();
+        if( !Yii::$app->request->isAjax ) {
+            return $this->redirect( Yii::$app->request->referrer);
+        }
         $this->layout = false;
         // render modal
         return $this->render('add-to-cart', compact('session','id'));
@@ -235,6 +238,9 @@ class SiteController extends Controller
         $session->open();
         $order = new Orders();
         $session->close();
+        if( empty($session['cart']) ) {
+            return $this->redirect(['site/index']);
+        }
         $this->view->title = "Оформление заказа:";
         return $this->render('order', compact('session', 'order'));
     }
