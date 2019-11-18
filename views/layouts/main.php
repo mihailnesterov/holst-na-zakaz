@@ -953,7 +953,7 @@
                 <button type="button" class="uk-button uk-button-default uk-modal-close uk-text-right">
                     Продолжить покупки
                 </button>
-                <a href="<?= Url::to('site/order') ?>" id="add-to-cart-order-button" class="uk-button uk-button-primary">
+                <a href="<?= Url::to('order') ?>" id="add-to-cart-order-button" class="uk-button uk-button-primary">
                     Оформить заказ
                 </a>
                 <button id="add-to-cart-clear-button" onclick="clearCart()" class="uk-button uk-button-danger uk-text-left" type="button" title="Очистить корзину">x</button>

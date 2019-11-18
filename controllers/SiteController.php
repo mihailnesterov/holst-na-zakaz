@@ -240,14 +240,22 @@ class SiteController extends Controller
         if( $order->load( Yii::$app->request->post() && $order->validate() ) ) {
             //Yii::$app->session->setFlash('success', print_r(Yii::$app->request->post()));
             //print_r(Yii::$app->request->post());
+            return $this->redirect(['thank-you-page']);
         }
         $session->close();
         // если корзина пустая - перенаправить на главную (в каталог)
         if( empty($session['cart']) ) {
-            return $this->redirect(['site/index']);
+            return $this->redirect(['index']);
         }
         $this->view->title = "Оформление заказа:";
         return $this->render('order', compact('session', 'order'));
+    }
+
+    // экшн thank-you-page
+    public function actionThankYouPage()
+    {
+        $this->view->title = "Заказ принят";
+        return $this->render('thank-you-page');
     }
 
     /*
