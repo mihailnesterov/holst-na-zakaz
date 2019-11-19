@@ -256,27 +256,44 @@ $this->registerMetaTag([
 					<div class="uk-width-expand@m">
 						<?php echo PosterListImageWidget::widget([ 
 							'poster_id' => $poster->id, 
-							'img_class' => 'poster-image uk-box-shadow-large' ]);
+							'img_class' => 'poster-image uk-box-shadow-small' ]);
 						?>
 					</div>
 					<div class="uk-width-1-3@m">
 						<ul class="uk-list uk-list-large uk-text-center">
-							<?php foreach ($types as $type): ?>
-								<li>
-									<a href="#" data-type-price="<?= $type->price ?>" >
-										<img 
-											data-src="images/types/<?= $type->src ?>" 
-											alt="<?= $type->name ?>" 
-											width="50"
-											class="uk-box-shadow-small"
-											uk-img
-										>
-										<p class="uk-text-small uk-margin-remove">
-											<?= $type->name ?>
-										</p>
-									</a>
-								</li>
-							<?php endforeach; ?>
+							<li class="uk-padding-small uk-background-muted">
+								<a href="#" data-type-price="150" >
+									<img 
+										data-src="images/modules/1.png" 
+										alt="" 
+										width="80"
+										class="uk-box-shadow-small uk-background-secondary"
+										uk-img
+									>
+								</a>
+							</li>
+							<li class="uk-padding-small uk-background-muted">
+								<a href="#" data-type-price="180" >
+									<img 
+										data-src="images/modules/2.png" 
+										alt="" 
+										width="80"
+										class="uk-box-shadow-small uk-background-secondary"
+										uk-img
+									>
+								</a>
+							</li>
+							<li class="uk-padding-small uk-background-muted">
+								<a href="#" data-type-price="200" >
+									<img 
+										data-src="images/modules/3.png" 
+										alt="" 
+										width="80"
+										class="uk-box-shadow-small uk-background-secondary"
+										uk-img
+									>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
