@@ -237,10 +237,13 @@ class SiteController extends Controller
         $session = Yii::$app->session;
         $session->open();
         $order = new Orders();
-        if( $order->load( Yii::$app->request->post() && $order->validate() ) ) {
+        if( $order->load( Yii::$app->request->post()) && $order->validate() ) {
             //Yii::$app->session->setFlash('success', print_r(Yii::$app->request->post()));
             //print_r(Yii::$app->request->post());
-            return $this->redirect(['thank-you-page']);
+            if( $order->save() ) {
+                $session->destroy();
+                return $this->redirect(['thank-you-page']);
+            }
         }
         $session->close();
         // если корзина пустая - перенаправить на главную (в каталог)

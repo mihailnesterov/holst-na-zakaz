@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-/* @var $order app\models\Order */
+/* @var $order app\models\Orders */
 /* @var $form ActiveForm */
 ?>
 
@@ -57,7 +57,6 @@ use yii\widgets\ActiveForm;
                             'template' => '{input}{error}',
                             'inputOptions' => [
                                 'tabindex' => '2',
-                                'type' => 'email',
                                 'placeholder' => 'Почта *',
                                 'class'=>'uk-input uk-width-1-1',
                             ]
@@ -92,7 +91,7 @@ use yii\widgets\ActiveForm;
                                 'placeholder' => 'Комментарий к заказу',
                                 'class'=>'uk-textarea uk-width-1-1'
                             ]
-                        ])->textarea(['rows' => 3, 'cols' => 20])->label(false) ?>
+                        ])->textarea(['rows' => 4, 'cols' => 10])->label(false) ?>
                     </div>
                     <!--<div class="uk-margin">
                         <textarea name="comment" placeholder="Комментарий к заказу" class="uk-input uk-width-1-1" style="resize: vertical; height: 100px;"></textarea>
@@ -165,7 +164,7 @@ use yii\widgets\ActiveForm;
                                     'inputOptions' => [
                                         'tabindex' => '8',
                                         'placeholder' => 'Промо-код',
-                                        'class'=>'uk-input uk-input-small uk-width-1-1',
+                                        'class'=>'uk-input uk-width-1-1',
                                     ]
                                 ])->label(false) ?>
                             </div>
@@ -183,21 +182,14 @@ use yii\widgets\ActiveForm;
                     </div> 
                     <div class="uk-width-2-3@m">
                         <label>
-                            <input type="checkbox" name="policy" class="uk-checkbox" checked>
-                            &nbsp; Я ознакомлен и согласен с <a href="/privacy/" target="_blank">условиями конфиденциальности</a>
+                            <input type="checkbox" name="policy" class="uk-checkbox" checked="checked">
+                            &nbsp; Я ознакомлен и согласен с <a href="//holst-na-zakaz.ru/privacy/" target="_blank">условиями конфиденциальности</a>
                         </label>
                     </div>
                 </div>
             </div> 
             <div class="uk-margin uk-margin-medium-top uk-margin-medium-bottom uk-text-left">
-                <!--<p>
-                    <a href="#video-order" uk-toggle="" class="uk-text-muted"><span uk-icon="info" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="info"><path d="M12.13,11.59 C11.97,12.84 10.35,14.12 9.1,14.16 C6.17,14.2 9.89,9.46 8.74,8.37 C9.3,8.16 10.62,7.83 10.62,8.81 C10.62,9.63 10.12,10.55 9.88,11.32 C8.66,15.16 12.13,11.15 12.14,11.18 C12.16,11.21 12.16,11.35 12.13,11.59 C12.08,11.95 12.16,11.35 12.13,11.59 L12.13,11.59 Z M11.56,5.67 C11.56,6.67 9.36,7.15 9.36,6.03 C9.36,5 11.56,4.54 11.56,5.67 L11.56,5.67 Z"></path> <circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle></svg></span> Как оформить заказ?</a></p> <p><a href="#video-create" uk-toggle="" class="uk-text-muted"><span uk-icon="info" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="info"><path d="M12.13,11.59 C11.97,12.84 10.35,14.12 9.1,14.16 C6.17,14.2 9.89,9.46 8.74,8.37 C9.3,8.16 10.62,7.83 10.62,8.81 C10.62,9.63 10.12,10.55 9.88,11.32 C8.66,15.16 12.13,11.15 12.14,11.18 C12.16,11.21 12.16,11.35 12.13,11.59 C12.08,11.95 12.16,11.35 12.13,11.59 L12.13,11.59 Z M11.56,5.67 C11.56,6.67 9.36,7.15 9.36,6.03 C9.36,5 11.56,4.54 11.56,5.67 L11.56,5.67 Z"></path> <circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle></svg></span> Как мы рисуем</a>
-                </p>-->
-                <!--<input type="hidden" name="page" value="/index.php">--> 
-                <?= Html::submitButton('Оформить заказ', ['class' => 'button uk-button uk-button-primary uk-button-large btn-calc1']) ?>
-                <!--<button type="submit" class="button uk-button uk-button-primary uk-button-large btn-calc1">
-                    Оформить заказ
-                </button>-->
+                <?= Html::submitButton('Оформить заказ', ['class' => 'button uk-button uk-button-large btn-calc1']) ?>
             </div>
         </fieldset>
         <?php ActiveForm::end(); ?>

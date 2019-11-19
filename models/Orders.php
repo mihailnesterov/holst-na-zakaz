@@ -63,7 +63,7 @@ class Orders extends \yii\db\ActiveRecord
             'time' => 'Время доставки',
             'promo' => 'Промо-код',
             'comment' => 'Комментарий',
-            'status' => 'Статус',
+            'status' => 'Статус заказа',
             'created' => 'Created',
         ];
     }
