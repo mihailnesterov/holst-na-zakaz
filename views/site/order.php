@@ -1,6 +1,6 @@
 <?php
 /**
- * order
+ * order page
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -9,8 +9,6 @@ use yii\widgets\ActiveForm;
 /* @var $order app\models\Orders */
 /* @var $form ActiveForm */
 ?>
-
-
 
 <div class="uk-width-1-1">
     <div class="uk-margin">
@@ -72,15 +70,6 @@ use yii\widgets\ActiveForm;
                             ]
                         ])->label(false) ?>
                     </div>
-                    <!--<div class="uk-margin">
-                        <input type="text" name="name" placeholder="Имя *" class="uk-input uk-width-1-1">
-                    </div>
-                    <div class="uk-margin">
-                        <input type="email" name="email" placeholder="Почта *" class="uk-input uk-width-1-1">
-                    </div>
-                    <div class="uk-margin">
-                        <input type="text" name="phone" placeholder="Телефон *" class="uk-input uk-width-1-1">
-                    </div>-->
                 </div>
                 <div class="uk-width-2-3@m">
                     <div class="uk-margin">
@@ -93,9 +82,6 @@ use yii\widgets\ActiveForm;
                             ]
                         ])->textarea(['rows' => 4, 'cols' => 10])->label(false) ?>
                     </div>
-                    <!--<div class="uk-margin">
-                        <textarea name="comment" placeholder="Комментарий к заказу" class="uk-input uk-width-1-1" style="resize: vertical; height: 100px;"></textarea>
-                    </div>-->
                     <div uk-grid="" class="uk-grid">
                         <div class="uk-width-1-3@m uk-first-column">
                             <div class="uk-margin">
@@ -108,9 +94,6 @@ use yii\widgets\ActiveForm;
                                     ]
                                 ])->label(false) ?>
                             </div>
-                            <!--<div class="uk-margin">
-                                <input type="text" name="address" placeholder="Адрес доставки" class="uk-input uk-width-1-1">
-                            </div>-->
                         </div>
                         <div class="uk-width-1-3@m">
                             <div class="uk-margin">
@@ -125,11 +108,6 @@ use yii\widgets\ActiveForm;
                                     ]
                                 ])->label(false) ?>
                             </div>
-                            <!--<div class="uk-margin">
-                                <div class="">
-                                    <input type="date" name="delivery_date" placeholder="Дата доставки" value="<?php echo date("Y-m-d");?>" autocomplete="on" class="uk-input uk-width-1-1">
-                                </div>
-                            </div>-->
                         </div> 
                         <div class="uk-width-1-3@m">
                             <div class="uk-margin">
@@ -142,9 +120,6 @@ use yii\widgets\ActiveForm;
                                     ]
                                 ])->label(false) ?>
                             </div>
-                            <!--<div class="uk-margin">
-                                <input type="text" name="delivery_time" placeholder="С 00:00 до 00:00" maxlength="100" class="uk-input uk-width-1-1">
-                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -169,16 +144,6 @@ use yii\widgets\ActiveForm;
                                 ])->label(false) ?>
                             </div>
                         </div>
-                        <!--<div class="uk-margin">
-                            <div 
-                                id="promo-calc-input" 
-                                uk-tooltip="title: Введите промокод" 
-                                class="uk-inline uk-width-1-1" 
-                                title="" aria-expanded="false"
-                            >
-                                <input type="text" name="promo_id" placeholder="Промо-код" class="uk-input uk-input-small uk-width-1-1">
-                            </div>
-                        </div>-->
                     </div> 
                     <div class="uk-width-2-3@m">
                         <label>

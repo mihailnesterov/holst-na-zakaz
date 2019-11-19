@@ -237,10 +237,10 @@ class SiteController extends Controller
         $session = Yii::$app->session;
         $session->open();
         $order = new Orders();
+        // проверка данных и валидация данных заказа
         if( $order->load( Yii::$app->request->post()) && $order->validate() ) {
-            //Yii::$app->session->setFlash('success', print_r(Yii::$app->request->post()));
-            //print_r(Yii::$app->request->post());
             if( $order->save() ) {
+                // если заказ сохранен - удаляем сессию и перенаправляем на thank-you-page
                 $session->destroy();
                 return $this->redirect(['thank-you-page']);
             }
