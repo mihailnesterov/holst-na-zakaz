@@ -240,7 +240,13 @@ class SiteController extends Controller
         // проверка данных и валидация данных заказа
         if( $order->load( Yii::$app->request->post()) && $order->validate() ) {
             if( $order->save() ) {
-                // если заказ сохранен - удаляем сессию и перенаправляем на thank-you-page
+                /**
+                 * если заказ успешно сохранен:
+                 * - добавляем и сохраняем в БД пункты заказа (addOrderItems)
+                 * - удаляем сессию, чтобы очистить корзину
+                 * - перенаправляем пользователя на thank-you-page
+                 */
+                $this->addOrderItems($session['cart'], $order->id);
                 $session->destroy();
                 return $this->redirect(['thank-you-page']);
             }
@@ -252,6 +258,26 @@ class SiteController extends Controller
         }
         $this->view->title = "Оформление заказа:";
         return $this->render('order', compact('session', 'order'));
+    }
+    
+    // метод для добавления пунктов заказа в заказ
+    protected function addOrderItems($items, $order_id) {
+        foreach( $items as $id => $item ) {
+            $order_items = new OrderItems();
+            $order_items->order_id = $order_id;
+            $order_items->poster_id = $id;
+            $order_items->width = '60';
+            $order_items->height = '90';
+            $order_items->type = 'Модули';
+            $order_items->material = 'Холст искусственный';
+            $order_items->podramnik = 4;
+            $order_items->add_services = 'Покрытие лаком,Роспись маслом';
+            $order_items->baget_id = 2;
+            //$order_items->clock_id = 1;
+            $order_items->price = $item['price'];
+            $order_items->qty = $item['qty'];
+            $order_items->save();
+        }
     }
 
     // экшн thank-you-page
