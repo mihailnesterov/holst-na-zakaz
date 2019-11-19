@@ -254,41 +254,50 @@ $this->registerMetaTag([
 				
 				<div uk-grid>
 					<div class="uk-width-expand@m">
+						
+						<div class="uk-cover-container">
 						<?php echo PosterListImageWidget::widget([ 
 							'poster_id' => $poster->id, 
 							'img_class' => 'poster-image uk-box-shadow-small' ]);
 						?>
+							<div id="poster-cover-type-module" class="uk-position-cover">
+								<img src="" alt="" uk-cover>
+							</div>
+						</div>
 					</div>
 					<div class="uk-width-1-3@m">
-						<ul class="uk-list uk-list-large uk-text-center">
+						<ul class="poster-types-modules uk-list uk-list-large uk-text-center">
 							<li class="uk-padding-small uk-background-muted">
-								<a href="#" data-type-price="150" >
-									<img 
-										data-src="images/modules/1.png" 
-										alt="" 
-										width="80"
-										class="uk-box-shadow-small uk-background-secondary"
-										uk-img
-									>
-								</a>
-							</li>
-							<li class="uk-padding-small uk-background-muted">
-								<a href="#" data-type-price="180" >
-									<img 
-										data-src="images/modules/2.png" 
-										alt="" 
-										width="80"
-										class="uk-box-shadow-small uk-background-secondary"
-										uk-img
-									>
-								</a>
-							</li>
-							<li class="uk-padding-small uk-background-muted">
-								<a href="#" data-type-price="200" >
+								<a href="#">
 									<img 
 										data-src="images/modules/3.png" 
+										data-price="100"
 										alt="" 
-										width="80"
+										width="100"
+										class="uk-box-shadow-small uk-background-secondary"
+										uk-img
+									>
+								</a>
+							</li>
+							<li class="uk-padding-small uk-background-muted">
+								<a href="#">
+									<img 
+										data-src="images/modules/1.png"
+										data-price="150"
+										alt="" 
+										width="100"
+										class="uk-box-shadow-small uk-background-secondary"
+										uk-img
+									>
+								</a>
+							</li>
+							<li class="uk-padding-small uk-background-muted">
+								<a href="#">
+									<img 
+										data-src="images/modules/2.png"
+										data-price="180" 
+										alt="" 
+										width="100"
 										class="uk-box-shadow-small uk-background-secondary"
 										uk-img
 									>

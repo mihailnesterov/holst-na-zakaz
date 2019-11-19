@@ -295,3 +295,9 @@ $('#modal-add-to-cart .uk-modal-body').on('click', '.cart-delete-item', function
         },
     });
 });
+
+$('.poster-types-modules li a img').on('click', function(e) {
+    e.preventDefault();
+    $('#poster-cover-type-module img').attr('src', $(this).data('src'));
+    console.log($(this).data('price'));
+});
