@@ -300,4 +300,29 @@ class SiteController extends Controller
         }
         return $this->render('error',['exception' => $exception]);
     }
+       
+    /**
+     * sitemap.xml page
+     */
+    public function actionSitemap() {
+        $urls = array();
+
+        array_push($urls, [ Yii::$app->urlManager->createUrl(['/']), 'weekly' ]);
+        
+        $catalog = Catalog::find()->all();
+        foreach ($catalog as $category) {
+            array_push($urls, [ Yii::$app->urlManager->createUrl(['category/' . $category->id]), 'daily' ]);
+        }    
+        $posters = Posters::find()->all();
+        foreach ($posters as $poster) {
+            array_push($urls, [ Yii::$app->urlManager->createUrl(['poster/' . $poster->id]), 'daily' ]);
+        }
+        $xml_sitemap = $this->renderPartial('sitemap', [
+            'host' => Yii::$app->request->hostInfo,
+            'urls' => $urls
+        ]);
+        Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        echo $xml_sitemap;
+    }
+
 }
