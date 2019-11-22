@@ -53,6 +53,7 @@ $this->registerMetaTag([
 									<a href="#" data-type-price="<?= $type->price ?>" >
 										<img 
 											data-src="images/types/<?= $type->src ?>" 
+											data-type-id="<?= $type->id ?>"
 											alt="<?= $type->name ?>" 
 											class="uk-padding-small uk-padding-remove-vertical"
 											uk-img
@@ -269,42 +270,21 @@ $this->registerMetaTag([
 					</div>
 					<div class="uk-width-1-3@m">
 						<ul class="poster-types-modules uk-list uk-list-large uk-text-center">
+							<?php foreach( $typesModules as $id => $module): ?>
 							<li class="uk-padding-small uk-background-muted">
 								<a href="#">
 									<img 
-										data-src="images/modules/3.png" 
-										data-price="100"
-										alt="" 
+										data-src="images/modules/<?= $module->src ?>" 
+										data-price="<?= $module->price ?>"
+										data-type-id="<?= $module->type_id ?>"
+										alt="модуль № <?= $module->id ?> цена <?= $module->price ?> руб." 
 										width="100"
 										class="uk-box-shadow-small uk-background-secondary"
 										uk-img
 									>
 								</a>
 							</li>
-							<li class="uk-padding-small uk-background-muted">
-								<a href="#">
-									<img 
-										data-src="images/modules/1.png"
-										data-price="150"
-										alt="" 
-										width="100"
-										class="uk-box-shadow-small uk-background-secondary"
-										uk-img
-									>
-								</a>
-							</li>
-							<li class="uk-padding-small uk-background-muted">
-								<a href="#">
-									<img 
-										data-src="images/modules/2.png"
-										data-price="180" 
-										alt="" 
-										width="100"
-										class="uk-box-shadow-small uk-background-secondary"
-										uk-img
-									>
-								</a>
-							</li>
+							<?php endforeach; ?>
 						</ul>
 					</div>
 				</div>

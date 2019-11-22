@@ -26,6 +26,7 @@ use app\models\PostersSizes;
 use app\models\PostersTypes;
 use app\models\Sizes;
 use app\models\Types;
+use app\models\TypesModules;
 use app\models\Orders;
 use app\models\OrderItems;
 
@@ -121,6 +122,9 @@ class SiteController extends Controller
         $types = Yii::$app->cache->getOrSet('posterTypes', function () {
             return Types::find()->all();
         }, 3600);
+        $typesModules = Yii::$app->cache->getOrSet('posterTypesModules', function () {
+            return TypesModules::find()->orderby([ 'type_id' => SORT_ASC])->all();
+        }, 3600);
         $posterSizes = Yii::$app->cache->getOrSet('posterSizes', function () {
             return Sizes::find()->all();
         }, 3600);
@@ -142,6 +146,7 @@ class SiteController extends Controller
             'images' => $images->all(),
             'postersAddServices' => $postersAddServices,
             'types' => $types,
+            'typesModules' => $typesModules,
             'posterSizes' => $posterSizes,
             'bagetsWidth' => $bagetsWidth,
             'bagets' => $bagets,
