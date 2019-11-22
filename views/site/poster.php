@@ -48,6 +48,7 @@ $this->registerMetaTag([
 					<div class="module-order-calc-steps-item-body">
 						<div class="uk-child-width-1-2 uk-padding-remove uk-margin-remove-vertical" uk-grid>
 							<?php foreach ($types as $type): ?>
+								<?php if($type->id !== 3): ?>
 								<div class="uk-text-center" style="">
 									<a href="#" data-type-price="<?= $type->price ?>" >
 										<img 
@@ -61,6 +62,7 @@ $this->registerMetaTag([
 										</p>
 									</a>
 								</div>
+								<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
 					</div>
