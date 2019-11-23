@@ -111,7 +111,7 @@ $this->registerMetaTag([
 				</div>
 
 				<div class="module-order-calc-steps-item active">
-					<a href="#" class="module-order-calc-steps-item-title">
+					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
 						Выберите материал
 					</a> 
 					<!--<div class="module-order-calc-steps-item-subtitle">
@@ -140,7 +140,7 @@ $this->registerMetaTag([
 				</div>
 
 				<div class="module-order-calc-steps-item active">
-					<a href="#" class="module-order-calc-steps-item-title">
+					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
 						Толщина подрамника
 					</a>
 					<div class="module-order-calc-steps-item-subtitle">
@@ -165,7 +165,7 @@ $this->registerMetaTag([
 				</div>
 
 				<div class="module-order-calc-steps-item active">
-					<a href="#" class="module-order-calc-steps-item-title">
+					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
 						Дополнительные услуги
 					</a> 
 					<!--<div class="module-order-calc-steps-item-subtitle">
@@ -206,9 +206,9 @@ $this->registerMetaTag([
 					<input type="hidden" name="addons" value="Покрытие лаком, Покрытие 3D гелем">
 				</div>
 
-				<div class="module-order-calc-steps-item -inactive active">
-					<a href="#" class="module-order-calc-steps-item-title">
-						Багет
+				<div class="module-order-calc-steps-item">
+					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
+						Выберите багет
 					</a> 
 					<div class="module-order-calc-steps-item-body">
 						<div class="module-order-calc-addons-item">

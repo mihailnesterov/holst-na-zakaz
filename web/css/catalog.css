@@ -1,4 +1,7 @@
-
+body {
+    /* set css-counter for poster steps headers */
+    counter-reset: orderCalcSteps;
+}
 aside {
     border: 0;
 }
@@ -143,4 +146,14 @@ aside {
   }
   .poster-clocks-cover img {
     padding: 0.2em;
+  }
+
+  /* fix: clear old steps css-counter */
+  .module-order-calc-steps-item-title::before {
+      content: "";
+  }
+/* add: new steps css-counter (see declaration in body) */
+  .module-order-calc-steps-item-title::before {
+    counter-increment: orderCalcSteps;
+    content: counter(orderCalcSteps) ". ";
   }

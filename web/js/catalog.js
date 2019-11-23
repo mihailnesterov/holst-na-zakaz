@@ -64,8 +64,15 @@ if (posterApp) {
                 this.posterPrices.module = 0;
             },
             selectActiveTab(e) {
-            // ... выбор активной вкладки
-                //console.log(e.target.closest('div').classList.value);
+                // ... выбор активной вкладки
+                const tab = e.target.closest('.module-order-calc-steps-item');
+                const tabs = document.querySelectorAll('.module-order-calc-steps-item');
+                tabs.forEach( el => {
+                    if( el.classList.contains('active') ) {
+                        el.classList.remove('active');
+                    }
+                });
+                tab.classList.add('active');
             },
             selectPosterSize(e) {
                 const classList = e.target.classList.value;
@@ -190,6 +197,15 @@ if (posterApp) {
                 this.posterPrices.module = e.target.dataset.price;
                 document.querySelector('#poster-cover-type-module img').setAttribute('src', e.target.dataset.src);
             },
+            clearActiveTabs() {
+                const tabs = document.querySelectorAll('.module-order-calc-steps-item');
+                tabs.forEach( el => {
+                    if( el.classList.contains('active') ) {
+                        el.classList.remove('active');
+                    }
+                });
+                tabs[0].classList.add('active');
+            },
         },
         computed: {
             getTotalPrice() {
@@ -211,6 +227,7 @@ if (posterApp) {
             this.setBasePrice('base-price');
             this.setDefaultPrice(2);
             this.setDefaultPosterSize(2);
+            this.clearActiveTabs();
         }
     });
 }
