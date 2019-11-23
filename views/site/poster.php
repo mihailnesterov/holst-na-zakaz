@@ -220,6 +220,46 @@ $this->registerMetaTag([
 					</div>
 				</div>
 
+				<div class="uk-margin uk-padding" style="border: 1px #ddd solid;">
+						<p>Базовая цена = <span id="price-base"><?= $poster->price ?></span></p>
+						<p>Цена за холст = <span id="price-holst">{{posterPrices.size}}</span></p>
+						<p>Цена за доп. услуги = <span id="price-services">{{posterPrices.services}}</span></p>
+						<p>Цена за багет = <span id="price-baget">{{posterPrices.baguette}}</span></p>
+						<p>Цена за модуль = <span id="price-module">{{posterPrices.module}}</span></p>
+						<p>Цена за часы = <span id="price-clock">{{posterPrices.clock}}</span></p>
+						<p>Цены+ = <span id="price-fix">
+						{{fixPrices.holder + fixPrices.margin + fixPrices.podramnik + fixPrices.bagetWork - fixPrices.promoCode}}
+						</span></p>
+						<p>
+							{{posterPrices.base}} + 
+							{{posterPrices.size}} + 
+							{{posterPrices.services}} +
+							{{posterPrices.baguette}} +
+							{{posterPrices.module}} +
+							{{posterPrices.clock}} +
+							{{fixPrices.holder}} +
+							{{fixPrices.margin}} +
+							{{fixPrices.podramnik}} +
+							{{fixPrices.bagetWork}} -
+							{{fixPrices.promoCode}}
+						</p>
+						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
+						<div class="uk-padding-small uk-margin-remove uk-text-center">
+							<?= Html::a(
+								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
+								[
+									'add-to-cart', 'id' => $poster->id
+								], 
+								[
+									'class' => '-button -uk-button add-to-cart-button',
+									'title' => 'Добавить в корзину "'.$poster->name.'"',
+									'data-id' => $poster->id,
+								]
+							) ?>
+						</div>
+						<!--<button @click="buy">Купить</button>-->
+				</div>
+
 			</div>
 		</div> <!-- ./ end left column -->
 		
@@ -427,45 +467,7 @@ $this->registerMetaTag([
 					<input type="hidden" name="baguette">
 				</div> <!-- ./ end bagettes slider -->
 
-				<div class="uk-margin uk-padding" style="border: 1px #ddd solid;">
-						<p>Базовая цена = <span id="price-base"><?= $poster->price ?></span></p>
-						<p>Цена за холст = <span id="price-holst">{{posterPrices.size}}</span></p>
-						<p>Цена за доп. услуги = <span id="price-services">{{posterPrices.services}}</span></p>
-						<p>Цена за багет = <span id="price-baget">{{posterPrices.baguette}}</span></p>
-						<p>Цена за модуль = <span id="price-module">{{posterPrices.module}}</span></p>
-						<p>Цена за часы = <span id="price-clock">{{posterPrices.clock}}</span></p>
-						<p>Цены+ = <span id="price-fix">
-						{{fixPrices.holder + fixPrices.margin + fixPrices.podramnik + fixPrices.bagetWork - fixPrices.promoCode}}
-						</span></p>
-						<p>
-							{{posterPrices.base}} + 
-							{{posterPrices.size}} + 
-							{{posterPrices.services}} +
-							{{posterPrices.baguette}} +
-							{{posterPrices.module}} +
-							{{posterPrices.clock}} +
-							{{fixPrices.holder}} +
-							{{fixPrices.margin}} +
-							{{fixPrices.podramnik}} +
-							{{fixPrices.bagetWork}} -
-							{{fixPrices.promoCode}}
-						</p>
-						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
-						<div class="uk-padding-small uk-margin-remove uk-text-center">
-							<?= Html::a(
-								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>Добавить в корзину', 
-								[
-									'add-to-cart', 'id' => $poster->id
-								], 
-								[
-									'class' => 'button uk-button add-to-cart-button',
-									'title' => 'Добавить в корзину "'.$poster->name.'"',
-									'data-id' => $poster->id,
-								]
-							) ?>
-						</div>
-						<!--<button @click="buy">Купить</button>-->
-				</div>
+				
 
 			</div> <!-- ./ end uk-card -->
 		</div> <!-- ./ end right column -->

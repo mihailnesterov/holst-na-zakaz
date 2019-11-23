@@ -76,9 +76,22 @@ aside {
     background: #cd40dc;
     color: #fff;
 }
-.holst-card .holst-card-block .add-to-cart-button {
-    background: #cd40dc;
+
+.add-to-cart-button {
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-weight: normal;
+    transition: all .2s;
+    background: linear-gradient(to right,#a02bb0,#c50fb9);
     color: #fff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+.add-to-cart-button:hover {
+    color: #ddd;
+    background: linear-gradient(to right,#7e46a2,#a02bb0);
+    transition: all .2s;
+    text-decoration: none;
 }
 
 /*3d effect used in posterlist.php - https://html5book.ru/3d-transform/ */
