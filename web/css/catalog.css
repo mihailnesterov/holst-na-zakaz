@@ -126,3 +126,21 @@ aside {
     font-weight: 600;
     box-shadow:3px 6px 3px rgba(0,0,0,0.1)
   }
+
+  /* class for clocks cover */
+  .poster-clocks-cover {
+    background-color: rgba(255,255,255,0.4);
+    position: absolute;
+    top:15px;
+    left:15px;
+    bottom: auto;
+    right: auto;
+    width: 100px;
+    height: 100px;
+    box-shadow: 3px 4px 3px rgba(0,0,0,0.3);
+    border: 3px #f0506e solid;
+    cursor: move;
+  }
+  .poster-clocks-cover img {
+    padding: 0.2em;
+  }

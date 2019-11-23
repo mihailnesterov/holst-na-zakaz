@@ -50,7 +50,7 @@ $this->registerMetaTag([
 							<?php foreach ($types as $type): ?>
 								<?php if($type->id !== 3): ?>
 								<div class="uk-text-center" style="">
-									<a href="#" data-type-price="<?= $type->price ?>" >
+									<a @click.prevent="showModuleByTypeId" href="#" data-type-price="<?= $type->price ?>" >
 										<img 
 											data-src="images/types/<?= $type->src ?>" 
 											data-type-id="<?= $type->id ?>"
@@ -85,7 +85,9 @@ $this->registerMetaTag([
 								@click.prevent="selectPosterSize" 
 								href="#" 
 								class="module-order-calc-sizes-item" 
-								data-key="<?= $key ?>" 
+								data-key="<?= $key ?>"
+								data-width="<?= $size->width  ?>"
+								data-height="<?= $size->height ?>"
 								:data-price="Math.ceil((((<?= $size->width ?> / 100 * <?= $size->height ?> / 100) * posterPrices.material)))"
 							>
 								<?= $size->width ?>×<?= $size->height ?>
@@ -218,19 +220,6 @@ $this->registerMetaTag([
 					</div>
 				</div>
 
-				<div class="module-order-calc-steps-item -inactive active">
-					<a href="#" class="module-order-calc-steps-item-title">
-						Часы
-					</a> 
-					<div class="module-order-calc-steps-item-body">
-						<div class="module-order-calc-addons-item">
-						<label>
-						<input @click="toggleClocks" type="checkbox" value="">&nbsp;
-							Добавить часы
-						</label> 
-						</div>
-					</div>
-				</div>
 			</div>
 		</div> <!-- ./ end left column -->
 		
@@ -264,28 +253,84 @@ $this->registerMetaTag([
 							'img_class' => 'poster-image uk-box-shadow-small' ]);
 						?>
 							<div id="poster-cover-type-module" class="uk-position-cover">
-								<img src="" alt="" uk-cover>
+								<img src="" alt="" class="" uk-cover>
 							</div>
+							
 						</div>
 					</div>
 					<div class="uk-width-1-3@m">
-						<ul class="poster-types-modules uk-list uk-list-large uk-text-center">
-							<?php foreach( $typesModules as $id => $module): ?>
-							<li class="uk-padding-small uk-background-muted">
-								<a href="#">
-									<img 
-										data-src="images/modules/<?= $module->src ?>" 
-										data-price="<?= $module->price ?>"
-										data-type-id="<?= $module->type_id ?>"
-										alt="модуль № <?= $module->id ?> цена <?= $module->price ?> руб." 
-										width="100"
-										class="uk-box-shadow-small uk-background-secondary"
-										uk-img
-									>
+
+						<!-- modules -->
+						<div v-if="!isClocksSelected">
+							<?php if($typesModules): ?>
+								<div v-if="currTypeId === 2" class="uk-h4 module-order-calc-module-title">
+									Выберите модуль
+								</div> 
+								<div v-if="currTypeId === 4" class="uk-h4 module-order-calc-module-title">
+									Выберите ширму
+								</div> 
+								<ul class="poster-types-modules uk-list uk-list-large uk-text-center">
+									<?php foreach( $typesModules as $id => $module): ?>
+									<li v-if="<?= $module->type_id ?> == currTypeId" class="uk-padding-small uk-background-muted">
+										<a @click.prevent="selectModule" href="#">
+											<img 
+												data-src="images/modules/<?= $module->src ?>" 
+												data-price="<?= $module->price ?>"
+												data-type-id="<?= $module->type_id ?>"
+												alt="модуль № <?= $module->id ?> цена <?= $module->price ?> руб." 
+												width="100"
+												class="uk-box-shadow-small uk-background-secondary"
+												uk-img
+											>
+										</a>
+									</li>
+									<?php endforeach; ?>
+								</ul>
+							<?php endif; ?>
+						</div>
+						<!-- ./ modules -->
+
+						<!-- clocks slider -->
+						<div v-if="isClocksSelected" uk-slider="" class="module-order-calc-clocks --uk-visible@m uk-slider uk-slider-container">
+							<div class="uk-h4 module-order-calc-clocks-title">
+								Выберите часы
+							</div> 
+							<div class="uk-position-relative uk-visible-toggle">
+								<ul class="uk-slider-items  uk-child-width-1-1 uk-grid" style="transform: translateX(0px);">
+									<?php foreach ($clocks as $clock): ?>
+									<li class="module-order-calc-clocks-item uk-text-center uk-active">
+										<a @click.prevent="selectClocks" href="#">
+											<div class="module-order-calc-clocks-item-image">
+												<img src="images/clocks/<?= $clock->src ?>" alt="<?= $clock->name ?>" class="uk-padding-small">
+											</div>
+										</a> 
+										<label>
+											<input @click="selectClocks" type="radio" name="radio-clock-image" value="<?= $clock->price ?>"> Выбрать
+										</label> 
+									</li>
+									<?php endforeach; ?>
+								</ul> 
+								<a href="#" uk-slidenav-previous="" uk-slider-item="previous" class="uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-previous uk-icon uk-slidenav">
+									<svg width="14" height="24" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous">
+										<polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline>
+									</svg>
+								</a> 
+								<a href="#" uk-slidenav-next="" uk-slider-item="next" class="uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-next uk-icon uk-slidenav">
+									<svg width="14" height="24" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-next">
+										<polyline fill="none" stroke="#000" stroke-width="1.4" points="1.225,23 12.775,12 1.225,1 "></polyline>
+									</svg>
 								</a>
-							</li>
-							<?php endforeach; ?>
-						</ul>
+							</div>
+							<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin">
+								<!--<li uk-slider-item="0" class="uk-active">
+									<a href="#"></a>
+								</li>
+								<li uk-slider-item="1">
+									<a href="#"></a>
+								</li>-->
+							</ul> 
+							<input type="hidden" name="clock">
+						</div> <!-- ./ end clocks slider -->
 					</div>
 				</div>
 				<!-- poster images slider -->
@@ -382,60 +427,27 @@ $this->registerMetaTag([
 					<input type="hidden" name="baguette">
 				</div> <!-- ./ end bagettes slider -->
 
-				<!-- clocks slider -->
-				<div v-if="isClocksSelected" uk-slider="" class="module-order-calc-clocks --uk-visible@m uk-slider uk-slider-container">
-					<div class="uk-h4 module-order-calc-clocks-title">
-                        Выберите часы
-					</div> 
-					<div class="uk-position-relative uk-visible-toggle">
-						<ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid" style="transform: translateX(0px);">
-							<?php foreach ($clocks as $clock): ?>
-							<li class="module-order-calc-clocks-item uk-active">
-								<a @click.prevent="selectClocks" href="#">
-									<div class="module-order-calc-clocks-item-image">
-										<img src="images/clocks/<?= $clock->src ?>" alt="<?= $clock->name ?>">
-									</div>
-								</a> 
-								<label>
-									<input @click="selectClocks" type="radio" name="radio-clock-image" value="<?= $clock->price ?>"> Выбрать
-								</label> 
-							</li>
-							<?php endforeach; ?>
-						</ul> 
-						<a href="#" uk-slidenav-previous="" uk-slider-item="previous" class="uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-previous uk-icon uk-slidenav">
-							<svg width="14" height="24" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-previous">
-								<polyline fill="none" stroke="#000" stroke-width="1.4" points="12.775,1 1.225,12 12.775,23 "></polyline>
-							</svg>
-						</a> 
-						<a href="#" uk-slidenav-next="" uk-slider-item="next" class="uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-next uk-icon uk-slidenav">
-							<svg width="14" height="24" viewBox="0 0 14 24" xmlns="http://www.w3.org/2000/svg" data-svg="slidenav-next">
-								<polyline fill="none" stroke="#000" stroke-width="1.4" points="1.225,23 12.775,12 1.225,1 "></polyline>
-							</svg>
-						</a>
-					</div>
-					<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin">
-						<!--<li uk-slider-item="0" class="uk-active">
-							<a href="#"></a>
-						</li>
-						<li uk-slider-item="1">
-							<a href="#"></a>
-						</li>-->
-					</ul> 
-					<input type="hidden" name="clock">
-				</div> <!-- ./ end clocks slider -->
-
 				<div class="uk-margin uk-padding" style="border: 1px #ddd solid;">
 						<p>Базовая цена = <span id="price-base"><?= $poster->price ?></span></p>
+						<p>Цена за холст = <span id="price-holst">{{posterPrices.size}}</span></p>
+						<p>Цена за доп. услуги = <span id="price-services">{{posterPrices.services}}</span></p>
+						<p>Цена за багет = <span id="price-baget">{{posterPrices.baguette}}</span></p>
+						<p>Цена за модуль = <span id="price-module">{{posterPrices.module}}</span></p>
+						<p>Цена за часы = <span id="price-clock">{{posterPrices.clock}}</span></p>
+						<p>Цены+ = <span id="price-fix">
+						{{fixPrices.holder + fixPrices.margin + fixPrices.podramnik + fixPrices.bagetWork - fixPrices.promoCode}}
+						</span></p>
 						<p>
 							{{posterPrices.base}} + 
 							{{posterPrices.size}} + 
 							{{posterPrices.services}} +
 							{{posterPrices.baguette}} +
+							{{posterPrices.module}} +
 							{{posterPrices.clock}} +
 							{{fixPrices.holder}} +
 							{{fixPrices.margin}} +
 							{{fixPrices.podramnik}} +
-							{{fixPrices.bagetWork}} +
+							{{fixPrices.bagetWork}} -
 							{{fixPrices.promoCode}}
 						</p>
 						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>

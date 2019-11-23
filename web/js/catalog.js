@@ -6,27 +6,25 @@ if (posterApp) {
         el: '#poster-app',
         data: {
             posterPrices: {
-                base: 0,
-                size: 0,
-                material: 0,
-                podramnik: 0,
-                services: 0,
-                baguette: 0,
-                clock: 0
+                base: 0,    // базовая цена
+                size: 0,    // стоимость за холст по размерам ( w, h )
+                material: 0,    // цена за метериал
+                podramnik: 0,   // цена за подрамник
+                services: 0,    // цена за доп. услуги
+                baguette: 0,    // цена за багет
+                clock: 0,   // цена за часы
+                module: 0,  // цена за модуль или ширму
             },
             fixPrices: {
-                holder: 50,
-                margin: 150,
-                podramnik: 550,
-                bagetWork: 350,
-                promoCode: 300,
-                isPromoCode: false
+                holder: 50,         // крепеж
+                margin: 150,        // общая наценка
+                podramnik: 550,     // подрамник  любой толщины (2,4)
+                bagetWork: 350,     // цена за работу за багет
+                promoCode: 0,       // промо-код - сумма скидки в руб.
             },
-            isBaguettesSelected: false, // false or true Boolean
-            isClocksSelected: false, // false or true Boolean
-            cartHeader: 'Корзина',
-            cartCount: 0,
-            cartSum: 0,
+            isBaguettesSelected: false, // false / true выбран багет
+            isClocksSelected: false, // false or true выбраны часы
+            currTypeId: 1,
         },
         methods: {
             buy(){
@@ -58,15 +56,16 @@ if (posterApp) {
             setDefaultPrice(size) {
                 this.posterPrices.base = document.getElementById('base-price').value;
                 this.posterPrices.material = document.querySelector('input[name=radio-materials]').value;
-                this.posterPrices.size = document.getElementsByClassName('module-order-calc-sizes-item')[size].dataset.price;
-                //this.posterPrices.podramnik = document.querySelector('input[name=radio-bagets-width]').value;
+                const item = document.getElementsByClassName('module-order-calc-sizes-item')[size];
+                this.posterPrices.size = Math.ceil(((( parseInt(item.dataset.width) / 100 * parseInt(item.dataset.height) / 100) * this.posterPrices.material)));
                 this.posterPrices.services = 0;
                 this.posterPrices.baguette = 0;
                 this.posterPrices.clock = 0;
+                this.posterPrices.module = 0;
             },
             selectActiveTab(e) {
             // ... выбор активной вкладки
-                console.log(e.target.closest('div').classList.value);
+                //console.log(e.target.closest('div').classList.value);
             },
             selectPosterSize(e) {
                 const classList = e.target.classList.value;
@@ -89,6 +88,8 @@ if (posterApp) {
             selectMaterial(e) {
                 e.target.checked = true;
                 this.posterPrices.material = e.target.value;
+                const item = document.querySelector('.module-order-calc-sizes-item.uk-active');
+                this.posterPrices.size = Math.ceil(((( parseInt(item.dataset.width) / 100 * parseInt(item.dataset.height) / 100) * this.posterPrices.material)));
             },
             toggleBaguettes() {
                 this.isBaguettesSelected = !this.isBaguettesSelected;
@@ -108,14 +109,64 @@ if (posterApp) {
                     }
                 }
             },
-            toggleClocks() {
+            /*toggleClocks() {
                 this.isClocksSelected = !this.isClocksSelected;
                 if(!this.isClocksSelected) this.posterPrices.clock = 0;
-            },
+            },*/
             selectClocks(e) {
                 const radio = e.target.closest('li').querySelector('input[type=radio]');
+                const img_block = document.querySelector('#poster-cover-type-module');
                     radio.checked = true;
                     this.posterPrices.clock = radio.value;
+                    this.posterPrices.module = 0;
+                    document.querySelector('#poster-cover-type-module img').setAttribute('src', e.target.src);
+                    if (!img_block.classList.contains('poster-clocks-cover')) {
+                        img_block.classList.add('poster-clocks-cover');
+                    }
+                    /*document.querySelector('#poster-cover-type-module img').style.width = "100px";
+                    document.querySelector('#poster-cover-type-module img').style.height = "100px";
+                    document.querySelector('#poster-cover-type-module img').style.top = "25%";
+                    document.querySelector('#poster-cover-type-module img').style.left = "25%";
+                    document.querySelector('#poster-cover-type-module img').style.right = "25%";
+                    document.querySelector('#poster-cover-type-module img').style.bottom = "25%";
+                    document.querySelector('#poster-cover-type-module img').style.backgroundColor = "rgba(255,255,255,0.3)";*/
+            },
+            showModuleByTypeId(e) {
+                const type_id = parseInt(e.target.dataset.typeId);
+                const img_block = document.querySelector('#poster-cover-type-module');
+                this.currTypeId = type_id;
+                if (img_block.classList.contains('poster-clocks-cover')) {
+                    img_block.classList.remove('poster-clocks-cover');
+                }
+                document.querySelector('#poster-cover-type-module img').setAttribute('src', '');
+                /*document.querySelector('#poster-cover-type-module img').style.width = "100%";
+                document.querySelector('#poster-cover-type-module img').style.height = "100%";
+                document.querySelector('#poster-cover-type-module img').style.top = "50%";
+                document.querySelector('#poster-cover-type-module img').style.left = "50%";
+                document.querySelector('#poster-cover-type-module img').style.backgroundColor = "transparent";*/
+                if( type_id === 5 ) {
+                    this.isClocksSelected = true;
+                    this.posterPrices.module = 0;
+                } else if ( type_id === 1 ) {
+                    this.isClocksSelected = false;
+                    this.posterPrices.clock = 0;
+                    this.posterPrices.module = 0;
+                }
+                else {
+                    this.isClocksSelected = false;
+                    this.posterPrices.clock = 0;
+                    this.posterPrices.module = 0;
+                }
+                
+            },
+            selectModule(e) {
+                this.posterPrices.module = e.target.dataset.price;
+                document.querySelector('#poster-cover-type-module img').setAttribute('src', e.target.dataset.src);
+                /*document.querySelector('#poster-cover-type-module img').style.width = "100%";
+                document.querySelector('#poster-cover-type-module img').style.height = "100%";
+                document.querySelector('#poster-cover-type-module img').style.top = "50%";
+                document.querySelector('#poster-cover-type-module img').style.left = "50%";
+                document.querySelector('#poster-cover-type-module img').style.backgroundColor = "transparent";*/
             },
         },
         computed: {
@@ -124,8 +175,15 @@ if (posterApp) {
                 for(price in this.posterPrices) {
                     totalPrice += +this.posterPrices[price];
                 }
+                for(fix in this.fixPrices) {
+                    if (this.fixPrices[fix] === 'promoCode') {
+                        totalPrice -= +this.fixPrices[fix];
+                    } else {
+                        totalPrice += +this.fixPrices[fix];
+                    } 
+                }
                 return totalPrice;
-            }
+            },
         },
         mounted() {
             this.setBasePrice('base-price');
@@ -296,8 +354,8 @@ $('#modal-add-to-cart .uk-modal-body').on('click', '.cart-delete-item', function
     });
 });
 
-$('.poster-types-modules li a img').on('click', function(e) {
+/*$('.poster-types-modules li a img').on('click', function(e) {
     e.preventDefault();
     $('#poster-cover-type-module img').attr('src', $(this).data('src'));
     console.log($(this).data('price'));
-});
+});*/
