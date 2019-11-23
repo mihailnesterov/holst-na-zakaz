@@ -123,13 +123,45 @@ if (posterApp) {
                     if (!img_block.classList.contains('poster-clocks-cover')) {
                         img_block.classList.add('poster-clocks-cover');
                     }
-                    /*document.querySelector('#poster-cover-type-module img').style.width = "100px";
-                    document.querySelector('#poster-cover-type-module img').style.height = "100px";
-                    document.querySelector('#poster-cover-type-module img').style.top = "25%";
-                    document.querySelector('#poster-cover-type-module img').style.left = "25%";
-                    document.querySelector('#poster-cover-type-module img').style.right = "25%";
-                    document.querySelector('#poster-cover-type-module img').style.bottom = "25%";
-                    document.querySelector('#poster-cover-type-module img').style.backgroundColor = "rgba(255,255,255,0.3)";*/
+            },
+            moveClocks(e) { // move clocks by mouse
+                const clocks = e.target.closest('div');
+                
+                let coords = getCoords(clocks);
+                let shiftX = e.pageX - coords.left;
+                let shiftY = e.pageY - coords.top;
+
+                //clocks.style.position = 'absolute';
+                document.body.appendChild(clocks);
+                moveAt(e);
+
+                clocks.style.zIndex = 999;
+
+                function moveAt(e) {
+                    clocks.style.left = e.pageX - shiftX + 'px';
+                    clocks.style.top = e.pageY - shiftY + 'px';
+                }
+
+                document.onmousemove = function(e) {
+                    moveAt(e);
+                };
+
+                clocks.onmouseup = function() {
+                    document.onmousemove = null;
+                    clocks.onmouseup = null;
+                };
+
+                clocks.ondragstart = function() {
+                return false;
+                };
+
+                function getCoords(elem) {   // кроме IE8-
+                    var box = elem.getBoundingClientRect();
+                    return {
+                        top: box.top + pageYOffset,
+                        left: box.left + pageXOffset
+                    };
+                }
             },
             showModuleByTypeId(e) {
                 const type_id = parseInt(e.target.dataset.typeId);
@@ -139,11 +171,6 @@ if (posterApp) {
                     img_block.classList.remove('poster-clocks-cover');
                 }
                 document.querySelector('#poster-cover-type-module img').setAttribute('src', '');
-                /*document.querySelector('#poster-cover-type-module img').style.width = "100%";
-                document.querySelector('#poster-cover-type-module img').style.height = "100%";
-                document.querySelector('#poster-cover-type-module img').style.top = "50%";
-                document.querySelector('#poster-cover-type-module img').style.left = "50%";
-                document.querySelector('#poster-cover-type-module img').style.backgroundColor = "transparent";*/
                 if( type_id === 5 ) {
                     this.isClocksSelected = true;
                     this.posterPrices.module = 0;
@@ -162,11 +189,6 @@ if (posterApp) {
             selectModule(e) {
                 this.posterPrices.module = e.target.dataset.price;
                 document.querySelector('#poster-cover-type-module img').setAttribute('src', e.target.dataset.src);
-                /*document.querySelector('#poster-cover-type-module img').style.width = "100%";
-                document.querySelector('#poster-cover-type-module img').style.height = "100%";
-                document.querySelector('#poster-cover-type-module img').style.top = "50%";
-                document.querySelector('#poster-cover-type-module img').style.left = "50%";
-                document.querySelector('#poster-cover-type-module img').style.backgroundColor = "transparent";*/
             },
         },
         computed: {

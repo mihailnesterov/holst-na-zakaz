@@ -252,7 +252,7 @@ $this->registerMetaTag([
 							'poster_id' => $poster->id, 
 							'img_class' => 'poster-image uk-box-shadow-small' ]);
 						?>
-							<div id="poster-cover-type-module" class="uk-position-cover">
+							<div @mousedown="moveClocks" id="poster-cover-type-module" class="uk-position-cover">
 								<img src="" alt="" class="" uk-cover>
 							</div>
 							
