@@ -25,6 +25,13 @@ if (posterApp) {
             isBaguettesSelected: false, // false / true выбран багет
             isClocksSelected: false, // false or true выбраны часы
             currTypeId: 1,
+            currTypeName: 'Картина на холсте',
+            currTypeDescription: '',
+            currSize: '50x70',
+            currMaterial: 'Холст натуральный',
+            currPodramnik: 2,
+            currServices: null,
+            currBaget: null,
         },
         methods: {
             buy(){
@@ -91,23 +98,45 @@ if (posterApp) {
                 const height = e.target.textContent.split('×')[1];
                     inputTypeNumber[0].value = +width;
                     inputTypeNumber[1].value = +height;
+                
+                this.currSize = width + '×' + height;
             },
             selectMaterial(e) {
                 e.target.checked = true;
                 this.posterPrices.material = e.target.value;
                 const item = document.querySelector('.module-order-calc-sizes-item.uk-active');
                 this.posterPrices.size = Math.ceil(((( parseInt(item.dataset.width) / 100 * parseInt(item.dataset.height) / 100) * this.posterPrices.material)));
+                this.currMaterial = e.target.dataset.name;
+            },
+            selectPodramnikWidth(e) {
+                e.target.checked = true;
+                this.currPodramnik = e.target.dataset.width;
+                console.log(this.currPodramnik);
             },
             toggleBaguettes() {
                 this.isBaguettesSelected = !this.isBaguettesSelected;
-                if(!this.isBaguettesSelected) this.posterPrices.baguette = 0;
+                if(!this.isBaguettesSelected) {
+                    this.posterPrices.baguette = 0;
+                    this.currBaget = null;
+                }
+                console.log(this.currBaget);
             },
             selectBaguette(e) {
                 const radio = e.target.closest('li').querySelector('input[type=radio]');
-                    radio.checked = true;
-                    this.posterPrices.baguette = radio.value;
+                const data = e.target.closest('li').querySelector('.module-order-calc-baguettes-item-desc');
+
+                radio.checked = true;
+                this.posterPrices.baguette = radio.value;
+                if ( this.isBaguettesSelected ) {
+                    this.currBaget = 'артикул: ' + data.dataset.articul + ', ' + data.dataset.material + ', ' + data.dataset.width + ' см, ' + data.dataset.color;
+                } else {
+                    this.currBaget = null;
+                }
+                console.log(this.currBaget);
             },
             selectAddService(e) {
+                const chk_boxes = document.querySelectorAll('input[type="checkbox"].checkbox-add-service');
+                let all_checked_names = '';
                 if(e.target.checked) {
                     this.posterPrices.services += +e.target.value;
                 } else {
@@ -115,6 +144,16 @@ if (posterApp) {
                         this.posterPrices.services -= +e.target.value;
                     }
                 }
+                for(let i=0; i<chk_boxes.length;i++) {
+                    if (chk_boxes[i].checked) {
+                        if(all_checked_names == '') {
+                            all_checked_names = chk_boxes[i].dataset.serviceName;
+                        } else {
+                            all_checked_names += ', ' + chk_boxes[i].dataset.serviceName;
+                        }
+                    }
+                }
+                this.currServices = all_checked_names;
             },
             /*toggleClocks() {
                 this.isClocksSelected = !this.isClocksSelected;
@@ -172,8 +211,14 @@ if (posterApp) {
             },
             showModuleByTypeId(e) {
                 const type_id = parseInt(e.target.dataset.typeId);
+                const type_name = e.target.dataset.typeName;
+                const type_description = e.target.closest('div').querySelector('.uk-hidden.type-description').textContent;
                 const img_block = document.querySelector('#poster-cover-type-module');
+                
                 this.currTypeId = type_id;
+                this.currTypeName = type_name;
+                this.currTypeDescription = type_description;
+
                 if (img_block.classList.contains('poster-clocks-cover')) {
                     img_block.classList.remove('poster-clocks-cover');
                 }
@@ -216,12 +261,25 @@ if (posterApp) {
                 for(fix in this.fixPrices) {
                     if (this.fixPrices[fix] === 'promoCode') {
                         totalPrice -= +this.fixPrices[fix];
+                    } else if (this.fixPrices[fix] === 'bagetWork') {
+                        if (currBaget !== null ) {
+                            totalPrice += +this.fixPrices[fix];
+                        } else {
+                            totalPrice += 0;
+                        }
                     } else {
                         totalPrice += +this.fixPrices[fix];
                     } 
                 }
                 return totalPrice;
             },
+            /*getPosterTypeTooltip() {
+                var sticky = UIkit.sticky('.uk-card', {
+                    title: this.currTypeDescription !== '' ? this.currTypeDescription : '',
+                    offset: 50,
+                    top: 100
+                });
+            },*/
         },
         mounted() {
             this.setBasePrice('base-price');

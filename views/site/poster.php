@@ -54,6 +54,7 @@ $this->registerMetaTag([
 										<img 
 											data-src="images/types/<?= $type->src ?>" 
 											data-type-id="<?= $type->id ?>"
+											data-type-name="<?= $type->name ?>"
 											alt="<?= $type->name ?>" 
 											class="uk-padding-small uk-padding-remove-vertical"
 											uk-img
@@ -62,6 +63,9 @@ $this->registerMetaTag([
 											<?= $type->name ?>
 										</p>
 									</a>
+									<div class="uk-hidden type-description">
+										<?= $type->description ?>
+									</div>
 								</div>
 								<?php endif; ?>
 							<?php endforeach; ?>
@@ -122,9 +126,9 @@ $this->registerMetaTag([
 						<div class="module-order-calc-materials-item">
 							<label>
 								<?php if($key === 0):?>
-									<input @click="selectMaterial" checked='checked' type="radio" name="radio-materials" value="<?= $material->price ?>">&nbsp;
+									<input @click="selectMaterial" checked='checked' type="radio" name="radio-materials" data-name="<?= $material->name ?>" value="<?= $material->price ?>">&nbsp;
 								<?php else: ?>
-									<input @click="selectMaterial" type="radio" name="radio-materials"  value="<?= $material->price ?>">&nbsp;
+									<input @click="selectMaterial" type="radio" name="radio-materials" data-name="<?= $material->name ?>" value="<?= $material->price ?>">&nbsp;
 								<?php endif; ?>
 								<?= $material->name ?>&nbsp;
 								<span class="uk-label">
@@ -149,11 +153,11 @@ $this->registerMetaTag([
 					<div class="module-order-calc-steps-item-body">
 						
 						<?php foreach($bagetsWidth as $key => $width): ?>
-						<div class="module-order-calc-gifts-item"><label>
+						<div class="module-order-calc-podramnik-item"><label>
 							<?php if($key === 0):?>
-								<input checked='checked' type="radio" name="radio-bagets-width" value="550">&nbsp;
+								<input type="radio" @click="selectPodramnikWidth" data-width="<?= $width->width ?>" checked='checked' name="radio-bagets-width" value="550">&nbsp;
 							<?php else: ?>
-								<input type="radio" name="radio-bagets-width" value="550">&nbsp;
+								<input type="radio" @click="selectPodramnikWidth" data-width="<?= $width->width ?>" name="radio-bagets-width" value="550">&nbsp;
 							<?php endif; ?>
 								<?= $width->width ?> см
 							</label>
@@ -175,7 +179,7 @@ $this->registerMetaTag([
 					<div class="module-order-calc-steps-item-body">
 						<div class="module-order-calc-addons-item">
 							<label>
-								<input @click="selectAddService" type="checkbox" class="checkbox-add-service" value="<?= $service->price ?>">&nbsp;
+								<input @click="selectAddService" type="checkbox" class="checkbox-add-service" data-service-name="<?= $service->name ?>" value="<?= $service->price ?>">&nbsp;
 								<?= $service->name ?>
 								<span class="uk-label">
 									<?= $service->price ?> ₽
@@ -240,24 +244,11 @@ $this->registerMetaTag([
 							{{fixPrices.holder}} +
 							{{fixPrices.margin}} +
 							{{fixPrices.podramnik}} +
-							{{fixPrices.bagetWork}} -
+							{{posterPrices.baguette !== 0 ? fixPrices.bagetWork : 0}} -
 							{{fixPrices.promoCode}}
 						</p>
 						<p>Итого = <span id="price-total">{{ getTotalPrice }}</span></p>
-						<div class="uk-padding-small uk-margin-remove uk-text-center">
-							<?= Html::a(
-								'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
-								[
-									'add-to-cart', 'id' => $poster->id
-								], 
-								[
-									'class' => '-button -uk-button add-to-cart-button',
-									'title' => 'Добавить в корзину "'.$poster->name.'"',
-									'data-id' => $poster->id,
-								]
-							) ?>
-						</div>
-						<!--<button @click="buy">Купить</button>-->
+						
 				</div>
 
 			</div>
@@ -266,6 +257,43 @@ $this->registerMetaTag([
 		<!-- right column -->
 		<div class="uk-width-expand@m">
 			<div class="uk-card uk-card-default uk-card-body">
+				<div>
+					<h5>Итого:</h5>
+					<ul uk-accordion>
+						<li>
+							<a class="uk-accordion-title" href="#">
+								{{ currTypeName ? currTypeName : 'Картина на холсте' }}
+							</a>
+							<div class="uk-accordion-content uk-box-shadow-small uk-padding-small">
+								{{ currTypeDescription ? currTypeDescription : currMaterial + ', ' + currSize }}
+							</div>
+						</li>
+						<li>Размер: {{ currSize }} см</li>
+						<li>Материал: {{ currMaterial }}</li>
+						<li>Подрамник: {{ currPodramnik }} см</li>
+						<li v-if="currServices">Услуги: {{ currServices }}</li>
+						<li v-if="currBaget !== null && isBaguettesSelected">Багет: {{ currBaget }}</li>
+					</ul>
+					<p>На сумму = <span>{{ getTotalPrice }}</span> руб.</p>
+					<div class="uk-padding-small uk-margin-remove uk-text-center">
+						<?= Html::a(
+							'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
+							[
+								'add-to-cart', 'id' => $poster->id
+							], 
+							[
+								'class' => '-button -uk-button add-to-cart-button',
+								'title' => 'Добавить в корзину "'.$poster->name.'"',
+								'data-id' => $poster->id,
+							]
+						) ?>
+					</div>
+					<!--<button @click="buy">Купить</button>-->
+				</div>
+				<div v-if="currTypeDescription !== ''">
+					<p class="small">{{ currTypeDescription }}</p>
+				</div>
+
 				<h2 class="uk-heading-divider uk-margin-medium-bottom">
 				<?php if($this->title !== ''): ?>
 					<?= Html::encode($this->title) ?>
@@ -435,7 +463,12 @@ $this->registerMetaTag([
 								<label>
 									<input @click="selectBaguette" type="radio" name="radio-baget-image" value="<?= $baget->price ?>"> Выбрать
 								</label> 
-								<div class="module-order-calc-baguettes-item-desc">
+								<div class="module-order-calc-baguettes-item-desc" 
+									data-articul="<?= $baget->articul ?>" 
+									data-material="<?= $baget->material ?>" 
+									data-width="<?= $baget->width ?>"
+									data-color="<?= $baget->color ?>"
+								>
 									<div>Артикул: <?= $baget->articul ?></div> 
 									<div>Материал: <?= $baget->material ?></div> 
 									<div>Ширина: <?= $baget->width ?> см</div> 
