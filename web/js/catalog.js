@@ -74,12 +74,15 @@ if (posterApp) {
                 // ... выбор активной вкладки
                 const tab = e.target.closest('.module-order-calc-steps-item');
                 const tabs = document.querySelectorAll('.module-order-calc-steps-item');
-                tabs.forEach( el => {
-                    if( el.classList.contains('active') ) {
-                        el.classList.remove('active');
-                    }
-                });
-                tab.classList.add('active');
+                if (tab.classList.contains('active')) {
+                    tabs.forEach( el => {
+                        if( el.classList.contains('active') ) {
+                            el.classList.remove('active');
+                        }
+                    });
+                } else {
+                    tab.classList.add('active');
+                }
             },
             selectPosterSize(e) {
                 const classList = e.target.classList.value;
@@ -111,7 +114,6 @@ if (posterApp) {
             selectPodramnikWidth(e) {
                 e.target.checked = true;
                 this.currPodramnik = e.target.dataset.width;
-                console.log(this.currPodramnik);
             },
             toggleBaguettes() {
                 this.isBaguettesSelected = !this.isBaguettesSelected;
@@ -119,7 +121,6 @@ if (posterApp) {
                     this.posterPrices.baguette = 0;
                     this.currBaget = null;
                 }
-                console.log(this.currBaget);
             },
             selectBaguette(e) {
                 const radio = e.target.closest('li').querySelector('input[type=radio]');
