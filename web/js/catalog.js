@@ -32,6 +32,8 @@ if (posterApp) {
             currPodramnik: 2,
             currServices: null,
             currBaget: null,
+            currClocks: null,
+            currModule: null,
         },
         methods: {
             buy(){
@@ -183,6 +185,8 @@ if (posterApp) {
                     if (!img_block.classList.contains('poster-clocks-cover')) {
                         img_block.classList.add('poster-clocks-cover');
                     }
+                this.currClocks = e.target.closest('li').dataset.name;
+                this.currModule = null;
             },
             moveClocks(e) { // move clocks by mouse
                 // not used!!! need fix
@@ -257,6 +261,8 @@ if (posterApp) {
             selectModule(e) {
                 this.posterPrices.module = e.target.dataset.price;
                 document.querySelector('#poster-cover-type-module img').setAttribute('src', e.target.dataset.src);
+                this.currModule = e.target.closest('li').dataset.id;
+                this.currClocks = null;
             },
             clearActiveTabs() {
                 const tabs = document.querySelectorAll('.module-order-calc-steps-item');

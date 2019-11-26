@@ -362,64 +362,8 @@ $this->registerMetaTag([
 				<h5 class="uk-text-small uk-margin-remove-top">Автор: <a href="<?= Url::to(['/search','q' => $poster->autor]) ?>" style="color: rgb(205, 64, 220);"><?= $poster->autor ?></a></h5>
 				<?php endif;?>
 
-				<div uk-grid>
-
-					<div class="uk-width-1-2@m">
-						
-						<div class="uk-cover-container">
-						<?php echo PosterListImageWidget::widget([ 
-							'poster_id' => $poster->id, 
-							'img_class' => 'poster-image uk-box-shadow-small' ]);
-						?>
-							<div id="poster-cover-type-module" class="uk-position-cover">
-								<img src="" alt="" class="" uk-cover>
-							</div>
-							
-						</div>
-					</div>
-
-					<div class="uk-width-expand@m">
-						
-						<!-- total add to cart -->
-						<div class="uk-box-shadow-small uk-padding-small">
-							<ul class="uk-text-small uk-margin-small-top uk-margin-small-left uk-margin-remove-bottom" uk-accordion>
-								<li class="uk-open">
-									<a class="uk-accordion-title" href="#">
-										Ваш заказ:
-									</a>
-									<div class="uk-accordion-content">
-										<ul class="uk-list">
-											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currTypeName ? currTypeName : 'Картина на холсте' }}</li>
-											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Размер: {{ currSize }} см</li>
-											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currMaterial }}</li>
-											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Подрамник: {{ currPodramnik }} см</li>
-											<li v-if="currServices"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currServices }}</li>
-											<li v-if="currBaget !== null && isBaguettesSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Багет: {{ currBaget }}</li>
-										</ul>
-									</div>
-								</li>
-								
-							</ul>
-							<h4 class="uk-text-center  uk-margin-small-top">Итого: <span class="uk-text-bold uk-text-large">{{ getTotalPrice }}</span> руб.</h4>
-							<div class="uk-padding-small uk-margin-remove uk-text-center">
-								<?= Html::a(
-									'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
-									[
-										'add-to-cart', 'id' => $poster->id
-									], 
-									[
-										'class' => '-button -uk-button add-to-cart-button',
-										'title' => 'Добавить в корзину "'.$poster->name.'"',
-										'data-id' => $poster->id,
-									]
-								) ?>
-							</div>
-						</div>
-					</div>
-				</div>
-
 				<!-- modules -->
-				<div v-if="!isClocksSelected" class="module-order-calc-baguettes --uk-visible@m uk-slider uk-slider-container">
+				<div v-if="!isClocksSelected" class="module-order-calc-baguettes --uk-visible@m uk-slider uk-slider-container uk-margin-medium-bottom">
 					<?php if($typesModules): ?>
 						<div v-if="currTypeId === 2" class="uk-h4 module-order-calc-baguettes-title">
 							Выберите модуль
@@ -430,7 +374,7 @@ $this->registerMetaTag([
 						<div class="uk-position-relative uk-visible-toggle">
 							<ul class="poster-types-modules uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid" style="transform: translateX(0px);">
 								<?php foreach( $typesModules as $id => $module): ?>
-									<li v-if="<?= $module->type_id ?> == currTypeId" class="module-order-calc-baguettes-item">
+									<li v-if="<?= $module->type_id ?> == currTypeId" data-id="<?= $module->id ?>" class="module-order-calc-baguettes-item">
 										<a @click.prevent="selectModule" href="#">
 											<div class="module-order-calc-baguettes-item-image">
 												<img 
@@ -453,14 +397,14 @@ $this->registerMetaTag([
 				<!-- ./ modules -->
 
 				<!-- clocks slider -->
-				<div v-if="isClocksSelected" uk-slider="" class="module-order-calc-baguettes --uk-visible@m uk-slider uk-slider-container">
+				<div v-if="isClocksSelected" uk-slider="" class="module-order-calc-baguettes --uk-visible@m uk-slider uk-slider-container uk-margin-medium-bottom">
 					<div class="uk-h4 module-order-calc-baguettes-title">
 						Выберите часы
 					</div> 
 					<div class="uk-position-relative uk-visible-toggle">
 						<ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-grid" style="transform: translateX(0px);">
 							<?php foreach ($clocks as $clock): ?>
-							<li class="module-order-calc-baguettes-item uk-text-center uk-active">
+							<li data-name="<?= $clock->name ?>" class="module-order-calc-baguettes-item uk-text-center uk-active">
 								<a @click.prevent="selectClocks" href="#">
 									<div class="module-order-calc-baguettes-item-image">
 										<img src="images/clocks/<?= $clock->src ?>" alt="<?= $clock->name ?>">
@@ -493,6 +437,64 @@ $this->registerMetaTag([
 					</ul> 
 					<input type="hidden" name="clock">
 				</div> <!-- ./ end clocks slider -->
+
+				<div uk-grid>
+
+					<div class="uk-width-1-2@m">
+						
+						<div class="uk-cover-container">
+						<?php echo PosterListImageWidget::widget([ 
+							'poster_id' => $poster->id, 
+							'img_class' => 'poster-image uk-box-shadow-small' ]);
+						?>
+							<div id="poster-cover-type-module" class="uk-position-cover">
+								<img src="" alt="" class="" uk-cover>
+							</div>
+							
+						</div>
+					</div>
+
+					<div class="uk-width-expand@m">
+						
+						<!-- total add to cart -->
+						<div class="uk-box-shadow-small uk-padding-small">
+							<ul class="uk-text-small uk-margin-small-top uk-margin-small-left uk-margin-remove-bottom" uk-accordion>
+								<li class="uk-open">
+									<a class="uk-accordion-title" href="#">
+										Ваш заказ:
+									</a>
+									<div class="uk-accordion-content">
+										<ul class="uk-list">
+											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currTypeName ? currTypeName : 'Картина на холсте' }}</li>
+											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Размер: {{ currSize }} см</li>
+											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currMaterial }}</li>
+											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Подрамник: {{ currPodramnik }} см</li>
+											<li v-if="currServices"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currServices }}</li>
+											<li v-if="currClocks !== null && isClocksSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currClocks }}</li>
+											<li v-if="currModule !== null && !isClocksSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i><span v-if="currTypeId === 2">Модуль</span><span v-else>Ширма</span> № {{ currModule }}</li>
+											<li v-if="currBaget !== null && isBaguettesSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Багет: {{ currBaget }}</li>
+										</ul>
+									</div>
+								</li>
+								
+							</ul>
+							<h4 class="uk-text-center  uk-margin-small-top">Итого: <span class="uk-text-bold uk-text-large">{{ getTotalPrice }}</span> руб.</h4>
+							<div class="uk-padding-small uk-margin-remove uk-text-center">
+								<?= Html::a(
+									'<i class="fa fa-shopping-cart uk-margin-small-right"></i>В корзину', 
+									[
+										'add-to-cart', 'id' => $poster->id
+									], 
+									[
+										'class' => '-button -uk-button add-to-cart-button',
+										'title' => 'Добавить в корзину "'.$poster->name.'"',
+										'data-id' => $poster->id,
+									]
+								) ?>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<!-- bagettes slider -->
 				<div v-if="isBaguettesSelected" uk-slider="" class="module-order-calc-baguettes --uk-visible@m uk-slider uk-slider-container">
