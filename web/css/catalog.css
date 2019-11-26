@@ -121,6 +121,12 @@ aside {
       }
   }
 
+    /* fix accordeon border */
+    .uk-accordion-title::before {
+        border-bottom: 2px #cd40dc solid;
+        border-left: 2px #cd40dc solid;
+    }
+
   .poster-image {
       width: 100%;
       border: 1px #aaa solid;
