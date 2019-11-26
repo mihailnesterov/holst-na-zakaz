@@ -251,6 +251,10 @@ if (posterApp) {
                     this.posterPrices.clock = 0;
                     this.posterPrices.module = 0;
                 }
+                else if ( type_id === 2 ) {
+                    this.isClocksSelected = false;
+                    this.posterPrices.clock = 0;
+                }
                 else {
                     this.isClocksSelected = false;
                     this.posterPrices.clock = 0;

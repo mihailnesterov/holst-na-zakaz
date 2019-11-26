@@ -471,7 +471,7 @@ $this->registerMetaTag([
 											<li><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Подрамник: {{ currPodramnik }} см</li>
 											<li v-if="currServices"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currServices }}</li>
 											<li v-if="currClocks !== null && isClocksSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>{{ currClocks }}</li>
-											<li v-if="currModule !== null && !isClocksSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i><span v-if="currTypeId === 2">Модуль</span><span v-else>Ширма</span> № {{ currModule }}</li>
+											<li v-if="currModule !== null && posterPrices.module !== 0"><i class="fa fa-check uk-margin-small-right uk-text-success"></i><span v-if="currTypeId === 2">Модуль</span><span v-else>Ширма</span> № {{ currModule }}</li>
 											<li v-if="currBaget !== null && isBaguettesSelected"><i class="fa fa-check uk-margin-small-right uk-text-success"></i>Багет: {{ currBaget }}</li>
 										</ul>
 									</div>
