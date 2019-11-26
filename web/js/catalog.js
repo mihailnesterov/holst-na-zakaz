@@ -84,6 +84,19 @@ if (posterApp) {
                     tab.classList.add('active');
                 }
             },
+            selectNextTab(e) {
+                // ... выбор следующей вкладки
+                const tab = e.target.closest('.module-order-calc-steps-item');
+                const tabs = document.querySelectorAll('.module-order-calc-steps-item');
+                if (tab.classList.contains('active')) {
+                    tabs.forEach( (el) => {
+                        if( el.classList.contains('active') ) {
+                            el.classList.remove('active');
+                        }
+                    });
+                    tab.nextElementSibling.classList.add('active');
+                }
+            },
             selectPosterSize(e) {
                 const classList = e.target.classList.value;
                 const sizes = document.getElementsByClassName(classList);
@@ -172,6 +185,8 @@ if (posterApp) {
                     }
             },
             moveClocks(e) { // move clocks by mouse
+                // not used!!! need fix
+                //@mousedown="moveClocks"
                 const clocks = e.target.closest('div');
                 
                 let coords = getCoords(clocks);

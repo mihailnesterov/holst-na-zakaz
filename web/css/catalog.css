@@ -176,3 +176,7 @@ aside {
     counter-increment: orderCalcSteps;
     content: counter(orderCalcSteps) ". ";
   }
+
+  .module-order-calc-steps-item .fa-caret-down {
+    color: #cd40dc;
+  }

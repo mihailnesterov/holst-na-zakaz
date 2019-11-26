@@ -38,12 +38,22 @@ $this->registerMetaTag([
 		<!-- left column -->
 		<div class="uk-width-1-3@m">
 			<div class="uk-card uk-card-default --uk-card-body">
+				
+				<div class="uk-margin-remove uk-background-muted">
+					<h3 class="uk-heading-divider uk-padding-small uk-margin-remove uk-background-default">
+						<i class="fa fa-clone" style="color: #cd40dc"></i>
+						Конструктор заказа
+					</h3>
+				</div>
+				
+
 				<div class="module-order-calc-steps-item active">
 					<!--<h5 class="module-order-calc-steps-item-title uk-padding-small uk-margin-remove">
 						Выберите тип изделия
 					</h5>-->
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
-						Тип изделия
+						Выбрать тип изделия
+						<i class="fa fa-caret-down"></i>
 					</a> 
 					<div class="module-order-calc-steps-item-body">
 						<div class="uk-child-width-1-2 uk-padding-remove uk-margin-remove-vertical" uk-grid>
@@ -70,6 +80,9 @@ $this->registerMetaTag([
 								<?php endif; ?>
 							<?php endforeach; ?>
 						</div>
+						<div class="uk-margin-remove uk-margin-medium-top uk-padding-small uk-padding-remove-bottom uk-text-center">
+							<a @click.prevent="selectNextTab" href="#" class="uk-button uk-button-default uk-button-small uk-box-shadow-small">Следующий шаг</a>
+						</div>
 					</div>
 					<div class="module-order-calc-steps-items-selected">
 						<div class="uk-background-default uk-box-shadow-small uk-margin-small-top uk-margin-small-bottom uk-padding-small uk-text-small">
@@ -84,7 +97,8 @@ $this->registerMetaTag([
 						Выберите размер (см)
 					</h5>-->
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
-						Размер (см)
+						Выбрать размер
+						<i class="fa fa-caret-down"></i>
 					</a>
 					<div class="module-order-calc-steps-item-body">
 						<?php foreach ($posterSizes as $key => $size): ?>
@@ -113,19 +127,23 @@ $this->registerMetaTag([
 								<input type="number" class="uk-input uk-width-1-1">
 							</div>
 						</div>
-						<input type="hidden" name="size" value="30×45">
+						<!--<input type="hidden" name="size" value="30×45">-->
+						<div class="uk-margin-remove uk-margin-medium-top uk-padding-small uk-padding-remove-bottom uk-text-center">
+							<a @click.prevent="selectNextTab" href="#" class="uk-button uk-button-default uk-button-small uk-box-shadow-small">Следующий шаг</a>
+						</div>
 					</div>
 					<div class="module-order-calc-steps-items-selected">
 						<div class="uk-background-default uk-box-shadow-small uk-margin-small-top uk-margin-small-bottom uk-padding-small uk-text-small">
 							<i class="fa fa-check uk-margin-small-right uk-text-success"></i>
-							{{ currSize }}
+							{{ currSize }} см
 						</div>
 					</div>
 				</div>
 
 				<div class="module-order-calc-steps-item active">
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
-						Материал
+						Выбрать материал
+						<i class="fa fa-caret-down"></i>
 					</a> 
 					<!--<div class="module-order-calc-steps-item-subtitle">
 						Холст искусственный
@@ -149,6 +167,9 @@ $this->registerMetaTag([
 							<a aria-hidden="true" href="#material-info-holst-naturalniy" uk-toggle="" class="module-order-calc-materials-item-help"><span uk-icon="icon: question" class="uk-icon"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="question"><circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9"></circle> <circle cx="10.44" cy="14.42" r="1.05"></circle> <path fill="none" stroke="#000" stroke-width="1.2" d="M8.17,7.79 C8.17,4.75 12.72,4.73 12.72,7.72 C12.72,8.67 11.81,9.15 11.23,9.75 C10.75,10.24 10.51,10.73 10.45,11.4 C10.44,11.53 10.43,11.64 10.43,11.75"></path></svg></span></a> <div id="material-info-holst-naturalniy" uk-modal="" class="uk-modal"><div class="uk-modal-dialog uk-modal-body"><button type="button" uk-close="" class="uk-modal-close-default uk-close uk-icon"><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button> <h2 class="uk-modal-title">Холст натуральный</h2> <div><p>Натуральный холст придает картине особенного аристократизма и элегантности. Любое изображение, нанесенное на фактурную поверхность такого холста, выглядит солидно и изысканно.</p> <p>Оптимальная зернистость поверхности холста гарантирует отображение малейших штрихов, передачу едва уловимых оттенков. Это премиум материал, который эффектно смотрится в интерьере и создает иллюзию настоящего рукотворного произведения искусства.</p><p><img data-src="/img/desc/holst-naturalniy.jpg" class="lazyload"></p></div></div></div>
 						</div>
 						<?php endforeach; ?>
+						<div class="uk-margin-remove uk-margin-medium-top uk-padding-small uk-padding-remove-bottom uk-text-center">
+							<a @click.prevent="selectNextTab" href="#" class="uk-button uk-button-default uk-button-small uk-box-shadow-small">Следующий шаг</a>
+						</div>
 					</div>
 					<div class="module-order-calc-steps-items-selected">
 						<div class="uk-background-default uk-box-shadow-small uk-margin-small-top uk-margin-small-bottom uk-padding-small uk-text-small">
@@ -161,6 +182,7 @@ $this->registerMetaTag([
 				<div class="module-order-calc-steps-item active">
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
 						Толщина подрамника
+						<i class="fa fa-caret-down"></i>
 					</a>
 					<!--<div class="module-order-calc-steps-item-subtitle">
 						Ретушь фотографии
@@ -179,7 +201,11 @@ $this->registerMetaTag([
 						</div>
 						<?php endforeach;?>
 						
-						<input type="hidden" name="gift" value="Ретушь фотографии">
+						<!--<input type="hidden" name="gift" value="Ретушь фотографии">-->
+
+						<div class="uk-margin-remove uk-margin-medium-top uk-padding-small uk-padding-remove-bottom uk-text-center">
+							<a @click.prevent="selectNextTab" href="#" class="uk-button uk-button-default uk-button-small uk-box-shadow-small">Следующий шаг</a>
+						</div>
 					</div>
 					<div class="module-order-calc-steps-items-selected">
 						<div class="uk-background-default uk-box-shadow-small uk-margin-small-top uk-margin-small-bottom uk-padding-small uk-text-small">
@@ -191,13 +217,15 @@ $this->registerMetaTag([
 
 				<div class="module-order-calc-steps-item active">
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
-						Дополнительные услуги
+						Выбрать покрытие
+						<i class="fa fa-caret-down"></i>
 					</a> 
 					<!--<div class="module-order-calc-steps-item-subtitle">
 						Покрытие лаком, Покрытие 3D гелем
 					</div> -->
-					<?php foreach ($postersAddServices as $service): ?>
+					
 					<div class="module-order-calc-steps-item-body">
+						<?php foreach ($postersAddServices as $service): ?>
 						<div class="module-order-calc-addons-item">
 							<label>
 								<input @click="selectAddService" type="checkbox" class="checkbox-add-service" data-service-name="<?= $service->name ?>" value="<?= $service->price ?>">&nbsp;
@@ -226,9 +254,14 @@ $this->registerMetaTag([
 							</div>
 							<!--./ end modal -->
 						</div>
+						<?php endforeach; ?>
+						<!-- <input type="hidden" name="addons" value="Покрытие лаком, Покрытие 3D гелем">-->
+					
+						<div class="uk-margin-remove uk-margin-medium-top uk-padding-small uk-padding-remove-bottom uk-text-center">
+							<a @click.prevent="selectNextTab" href="#" class="uk-button uk-button-default uk-button-small uk-box-shadow-small">Следующий шаг</a>
+						</div>
 					</div>
-					<?php endforeach; ?>
-					<!-- <input type="hidden" name="addons" value="Покрытие лаком, Покрытие 3D гелем">-->
+
 					<div v-if="currServices !== null" class="module-order-calc-steps-items-selected">
 						<div class="uk-background-default uk-box-shadow-small uk-margin-small-top uk-margin-small-bottom uk-padding-small uk-text-small">
 							<i class="fa fa-check uk-margin-small-right uk-text-success"></i>
@@ -239,14 +272,15 @@ $this->registerMetaTag([
 
 				<div class="module-order-calc-steps-item">
 					<a @click.prevent="selectActiveTab" href="#" class="module-order-calc-steps-item-title">
-						Багет
+						Выбрать багет
+						<i class="fa fa-caret-down"></i>
 					</a> 
 					<div class="module-order-calc-steps-item-body">
 						<div class="module-order-calc-addons-item">
-						<label>
-						<input @click="toggleBaguettes" type="checkbox" value="">&nbsp;
-							Добавить багетную раму
-						</label> 
+							<label>
+								<input @click="toggleBaguettes" type="checkbox" value="">&nbsp;
+								Добавить багетную раму
+							</label> 
 						</div>
 					</div>
 					<div v-if="isBaguettesSelected && currBaget !== null" class="module-order-calc-steps-items-selected">
@@ -337,7 +371,7 @@ $this->registerMetaTag([
 							'poster_id' => $poster->id, 
 							'img_class' => 'poster-image uk-box-shadow-small' ]);
 						?>
-							<div @mousedown="moveClocks" id="poster-cover-type-module" class="uk-position-cover">
+							<div id="poster-cover-type-module" class="uk-position-cover">
 								<img src="" alt="" class="" uk-cover>
 							</div>
 							
