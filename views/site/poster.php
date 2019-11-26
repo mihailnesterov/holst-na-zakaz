@@ -486,7 +486,7 @@ $this->registerMetaTag([
 										'add-to-cart', 'id' => $poster->id
 									], 
 									[
-										'class' => '-button -uk-button add-to-cart-button',
+										'class' => 'add-to-cart-button',
 										'title' => 'Добавить в корзину "'.$poster->name.'"',
 										'data-id' => $poster->id,
 									]

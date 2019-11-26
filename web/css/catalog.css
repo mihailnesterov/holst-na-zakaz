@@ -86,6 +86,8 @@ aside {
     background: linear-gradient(to right,#a02bb0,#c50fb9);
     color: #fff;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    display: inline-block;
+    box-sizing: border-box;
 }
 .add-to-cart-button:hover {
     color: #ddd;

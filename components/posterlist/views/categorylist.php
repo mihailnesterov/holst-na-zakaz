@@ -34,7 +34,7 @@ use app\components\posterlistimage\PosterListImageWidget;
                             'add-to-cart', 'id' => $poster->poster_id
                         ], 
                         [
-                            'class' => 'uk-button uk-margin-small-bottom add-to-cart-button',
+                            'class' => 'uk-margin-small-bottom add-to-cart-button',
                             'title' => 'Добавить в корзину "'.$poster->poster->name.'"',
                             'data-id' => $poster->poster_id,
                         ]
