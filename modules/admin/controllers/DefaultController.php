@@ -89,7 +89,7 @@ class DefaultController extends Controller
      */
     public function actionLogin() {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
         }
 
         $this->view->title = 'Войти в кабинет';
@@ -98,7 +98,7 @@ class DefaultController extends Controller
 
         if ($model->load(Yii::$app->request->post()) 
             && $model->login()) {            
-            return $this->redirect(Yii::$app->urlManager->createUrl('/admin'));
+            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
         }
         
         $this->layout = 'login';
@@ -142,7 +142,7 @@ class DefaultController extends Controller
                 
                 $user->login();
                 
-                return $this->redirect(['/admin']);
+                return $this->redirect(['/admin/posters']);
                
             } 
         }
