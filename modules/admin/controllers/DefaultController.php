@@ -72,13 +72,14 @@ class DefaultController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(Yii::$app->urlManager->createUrl('/admin/login'));
         } else {
-            $user = $this->findUserModel(Yii::$app->user->identity->id);
+            /*$user = $this->findUserModel(Yii::$app->user->identity->id);
             $posters = Posters::find()->orderby(['id'=>SORT_DESC])->all();
             $this->view->title = 'Картины';
             return $this->render('index',[
                 'user' => $user,
                 'posters' => $posters
-            ]);
+            ]);*/
+            return $this->redirect(Yii::$app->urlManager->createUrl('/admin/posters'));
         }
     }
     
