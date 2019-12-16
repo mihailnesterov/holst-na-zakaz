@@ -15,10 +15,10 @@ use yii\widgets\Breadcrumbs;*/
             <?php foreach( $types as $type): ?>
             <div>
                 <div class="admin-holst-card uk-card uk-card-default uk-card-body uk-margin-small-bottom">
-                    <h4 class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $type->name ?></h4>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $type->description ?></p>                    
+                    <h4 class="uk-margin-remove uk-margin-small-bottom"><?= $type->name ?></h4>
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $type->price ?> руб.</p>
                     
-                    <div class="--holst-card-block uk-padding-small uk-margin-remove">
+                    <div class="uk-padding-small uk-margin-remove">
                         <div class="uk-button-group">
                             <a href="<?= Url::to(['/admin/type-edit', 'id' => $type->id]) ?>" class="uk-button uk-button-default uk-button-small" title="редактировать">
                                 <i class="fa fa-pencil-alt"></i>

@@ -20,9 +20,10 @@ use yii\widgets\Breadcrumbs;*/
                             <?= Html::img('@web/images/clocks/'.$clock->src,['alt' => "$clock->name"]) ?>
                         </a>
                     </div>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $clock->name ?></p>                   
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $clock->name ?></p>
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $clock->price ?> руб.</p>
                     
-                    <div class="--holst-card-block uk-padding-small uk-margin-remove">
+                    <div class="uk-padding-small uk-margin-remove">
                         <div class="uk-button-group">
                             <a href="<?= Url::to(['/admin/clock-edit', 'id' => $clock->id]) ?>" class="uk-button uk-button-default uk-button-small" title="редактировать">
                                 <i class="fa fa-pencil-alt"></i>

@@ -16,7 +16,8 @@ use yii\widgets\Breadcrumbs;*/
             <div>
                 <div class="admin-holst-card uk-card uk-card-default uk-card-body uk-margin-small-bottom">
                     <h4 class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $service->name ?></h4>
-                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $service->description ?></p>                    
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $service->price ?> руб.</p>
+                    <p class="uk-text-small uk-margin-remove uk-margin-small-bottom"><?= $service->description ?></p>
                     
                     <div class="--holst-card-block uk-padding-small uk-margin-remove">
                         <div class="uk-button-group">
