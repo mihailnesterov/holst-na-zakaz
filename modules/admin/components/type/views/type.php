@@ -34,6 +34,17 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="uk-margin">
+            <?= $form->field($model, 'price', [
+                'template' => '{input}{error}',
+                'inputOptions' => [
+                    'tabindex' => '2',
+                    'placeholder' => 'Цена',
+                    'class'=>'uk-input',
+                ]
+            ])->label('Цена') ?>
+        </div>
+
+        <div class="uk-margin">
             <?= $form->field($model, 'description', [
                 'template' => '{input}{error}',
                 'inputOptions' => [

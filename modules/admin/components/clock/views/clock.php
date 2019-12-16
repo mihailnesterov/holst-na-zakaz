@@ -32,6 +32,17 @@ use yii\widgets\ActiveForm;
             ])->label(false) ?>
         </div>
 
+        <div class="uk-margin">
+            <?= $form->field($model, 'price', [
+                'template' => '{input}{error}',
+                'inputOptions' => [
+                    'tabindex' => '2',
+                    'placeholder' => 'Цена',
+                    'class'=>'uk-input',
+                ]
+            ])->label('Цена') ?>
+        </div>
+
         <div class="uk-margin" uk-margin>
             <img id="clock-img" src="<?= $model->src != '' ? 'images/clocks/'.$model->src : 'images/image.png' ?>" alt="<?= $model->name ?>">
         </div>
@@ -55,7 +66,7 @@ use yii\widgets\ActiveForm;
                     'template' => '{input}{error}',
                     'inputOptions' => [
                         'id' => 'clock-image-file-input',
-                        'tabindex' => '2',
+                        'tabindex' => '3',
                         'class' =>'uk-input',
                         'accept' => '.gif, .jpg, .jpeg, .png'
                     ]
