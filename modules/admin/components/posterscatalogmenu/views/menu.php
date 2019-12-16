@@ -16,17 +16,5 @@ use yii\helpers\Url;
                 </ul>
             </div>
         </li>
-        <li class="uk-padding-remove">
-            <a class="uk-accordion-title" href="#"><h3>Модульные картины <i class="fas fa-arrow-circle-right"></i></h3></a>
-            <div class="uk-accordion-content">
-                <ul>
-                    <?php foreach( $catalog as $item): ?>
-                        <li>
-                        <a href="<?= Url::to(['/admin/posters?cat='.$item->catalog_id]) ?>"><?= $item->catalog->name ?> (<?= app\models\CatalogPosters::getCategoryCount($item->catalog_id) ?>)</a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </li>
     </ul>
 </div>
